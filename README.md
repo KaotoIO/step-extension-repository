@@ -1,35 +1,12 @@
 # step-extension-repository
-Official step extensions for Kaoto.
 
-After cloning your repository, you must run a `yarn install` to get the dependencies needed.
+This is the official step extensions repository for Kaoto.
 
-Everytime you push changes to your main branch, a new version of the plugin will be published on the github pages of your repository. 
+To add your new step extension here, create a new folder following the [step extension template](https://github.com/KaotoIO/step-extension). You can follow the [tutorial on how to build step extensions](https://kaoto.io/docs/add-custom-view/) to implement it.
 
-## Available Scripts
-
-In the project directory, you can run:
-
-### `yarn start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3002](http://localhost:3002) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-
+For your extension to be properly deployed, it must offer the following commands (included by default on the step extension template):
+ - `yarn clean` which cleans any previously generated code
+ - `yarn install` which downloads all the dependencies needed
+ - `yarn build` which generates the static html files in a folder called `dist`
+ 
+Once your extension is finished, [create a Pull Request](https://github.com/KaotoIO/step-extension-repository/compare) to include it on this repository.
