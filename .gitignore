@@ -1,0 +1,26 @@
+dist/
+yarn*
+node_modules
+
+#step extensions
+## dependencies
+*/node_modules
+*/.pnp
+*/.pnp.js
+
+## testing
+*/coverage
+
+## production
+*/build
+*/dist
+
+## misc
+*/.DS_Store
+*/.env.local
+*/.env.development.local
+*/.env.test.local
+*/.env.production.local
+
+*/npm-*.log*
+*/yarn-*.log*
