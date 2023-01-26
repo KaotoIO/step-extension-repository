@@ -125,7 +125,7 @@ export const DoCatch = ({ saveConfig, step }: IDoCatchForm) => {
   };
 
   return (
-    <div className={'do-try'}>
+    <div className={'do-try pf-u-py-lg'}>
       <p>This EIP behaves like a try-catch-finally block in Java.</p>
       <p>Add new catch clauses here:</p>
       <div className="form-group">
