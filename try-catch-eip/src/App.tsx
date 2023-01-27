@@ -15,10 +15,6 @@ export const App = () => {
       <Page>
         <PageSection variant={PageSectionVariants.light}>
           <header className="App-header">
-            <p>
-              This step supports the Java equivalent of try/catch/finally directly in the DSL. It
-              aims to work like its Java sisters but with more power.
-            </p>
           </header>
           <DoCatch />
           <footer className="App-footer">
