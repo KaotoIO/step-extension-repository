@@ -15,7 +15,7 @@ updates:
   # Extensions to watch
   # create a new element per extension
   - package-ecosystem: "npm" 
-    directory: "/choice" 
+    directory: "/try-catch-eip" 
     schedule:
       interval: "daily"
     open-pull-requests-limit: 15
