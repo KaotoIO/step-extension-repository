@@ -12,6 +12,7 @@ import {
 } from '@patternfly/react-core';
 import {PlusCircleIcon} from '@patternfly/react-icons';
 import {TrashIcon} from '@patternfly/react-icons';
+import {Predicate} from './Predicate';
 
 const style = {
   borderRadius: '25px',
@@ -40,15 +41,36 @@ export const DynamicInputs = ({
     e.target.reportValidity();
   };
 
-  const handleOnWhen = (e: any) => {
-    const element = e.target.parentElement.parentElement.parentElement;
-    const x = parseInt(element.dataset.x);
-    const value = e.target.value;
+  const extractCondition = (idx: string) => {
+    const onwhen = catchClauses[parseInt(idx)].onwhen;
+    return onwhen?.representerProperties.jq ? onwhen.jq : onwhen?.simple || '';
+  }
+
+  const extractConditionSyntax = (idx: string) => {
+    const onwhen = catchClauses[parseInt(idx)]['onwhen'];
+    return onwhen?.representerProperties.jq ? "JQ" : "SIMPLE";
+  }
+
+  const handleOnWhen = (syntax: string, expression: string, idx: string) => {
+    if (!expression || expression.trim().length == 0) {
+      return;
+    }
     const newCatchClauses = [...catchClauses];
-    newCatchClauses[x]['onwhen'] = value;
+    newCatchClauses[parseInt(idx)]['onwhen'] =
+      syntax == "JQ"
+        ? {
+          jq: expression,
+          representerProperties: {
+            jq: expression
+          }
+        }
+        : {
+          simple: expression,
+          representerProperties: {
+            simple: expression
+          }
+        };
     handleDynamicInputs(newCatchClauses);
-    e.target.checkValidity();
-    e.target.reportValidity();
   };
 
   const removeException = (e: any) => {
@@ -139,16 +161,11 @@ export const DynamicInputs = ({
                       })}
                       <br />
                       <p>Optional conditional for this block:</p>
-                      <textarea
-                        className="form-control"
-                        name={'on-when-' + idx}
-                        style={{ width: '70%' }}
-                        type="text"
-                        data-x={idx}
-                        key={'on-when-' + idx}
-                        value={value['onwhen']['simple']}
-                        onChange={handleOnWhen}
-                        placeholder="${body.size()} == 1"
+                      <Predicate
+                        identifier={'on-when-' + idx}
+                        initExpression={extractCondition(idx)}
+                        initSyntax={extractConditionSyntax(idx)}
+                        setPredicate={(syntax, expression) => handleOnWhen(syntax, expression, idx)}
                       />
                     </div>
                 </>
