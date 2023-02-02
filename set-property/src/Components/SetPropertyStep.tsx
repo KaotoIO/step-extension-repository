@@ -37,19 +37,15 @@ export const SetPropertyStep = (props: any) => {
   }
 
   function updateStepParams(constant?: string, simple?: string, jq?: string) {
-    const newStepParams: SetPropertyStepParams = {
-      name: propertyName,
-      constant: constant,
-      simple: simple,
-      jq: jq,
-    };
+    const newStepParams: SetPropertyStepParams =
+      { name: propertyName, constant, simple, jq, };
     setStepParams(newStepParams);
   }
 
   function updatePropertyName(name: string) {
     setPropertyName(name);
     const newStepParams: SetPropertyStepParams = {
-      name: name,
+      name,
       constant: stepParams?.constant,
       simple: stepParams?.simple,
       jq: stepParams?.jq

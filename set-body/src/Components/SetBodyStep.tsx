@@ -35,11 +35,7 @@ export const SetBodyStep = (props: any) => {
   }
 
   function updateStepParams(constant?: string, simple?: string, jq?: string) {
-    const newStepParams: SetBodyStepParams = {
-      constant: constant,
-      simple: simple,
-      jq: jq,
-    };
+    const newStepParams: SetBodyStepParams = { constant, simple, jq };
     setStepParams(newStepParams);
   }
 
