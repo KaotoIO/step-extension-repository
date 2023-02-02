@@ -51,10 +51,6 @@
     "build": "webpack --mode production --config webpack.common.js",
     "serve": "serve dist -p 3002",
     "clean": "rm -rf dist",
-    "startbu": "react-scripts start",
-    "buildbu": "react-scripts build",
-    "testbu": "react-scripts test",
-    "ejectbu": "react-scripts eject",
     "test": "jest --coverage"
   },
   "eslintConfig": {

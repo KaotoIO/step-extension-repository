@@ -29,10 +29,7 @@ export const TransformStep = (props: any) => {
   }
 
   function updateStepParams(simple?: string, jq?: string) {
-    const newStepParams: TransformStepParams = {
-      simple: simple ? simple : undefined,
-      jq: jq ? jq : undefined
-    };
+    const newStepParams: TransformStepParams = { simple, jq };
     setStepParams(newStepParams);
   }
 
@@ -58,4 +55,3 @@ export const TransformStep = (props: any) => {
 };
 
 export default TransformStep;
-

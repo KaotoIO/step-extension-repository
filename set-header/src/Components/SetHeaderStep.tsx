@@ -37,19 +37,15 @@ export const SetHeaderStep = (props: any) => {
   }
 
   function updateStepParams(constant?: string, simple?: string, jq?: string) {
-    const newStepParams: SetHeaderStepParams = {
-      name: headerName,
-      constant: constant,
-      simple: simple,
-      jq: jq,
-    };
+    const newStepParams: SetHeaderStepParams =
+      { name: headerName, constant, simple, jq };
     setStepParams(newStepParams);
   }
 
   function updateHeaderName(name: string) {
     setHeaderName(name);
     const newStepParams: SetHeaderStepParams = {
-      name: name,
+      name,
       constant: stepParams.constant,
       simple: stepParams.simple,
       jq: stepParams.jq

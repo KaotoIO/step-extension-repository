@@ -74,10 +74,6 @@ module.exports = () => {
             singleton: true,
             requiredVersion: dependencies['react-dom'],
           },
-          'react-i18next': {
-            singleton: true,
-            requiredVersion: dependencies['react-i18next'],
-          },
           'react-router-dom': {
             requiredVersion: dependencies['react-router-dom'],
           },
