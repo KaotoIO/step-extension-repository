@@ -1,15 +1,5 @@
 import * as React from 'react';
-import {
-  ActionGroup,
-  Button,
-  Card,
-  CardBody,
-  Flex,
-  FlexItem,
-  Form,
-  Stack,
-  StackItem
-} from '@patternfly/react-core';
+import { Button } from '@patternfly/react-core';
 import {PlusCircleIcon} from '@patternfly/react-icons';
 import {TrashIcon} from '@patternfly/react-icons';
 import {Predicate} from './Predicate';
@@ -43,12 +33,12 @@ export const DynamicInputs = ({
 
   const extractCondition = (idx: string) => {
     const onwhen = catchClauses[parseInt(idx)].onwhen;
-    return onwhen?.representerProperties.jq ? onwhen.jq : onwhen?.simple || '';
+    return onwhen?.representerProperties?.jq ? onwhen.jq : onwhen?.simple || '';
   }
 
   const extractConditionSyntax = (idx: string) => {
     const onwhen = catchClauses[parseInt(idx)]['onwhen'];
-    return onwhen?.representerProperties.jq ? "JQ" : "SIMPLE";
+    return onwhen?.representerProperties?.jq ? "JQ" : "SIMPLE";
   }
 
   const handleOnWhen = (syntax: string, expression: string, idx: string) => {
@@ -106,6 +96,11 @@ export const DynamicInputs = ({
       <>
         <div className="do-try-catch-eip-catch-clause">
           <form>
+            <div style={style}>
+                <p>First we have a block of steps to run. </p>
+                <p>If an exception is raised on this block,
+                it may be catch by one of the following blocks.</p>
+              </div>
             {Object.entries(catchClauses).map(([idx, value]) => {
               return (
                 <>
@@ -130,7 +125,9 @@ export const DynamicInputs = ({
                       >Add Exception
                       </Button>
                             <br/>
-                      {Object.entries(value.exceptions).map(([idy, element]) => {
+                      {
+                        // @ts-ignore
+                        Object.entries(value.exceptions).map(([idy, element]) => {
                         return (
                           <>
                             <Button
@@ -148,6 +145,7 @@ export const DynamicInputs = ({
                               name={'exception-' + idy + '-' + idx}
                               type="text"
                               key={idy + '-' + idx}
+                              // @ts-ignore
                               value={element}
                               data-x={idx}
                               data-y={idy}
@@ -171,6 +169,9 @@ export const DynamicInputs = ({
                 </>
               );
             })}
+            <div style={style}>
+                <p>The do-finally block is always executed at the end, whether or not an exception was catch.</p>
+              </div>
           </form>
         </div>
       </>
