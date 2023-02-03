@@ -1,0 +1,36 @@
+name: Run tests
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  folders:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+    - name: 📥 Checkout
+      uses: actions/checkout@v3
+      with:
+        submodules: recursive
+    - name: 🎡  Set Matrix
+      id: set-matrix
+      run: |
+          files=$(find . -maxdepth 1 -mindepth 1 -not -name '.*' -type d -printf '"%P",' );
+          echo "matrix=["${files%?}"]" >> $GITHUB_OUTPUT
+  run-tests:
+    needs: folders
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: 
+        folder: ${{ fromJson(needs.folders.outputs.matrix) }}
+      fail-fast: false
+    steps:
+    - name: 📥 Checkout
+      uses: actions/checkout@v3
+      with:
+        submodules: recursive
+    - name: 🧮 Run tests
+      run: cd ${{ matrix.folder }}; yarn install; yarn test
+
