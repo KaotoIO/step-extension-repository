@@ -10,6 +10,10 @@ module.exports = {
   // The directory where Jest should output its coverage files
   coverageDirectory: 'coverage',
 
+  moduleNameMapper: {
+    '\\.(css|less)$': path.resolve(__dirname, './src/__mocks__/styleMock.js'),
+  },
+
   transform: {
     '\\.(ts|tsx)$': 'ts-jest',
   },
@@ -24,9 +28,7 @@ module.exports = {
 
   testEnvironment: 'jsdom',
 
-  testMatch:["<rootDir>/src/*.test.{js,jsx,ts,tsx}"],
+  testMatch: ['<rootDir>/src/*.test.{js,jsx,ts,tsx}'],
 
-  transformIgnorePatterns: [
-    "/node_modules/(?!(@patternfly/react-styles)/)"
-  ]
+  transformIgnorePatterns: ['/node_modules/(?!(@patternfly/react-styles)/)'],
 };
