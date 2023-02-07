@@ -53,7 +53,7 @@ export const DoCatch = ({ saveConfig, step }: IDoCatchForm) => {
           value: branch.onwhen,
         },
       ],
-      identifier: branch.id || 'do-catch-' + (index + 1),
+      identifier: branch.id || `do-catch-${index + 1}`,
       conditionSyntax: 'SIMPLE',
     };
   }
