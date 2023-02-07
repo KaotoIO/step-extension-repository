@@ -13,7 +13,7 @@ export interface IDoCatchForm {
 
 export const DoCatch = ({ saveConfig, step }: IDoCatchForm) => {
   function extractCatches(branch: { identifier: string; parameters: any[] }, index: any, arr: any) {
-    if (branch.identifier != 'steps' && branch.identifier != 'do-finally') {
+    if (branch.identifier !== 'steps' && branch.identifier !== 'do-finally') {
       return {
         id: branch.identifier,
         onwhen: branch.parameters.filter((p) => p.id == 'on-when')[0].value,
