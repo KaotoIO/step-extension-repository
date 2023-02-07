@@ -1,5 +1,5 @@
-import {FormGroup, FormSelect, FormSelectOption, TextInput} from "@patternfly/react-core";
-import {useState} from "react";
+import {FormGroup, FormSelect, FormSelectOption, TextInput} from '@patternfly/react-core';
+import {useState} from 'react';
 
 export type PredicateProps = {
     initSyntax: string,
@@ -24,21 +24,20 @@ export const Predicate = (props: PredicateProps) => {
 
     return (
     <FormGroup>
-        <FormGroup label="Condition Syntax">
+        <FormGroup label='Condition Syntax'>
             <FormSelect
               data-testid={props.identifier + '-predicate-syntax-select'}
-              id="syntax-01"
-              name="simple-form-number"
+              id='syntax-01'
+              name='simple-form-number'
               value={predicateSyntax}
               onChange={handlePredicateSyntax}>
                 <FormSelectOption key='SIMPLE' value='SIMPLE' label='Simple' isDisabled={false}/>
                 <FormSelectOption key='JQ' value='JQ' label='Jq' isDisabled={false}/>
             </FormSelect>
         </FormGroup>
-        <FormGroup label="Condition">
-            <TextInput data-testid={props.identifier + '-predicate-string-input'} value={predicateString} onChange={handlePredicateString} aria-label="predicate"/>
+        <FormGroup label='Condition'>
+            <TextInput data-testid={props.identifier + '-predicate-string-input'} value={predicateString} onChange={handlePredicateString} aria-label='predicate'/>
         </FormGroup>
     </FormGroup>
     )
 }
-
