@@ -16,8 +16,8 @@ export const DoCatch = ({ saveConfig, step }: IDoCatchForm) => {
     if (branch.identifier !== 'steps' && branch.identifier !== 'do-finally') {
       return {
         id: branch.identifier,
-        onwhen: branch.parameters.filter((p) => p.id == 'on-when')[0].value,
-        exceptions: branch.parameters.filter((p) => p.id == 'exceptions')[0].value,
+        onwhen: branch.parameters.filter((p) => p.id === 'on-when')[0].value,
+        exceptions: branch.parameters.filter((p) => p.id === 'exceptions')[0].value,
       };
     }
 
