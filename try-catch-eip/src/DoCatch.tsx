@@ -1,5 +1,5 @@
 // @ts-ignore
-import { IStepProps } from '../ogcapi-features-action/kaoto/dts/types';
+import { IStepProps } from 'kaoto/types';
 import { DynamicInputs } from './DynamicInputs';
 import { Button } from '@patternfly/react-core';
 import {PlusCircleIcon} from '@patternfly/react-icons';
@@ -126,13 +126,13 @@ export const DoCatch = ({ saveConfig, step }: IDoCatchForm) => {
     <div className={'do-try pf-u-py-lg'}>
       <p>This EIP behaves like a try-catch-finally blocks in Java.</p>
       <p>You can define the steps of each block in the canvas. To add new catch blocks, use this tab.</p>
-        <Button variant="link" icon={<PlusCircleIcon />} className={'new-do-catch'} data-testid='trycatch-add-catch-button' onClick={addNewCatch}>
+        <Button variant='link' icon={<PlusCircleIcon />} className={'new-do-catch'} data-testid='trycatch-add-catch-button' onClick={addNewCatch}>
           New Catch Block
         </Button>
-      <div className="form-group">
+      <div className='form-group'>
         <DynamicInputs handleDynamicInputs={handleDynamicInputs} catchClauses={catchClauses} />
         <br />
-        <Button variant="primary" onClick={saveHandler}>
+        <Button variant='primary' onClick={saveHandler} data-testid={'trycatch-dosave'}>
           Apply
         </Button>
       </div>
