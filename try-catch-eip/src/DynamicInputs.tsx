@@ -15,8 +15,8 @@ export const DynamicInputs = ({
                   handleDynamicInputs,
                   catchClauses,
                 }: {
-  handleDynamicInputs: (newCatchClauses: any) => any;
-  catchClauses: any;
+  handleDynamicInputs: (newCatchClauses: any[]) => void;
+  catchClauses: any[];
 }) => {
   const [localValues, setLocalValues] = React.useState({});
 
