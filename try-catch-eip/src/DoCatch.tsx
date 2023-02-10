@@ -7,11 +7,11 @@ import { useState } from 'react';
 import * as React from 'react';
 
 export interface IDoCatchForm {
-  saveConfig?: (newConfig: any) => void;
+  updateStep?: (newConfig: any[]) => void;
   step?: IStepProps;
 }
 
-export const DoCatch = ({ saveConfig, step }: IDoCatchForm) => {
+export const DoCatch = ({ updateStep, step }: IDoCatchForm) => {
   function extractCatches(branch: { identifier: string; parameters: any[] }, index: any, arr: any) {
     if (branch.identifier !== 'steps' && branch.identifier !== 'do-finally') {
       return {
@@ -109,16 +109,16 @@ export const DoCatch = ({ saveConfig, step }: IDoCatchForm) => {
     docatches.forEach((c: any) => step.branches.push(c));
     step.branches.push(finallyclause);
 
-    if (saveConfig) {
-      saveConfig(step);
+    if (updateStep) {
+      updateStep(step);
     }
   };
 
   const addNewCatch = () => {
-    setCatchClauses((catchClauses: any) => [...catchClauses, { onwhen: '', exceptions: [''] }]);
+    setCatchClauses((catchClauses: any[]) => [...catchClauses, { onwhen: '', exceptions: [''] }]);
   };
 
-  const handleDynamicInputs = (data: any) => {
+  const handleDynamicInputs = (data: any[]) => {
     setCatchClauses(data);
   };
 
