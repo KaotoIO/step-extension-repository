@@ -1,24 +1,38 @@
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ModuleFederationPlugin =
-  require("webpack").container.ModuleFederationPlugin;
+  require('webpack').container.ModuleFederationPlugin;
 const { dependencies } = require('./package.json');
-const path = require("path");
-const { TsconfigPathsPlugin } = require("tsconfig-paths-webpack-plugin");
+const path = require('path');
+const { TsconfigPathsPlugin } = require('tsconfig-paths-webpack-plugin');
+
+const isPatternflyStyles = (stylesheet) =>
+  stylesheet.includes('@patternfly/react-styles/css/') ||
+  stylesheet.includes('@patternfly/react-core/');
 
 module.exports = {
-  entry: "./src/index",
-  mode: "development",
+  entry: './src/index',
+  mode: 'development',
   devServer: {
     static: {
-      directory: path.join(__dirname, "dist"),
+      directory: path.join(__dirname, 'dist'),
     },
     port: 3002,
   },
   output: {
-    publicPath: "auto",
+    publicPath: 'auto',
   },
   module: {
     rules: [
+      {
+        test: /\.css$/,
+        include: isPatternflyStyles,
+        use: ['null-loader'],
+        sideEffects: true,
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
       {
         test: /\.(tsx|ts|jsx)?$/,
         use: [
@@ -35,15 +49,15 @@ module.exports = {
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: "stepextensioncircuitbreaker",
-      filename: "remoteEntry.js",
+      name: 'stepextensioncircuitbreaker',
+      filename: 'remoteEntry.js',
       exposes: {
-        "./CircuitBreakerStep": "./src/CircuitBreakerStep",
+        './CircuitBreakerStep': './src/CircuitBreakerStep',
       },
-      shared: [{"react": { requiredVersion: dependencies["react"] }}, {"react-dom": { requiredVersion: dependencies["react-dom"] }}],
+      shared: [{'react': { requiredVersion: dependencies['react'] }}, {'react-dom': { requiredVersion: dependencies['react-dom'] }}],
     }),
     new HtmlWebpackPlugin({
-      template: "./public/index.html",
+      template: './public/index.html',
     }),
   ],
   resolve: {
