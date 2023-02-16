@@ -1,5 +1,5 @@
 import { Checkbox, Form, FormGroup, NumberInput, TextInput } from '@patternfly/react-core';
-import { FormEvent, useCallback, useEffect, useState } from 'react';
+import { FormEvent, useCallback, useState } from 'react';
 import { FaultToleranceConfigurationDefinition, faultToleranceConfigurationDefinitionInitialState } from '../models';
 import { hasOwn } from '../utils';
 
@@ -11,14 +11,6 @@ export function FaultToleranceConfiguration({ onChange }: CommonProps) {
   const [faultToleranceConfiguration, setfaultToleranceConfiguration] = useState<FaultToleranceConfigurationDefinition>(
     faultToleranceConfigurationDefinitionInitialState,
   );
-
-  useEffect(() => {
-    onChange(faultToleranceConfigurationDefinitionInitialState);
-  }, [onChange]);
-
-  const focusTextInput = useCallback((element: HTMLInputElement) => {
-    element?.focus();
-  }, []);
 
   const handleOnChange = useCallback((fieldName: string, value: string | number | boolean): void => {
     const updatedValue: FaultToleranceConfigurationDefinition = {
@@ -63,7 +55,6 @@ export function FaultToleranceConfiguration({ onChange }: CommonProps) {
     >
       <TextInput
         type="text"
-        ref={focusTextInput}
         id="circuitBreaker"
         name="circuitBreaker"
         aria-describedby="circuitBreaker"
@@ -167,7 +158,6 @@ export function FaultToleranceConfiguration({ onChange }: CommonProps) {
     >
       <TextInput
         type="text"
-        ref={focusTextInput}
         id="timeoutDuration"
         name="timeoutDuration"
         aria-describedby="timeoutDuration"
@@ -201,7 +191,6 @@ export function FaultToleranceConfiguration({ onChange }: CommonProps) {
     >
       <TextInput
         type="text"
-        ref={focusTextInput}
         id="timeoutScheduledExecutorService"
         name="timeoutScheduledExecutorService"
         aria-describedby="timeoutScheduledExecutorService"
@@ -267,7 +256,6 @@ export function FaultToleranceConfiguration({ onChange }: CommonProps) {
     >
       <TextInput
         type="text"
-        ref={focusTextInput}
         id="bulkheadExecutorService"
         name="bulkheadExecutorService"
         aria-describedby="bulkheadExecutorService"

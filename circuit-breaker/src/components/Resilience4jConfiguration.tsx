@@ -1,5 +1,5 @@
 import { Checkbox, Form, FormGroup, NumberInput, Select, SelectOption, SelectVariant, TextInput } from '@patternfly/react-core';
-import { FormEvent, useCallback, useEffect, useState } from 'react';
+import { FormEvent, useCallback, useState } from 'react';
 import { Resilience4jConfigurationDefinition, resilience4jConfigurationDefinitionInitialState } from '../models';
 import { hasOwn } from '../utils';
 
@@ -12,17 +12,9 @@ export function Resilience4jConfiguration({ onChange }: CommonProps) {
     resilience4jConfigurationDefinitionInitialState,
   );
 
-  useEffect(() => {
-    onChange(resilience4jConfigurationDefinitionInitialState);
-  }, [onChange]);
-
   const noopFn = useCallback(() => {
     return;
   }, [])
-
-  const focusTextInput = useCallback((element: HTMLInputElement) => {
-    element?.focus();
-  }, []);
 
   const handleOnChange = useCallback((fieldName: string, value: string | number | boolean): void => {
     const updatedValue: Resilience4jConfigurationDefinition = {
@@ -67,7 +59,6 @@ export function Resilience4jConfiguration({ onChange }: CommonProps) {
     >
       <TextInput
         type="text"
-        ref={focusTextInput}
         id="circuitBreaker"
         name="circuitBreaker"
         aria-describedby="circuitBreaker"
