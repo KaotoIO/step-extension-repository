@@ -1,5 +1,7 @@
-import { Tabs, Tab, TabTitleText } from '@patternfly/react-core';
+import { Tab, Tabs, TabTitleText } from '@patternfly/react-core';
+import { KeyboardEvent, MouseEvent, useState } from 'react';
 import { Common } from './components/Common';
+import { FaultToleranceConfiguration } from './components/FaultToleranceConfiguration';
 import { Resilience4jConfiguration } from './components/Resilience4jConfiguration';
 
 export type Props = {
@@ -7,6 +9,14 @@ export type Props = {
 }
 
 export const CircuitBreakerStep = (props: any) => {
+  const [activeTabKey, setActiveTabKey] = useState<string | number>(0);
+  const handleTabClick = (
+    _: MouseEvent<any> | KeyboardEvent | MouseEvent,
+    tabIndex: string | number
+  ) => {
+    setActiveTabKey(tabIndex);
+  };
+
   console.log({ step: props.step, stepParams: props.stepParams });
 
   const onCommonChange = (commonProps: unknown) => {
@@ -20,6 +30,8 @@ export const CircuitBreakerStep = (props: any) => {
       <br />
 
       <Tabs
+        activeKey={activeTabKey}
+        onSelect={handleTabClick}
         isBox
         role="region"
       >
@@ -36,7 +48,7 @@ export const CircuitBreakerStep = (props: any) => {
           title={<TabTitleText>FaultTolerance Configuration</TabTitleText>}
           aria-label="FaultTolerance configuration"
         >
-          FaultTolerance Configuration
+          <FaultToleranceConfiguration onChange={onCommonChange} />
         </Tab>
       </Tabs>
     </>
