@@ -19,7 +19,7 @@ export function Resilience4jConfiguration({ onChange }: ConfigurationProps) {
     };
 
     setResilience4jConfiguration(updatedValue);
-    onChange({ fieldName: 'resilience4j', configuration: updatedValue });
+    onChange({ resilience4jConfiguration: updatedValue });
   }, [resilience4jConfiguration, onChange]);
 
   const handleOnStringOrBooleanChange = useCallback((value: string | boolean | number, event: FormEvent<HTMLInputElement>): void => {

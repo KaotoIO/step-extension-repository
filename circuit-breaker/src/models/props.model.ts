@@ -1,9 +1,9 @@
 import { CommonDefinition, FaultToleranceConfigurationDefinition, Resilience4jConfigurationDefinition } from './circuitbreaker.model';
 
 export type OnConfigurationChange = {
-  (definition: { fieldName: 'common', configuration: CommonDefinition }): void;
-  (definition: { fieldName: 'resilience4j', configuration: Resilience4jConfigurationDefinition }): void;
-  (definition: { fieldName: 'faultTolerance', configuration: FaultToleranceConfigurationDefinition }): void;
+  (configuration: CommonDefinition): void;
+  (configuration: { resilience4jConfiguration: Resilience4jConfigurationDefinition }): void;
+  (configuration: { faultToleranceConfiguration: FaultToleranceConfigurationDefinition }): void;
 }
 
 export interface ConfigurationProps {

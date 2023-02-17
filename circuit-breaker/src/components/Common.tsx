@@ -1,13 +1,9 @@
 import { Checkbox, Form, FormGroup, TextInput } from '@patternfly/react-core';
-import { FormEvent, useCallback, useEffect, useState } from 'react';
+import { FC, FormEvent, useCallback, useState } from 'react';
 import { CommonDefinition, commonDefinitionInitialState, ConfigurationProps } from '../models';
 
-export function Common({ onChange }: ConfigurationProps) {
+export const Common: FC<ConfigurationProps> = (props) => {
   const [commonDefinition, setCommonDefinition] = useState<CommonDefinition>(commonDefinitionInitialState);
-
-  useEffect(() => {
-    onChange({ fieldName: 'common', configuration: commonDefinitionInitialState });
-  }, [onChange]);
 
   const focusTextInput = useCallback((element: HTMLInputElement) => {
     element?.focus();
@@ -19,11 +15,11 @@ export function Common({ onChange }: ConfigurationProps) {
 
     switch (fieldName) {
       case 'text':
-        updatedValue = { ...commonDefinition, description: { ...commonDefinition.description, text: value as string }};
+        updatedValue = { ...commonDefinition, description: { ...commonDefinition.description, text: value as string } };
         break;
 
       case 'language':
-        updatedValue = { ...commonDefinition, description: { ...commonDefinition.description, language: value as string }};
+        updatedValue = { ...commonDefinition, description: { ...commonDefinition.description, language: value as string } };
         break;
 
       case 'disabled':
@@ -40,8 +36,8 @@ export function Common({ onChange }: ConfigurationProps) {
     }
 
     setCommonDefinition(updatedValue);
-    onChange({ fieldName: 'common', configuration: updatedValue });
-  }, [commonDefinition, onChange]);
+    props.onChange(updatedValue);
+  }, [commonDefinition, props]);
 
   return <Form>
     <FormGroup
@@ -105,3 +101,6 @@ export function Common({ onChange }: ConfigurationProps) {
     </FormGroup>
   </Form>
 };
+function useEffect(arg0: () => void, arg1: any[]) {
+  throw new Error('Function not implemented.');
+}

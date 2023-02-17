@@ -1,5 +1,5 @@
 import { Tab, Tabs, TabTitleText } from '@patternfly/react-core';
-import { KeyboardEvent, MouseEvent, useState } from 'react';
+import { KeyboardEvent, MouseEvent, useCallback, useState } from 'react';
 import { Common } from './components/Common';
 import { FaultToleranceConfiguration } from './components/FaultToleranceConfiguration';
 import { Resilience4jConfiguration } from './components/Resilience4jConfiguration';
@@ -15,23 +15,9 @@ export const CircuitBreakerStep = (props: IKaotoApi) => {
     setActiveTabKey(tabIndex);
   };
 
-  const onConfigurationChange: OnConfigurationChange = (definition) => {
-    switch (definition.fieldName) {
-      case 'common':
-        setCircuitBreakerDefinition({ ...circuitBreakerDefinition, ...definition.configuration });
-        break;
-      case 'resilience4j':
-        setCircuitBreakerDefinition({ ...circuitBreakerDefinition, resilience4jConfiguration: definition.configuration });
-        break;
-      case 'faultTolerance':
-        setCircuitBreakerDefinition({ ...circuitBreakerDefinition, faultToleranceConfiguration: definition.configuration });
-        break;
-    }
-
-    console.log(props.step);
-
-    // props.updateStep( circuitBreakerDefinition )
-  }
+  const onConfigurationChange: OnConfigurationChange = useCallback((configuration) => {
+    setCircuitBreakerDefinition({ ...circuitBreakerDefinition, ...configuration });
+  }, [circuitBreakerDefinition]);
 
   return (
     <>

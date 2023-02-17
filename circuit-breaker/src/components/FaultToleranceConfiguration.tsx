@@ -15,7 +15,7 @@ export function FaultToleranceConfiguration({ onChange }: ConfigurationProps) {
     };
 
     setfaultToleranceConfiguration(updatedValue);
-    onChange({ fieldName: 'faultTolerance', configuration: updatedValue });
+    onChange({ faultToleranceConfiguration: updatedValue });
   }, [faultToleranceConfiguration, onChange]);
 
   const handleOnStringOrBooleanChange = useCallback((value: string | boolean | number, event: FormEvent<HTMLInputElement>): void => {
