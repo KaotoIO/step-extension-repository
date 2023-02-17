@@ -1,13 +1,9 @@
 import { Checkbox, Form, FormGroup, NumberInput, TextInput } from '@patternfly/react-core';
 import { FormEvent, useCallback, useState } from 'react';
-import { FaultToleranceConfigurationDefinition, faultToleranceConfigurationDefinitionInitialState } from '../models';
+import { ConfigurationProps, FaultToleranceConfigurationDefinition, faultToleranceConfigurationDefinitionInitialState } from '../models';
 import { hasOwn } from '../utils';
 
-export interface CommonProps {
-  onChange: (commonProps: FaultToleranceConfigurationDefinition) => void;
-}
-
-export function FaultToleranceConfiguration({ onChange }: CommonProps) {
+export function FaultToleranceConfiguration({ onChange }: ConfigurationProps) {
   const [faultToleranceConfiguration, setfaultToleranceConfiguration] = useState<FaultToleranceConfigurationDefinition>(
     faultToleranceConfigurationDefinitionInitialState,
   );
@@ -19,7 +15,7 @@ export function FaultToleranceConfiguration({ onChange }: CommonProps) {
     };
 
     setfaultToleranceConfiguration(updatedValue);
-    onChange(updatedValue);
+    onChange({ fieldName: 'faultTolerance', configuration: updatedValue });
   }, [faultToleranceConfiguration, onChange]);
 
   const handleOnStringOrBooleanChange = useCallback((value: string | boolean | number, event: FormEvent<HTMLInputElement>): void => {

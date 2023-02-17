@@ -3,12 +3,10 @@ import { KeyboardEvent, MouseEvent, useState } from 'react';
 import { Common } from './components/Common';
 import { FaultToleranceConfiguration } from './components/FaultToleranceConfiguration';
 import { Resilience4jConfiguration } from './components/Resilience4jConfiguration';
+import { CircuitBreakerDefinition, IKaotoApi, OnConfigurationChange } from './models';
 
-export type Props = {
-  onButtonClicked?: () => void;
-}
-
-export const CircuitBreakerStep = (props: any) => {
+export const CircuitBreakerStep = (props: IKaotoApi) => {
+  const [circuitBreakerDefinition, setCircuitBreakerDefinition] = useState<CircuitBreakerDefinition>({});
   const [activeTabKey, setActiveTabKey] = useState<string | number>(0);
   const handleTabClick = (
     _: MouseEvent<any> | KeyboardEvent | MouseEvent,
@@ -17,16 +15,27 @@ export const CircuitBreakerStep = (props: any) => {
     setActiveTabKey(tabIndex);
   };
 
-  console.log({ step: props.step, stepParams: props.stepParams });
+  const onConfigurationChange: OnConfigurationChange = (definition) => {
+    switch (definition.fieldName) {
+      case 'common':
+        setCircuitBreakerDefinition({ ...circuitBreakerDefinition, ...definition.configuration });
+        break;
+      case 'resilience4j':
+        setCircuitBreakerDefinition({ ...circuitBreakerDefinition, resilience4jConfiguration: definition.configuration });
+        break;
+      case 'faultTolerance':
+        setCircuitBreakerDefinition({ ...circuitBreakerDefinition, faultToleranceConfiguration: definition.configuration });
+        break;
+    }
 
-  const onCommonChange = (commonProps: unknown) => {
-    console.log(commonProps);
-    // props?.onChange(commonProps);
+    console.log(props.step);
+
+    // props.updateStep( circuitBreakerDefinition )
   }
 
   return (
     <>
-      <Common onChange={onCommonChange} />
+      <Common onChange={onConfigurationChange} />
       <br />
 
       <Tabs
@@ -40,7 +49,7 @@ export const CircuitBreakerStep = (props: any) => {
           title={<TabTitleText>Resilience4j Configuration</TabTitleText>}
           aria-label="Resilience4j configuration"
         >
-          <Resilience4jConfiguration onChange={onCommonChange} />
+          <Resilience4jConfiguration onChange={onConfigurationChange} />
         </Tab>
 
         <Tab
@@ -48,7 +57,7 @@ export const CircuitBreakerStep = (props: any) => {
           title={<TabTitleText>FaultTolerance Configuration</TabTitleText>}
           aria-label="FaultTolerance configuration"
         >
-          <FaultToleranceConfiguration onChange={onCommonChange} />
+          <FaultToleranceConfiguration onChange={onConfigurationChange} />
         </Tab>
       </Tabs>
     </>

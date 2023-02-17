@@ -1,16 +1,12 @@
 import { Checkbox, Form, FormGroup, TextInput } from '@patternfly/react-core';
 import { FormEvent, useCallback, useEffect, useState } from 'react';
-import { commonDefinitionInitialState, CommonDefinition } from '../models';
+import { CommonDefinition, commonDefinitionInitialState, ConfigurationProps } from '../models';
 
-export interface CommonProps {
-  onChange: (commonProps: CommonDefinition) => void;
-}
-
-export function Common({ onChange }: CommonProps) {
+export function Common({ onChange }: ConfigurationProps) {
   const [commonDefinition, setCommonDefinition] = useState<CommonDefinition>(commonDefinitionInitialState);
 
   useEffect(() => {
-    onChange(commonDefinitionInitialState);
+    onChange({ fieldName: 'common', configuration: commonDefinitionInitialState });
   }, [onChange]);
 
   const focusTextInput = useCallback((element: HTMLInputElement) => {
@@ -44,7 +40,7 @@ export function Common({ onChange }: CommonProps) {
     }
 
     setCommonDefinition(updatedValue);
-    onChange(updatedValue);
+    onChange({ fieldName: 'common', configuration: updatedValue });
   }, [commonDefinition, onChange]);
 
   return <Form>

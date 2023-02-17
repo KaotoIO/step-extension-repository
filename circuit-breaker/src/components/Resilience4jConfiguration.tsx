@@ -1,13 +1,9 @@
 import { Checkbox, Form, FormGroup, NumberInput, Select, SelectOption, SelectVariant, TextInput } from '@patternfly/react-core';
 import { FormEvent, useCallback, useState } from 'react';
-import { Resilience4jConfigurationDefinition, resilience4jConfigurationDefinitionInitialState } from '../models';
+import { ConfigurationProps, Resilience4jConfigurationDefinition, resilience4jConfigurationDefinitionInitialState } from '../models';
 import { hasOwn } from '../utils';
 
-export interface CommonProps {
-  onChange: (commonProps: Resilience4jConfigurationDefinition) => void;
-}
-
-export function Resilience4jConfiguration({ onChange }: CommonProps) {
+export function Resilience4jConfiguration({ onChange }: ConfigurationProps) {
   const [resilience4jConfiguration, setResilience4jConfiguration] = useState<Resilience4jConfigurationDefinition>(
     resilience4jConfigurationDefinitionInitialState,
   );
@@ -23,7 +19,7 @@ export function Resilience4jConfiguration({ onChange }: CommonProps) {
     };
 
     setResilience4jConfiguration(updatedValue);
-    onChange(updatedValue);
+    onChange({ fieldName: 'resilience4j', configuration: updatedValue });
   }, [resilience4jConfiguration, onChange]);
 
   const handleOnStringOrBooleanChange = useCallback((value: string | boolean | number, event: FormEvent<HTMLInputElement>): void => {
