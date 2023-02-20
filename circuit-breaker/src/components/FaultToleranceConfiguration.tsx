@@ -1,4 +1,5 @@
-import { Checkbox, Form, FormGroup, NumberInput, TextInput } from '@patternfly/react-core';
+import { Checkbox, Form, FormGroup, NumberInput, Popover, TextInput } from '@patternfly/react-core';
+import HelpIcon from '@patternfly/react-icons/dist/esm/icons/help-icon';
 import { FormEvent, useCallback, useState } from 'react';
 import { ConfigurationProps, FaultToleranceConfigurationDefinition, faultToleranceConfigurationDefinitionInitialState } from '../models';
 import { hasOwn } from '../utils';
@@ -47,7 +48,21 @@ export function FaultToleranceConfiguration({ onChange }: ConfigurationProps) {
     <FormGroup
       label="Circuit Breaker"
       fieldId="circuitBreaker"
-      helperText=<span>Refers to an existing <code>io.smallrye.faulttolerance.core.circuit.breaker.CircuitBreaker</code> instance to lookup and use from the registry. When using this, then any other circuit breaker options are not in use.</span>
+      helperText=<span>Refers to an existing <code>io.github.resilience4j.circuitbreaker.CircuitBreaker</code> instance to lookup and use from the registry.</span>
+      labelIcon=<Popover
+        hideOnOutsideClick={false}
+        bodyContent={<span> When using this, then any other circuit breaker options are not in use.</span>}
+      >
+        <button
+          type="button"
+          aria-label="More info for name field"
+          onClick={e => e.preventDefault()}
+          aria-describedby="simple-form-name-01"
+          className="pf-c-form__group-label-help"
+        >
+          <HelpIcon noVerticalAlign />
+        </button>
+      </Popover>
     >
       <TextInput
         type="text"
