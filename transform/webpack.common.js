@@ -16,6 +16,7 @@ module.exports = () => {
     target: 'web',
     devtool: 'source-map',
     output: {
+      hashFunction: 'xxhash64',
       path: path.resolve(__dirname, 'dist'),
       publicPath: 'auto',
     },
