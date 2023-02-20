@@ -12,8 +12,6 @@ jobs:
     steps:
     - name: 📥 Checkout
       uses: actions/checkout@v3
-      with:
-        submodules: recursive
     - name: 🎡  Set Matrix
       id: set-matrix
       run: |
@@ -29,8 +27,6 @@ jobs:
     steps:
     - name: 📥 Checkout
       uses: actions/checkout@v3
-      with:
-        submodules: recursive
     - name: 🧮 Run tests
       run: cd ${{ matrix.folder }}; yarn install; yarn test
 
