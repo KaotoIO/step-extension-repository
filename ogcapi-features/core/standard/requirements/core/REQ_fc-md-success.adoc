@@ -1,7 +1,0 @@
-[[req_core_fc-md-success]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/core/fc-md-success*
-^|A |A successful execution of the operation SHALL be reported as a response with a HTTP status code `200`.
-^|B |The content of that response SHALL be based upon the OpenAPI 3.0 schema link:http://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/schemas/collections.yaml[collections.yaml].
-|===

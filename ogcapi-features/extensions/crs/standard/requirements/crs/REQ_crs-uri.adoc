@@ -1,6 +1,0 @@
-[[req_crs_crs-uri]]
-[width="90%",cols="2,6a"]
-|===
-|*Requirement {counter:req-id}* |*/req/crs/crs-uri* +
-2+|Each CRS supported by a server SHALL be referenceable by a uniform resource identifier (i.e. a URI).
-|===

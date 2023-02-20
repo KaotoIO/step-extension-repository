@@ -72,7 +72,8 @@
     "format:fix": "prettier --write --ignore-unknown 'src'",
     "lint": "eslint --ext .ts,.tsx,.js ./src",
     "lint:fix": "yarn lint --fix",
-    "lint-staged": "yarn lint:fix && yarn format:fix"
+    "lint-staged": "yarn lint:fix && yarn format:fix",
+    "test": "echo 'No tests to run.'"
   },
   "eslintConfig": {
     "extends": [
