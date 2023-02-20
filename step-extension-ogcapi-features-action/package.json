@@ -45,7 +45,8 @@
     "startbu": "react-scripts start",
     "buildbu": "react-scripts build",
     "testbu": "react-scripts test",
-    "ejectbu": "react-scripts eject"
+    "ejectbu": "react-scripts eject",
+    "test": "echo 'No tests to run.'"
   },
   "eslintConfig": {
     "extends": [
