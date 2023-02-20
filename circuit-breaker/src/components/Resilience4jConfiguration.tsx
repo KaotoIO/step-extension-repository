@@ -1,4 +1,5 @@
-import { Checkbox, Form, FormGroup, NumberInput, Select, SelectOption, SelectVariant, TextInput } from '@patternfly/react-core';
+import HelpIcon from '@patternfly/react-icons/dist/esm/icons/help-icon';
+import { Checkbox, Form, FormGroup, NumberInput, Popover, Select, SelectOption, SelectVariant, TextInput } from '@patternfly/react-core';
 import { FormEvent, useCallback, useState } from 'react';
 import { ConfigurationProps, Resilience4jConfigurationDefinition, resilience4jConfigurationDefinitionInitialState } from '../models';
 import { hasOwn } from '../utils';
@@ -51,7 +52,21 @@ export function Resilience4jConfiguration({ onChange }: ConfigurationProps) {
     <FormGroup
       label="Circuit Breaker"
       fieldId="circuitBreaker"
-      helperText=<span>Refers to an existing <code>io.github.resilience4j.circuitbreaker.CircuitBreaker</code> instance to lookup and use from the registry. When using this, then any other circuit breaker options are not in use.</span>
+      helperText=<span>Refers to an existing <code>io.github.resilience4j.circuitbreaker.CircuitBreaker</code> instance to lookup and use from the registry.</span>
+      labelIcon=<Popover
+        hideOnOutsideClick={false}
+        bodyContent={<span> When using this, then any other circuit breaker options are not in use.</span>}
+      >
+        <button
+          type="button"
+          aria-label="More info for name field"
+          onClick={e => e.preventDefault()}
+          aria-describedby="simple-form-name-01"
+          className="pf-c-form__group-label-help"
+        >
+          <HelpIcon noVerticalAlign />
+        </button>
+      </Popover>
     >
       <TextInput
         type="text"
@@ -79,7 +94,7 @@ export function Resilience4jConfiguration({ onChange }: ConfigurationProps) {
     </FormGroup>
 
     <FormGroup
-      label="FailureRateThreshold"
+      label="Failure Rate Threshold"
       fieldId="failureRateThreshold"
       helperText=<p>Configures the failure rate threshold in percentage. If the failure rate is equal or greater than the threshold the CircuitBreaker transitions to open and starts short-circuiting calls. The threshold must be greater than 0 and not greater than 100. Default value is 50 percentage.</p>
     >
@@ -100,7 +115,7 @@ export function Resilience4jConfiguration({ onChange }: ConfigurationProps) {
     </FormGroup>
 
     <FormGroup
-      label="PermittedNumberOfCallsInHalfOpenState"
+      label="Permitted Number Of Calls In Half Open State"
       fieldId="permittedNumberOfCallsInHalfOpenState"
       helperText=<p>Configures the number of permitted calls when the CircuitBreaker is half open. The size must be greater than 0. Default size is 10.</p>
     >
@@ -124,7 +139,7 @@ export function Resilience4jConfiguration({ onChange }: ConfigurationProps) {
     >
       <Checkbox
         id="throwExceptionWhenHalfOpenOrOpenState"
-        label=<span><strong>ThrowExceptionWhenHalfOpenOrOpenState</strong></span>
+        label=<span><strong>Throw Exception When Half Open Or Open State</strong></span>
         name="throwExceptionWhenHalfOpenOrOpenState"
         aria-describedby="throwExceptionWhenHalfOpenOrOpenState"
         isChecked={resilience4jConfiguration.throwExceptionWhenHalfOpenOrOpenState}
@@ -133,9 +148,23 @@ export function Resilience4jConfiguration({ onChange }: ConfigurationProps) {
     </FormGroup>
 
     <FormGroup
-      label="SlidingWindowSize"
+      label="Sliding Window Size"
       fieldId="slidingWindowSize"
-      helperText=<p>Configures the size of the sliding window which is used to record the outcome of calls when the CircuitBreaker is closed. slidingWindowSize configures the size of the sliding window. Sliding window can either be count-based or time-based. If slidingWindowType is <code>COUNT_BASED</code>, the last slidingWindowSize calls are recorded and aggregated. If slidingWindowType is <code>TIME_BASED</code>, the calls of the last slidingWindowSize seconds are recorded and aggregated. The slidingWindowSize must be greater than 0. The minimumNumberOfCalls must be greater than 0. If the slidingWindowType is <code>COUNT_BASED</code>, the minimumNumberOfCalls cannot be greater than slidingWindowSize. If the <strong>slidingWindowType</strong> is <code>TIME_BASED</code>, you can pick whatever you want. Default <strong>slidingWindowSize</strong> is 100.</p>
+      helperText=<p>Configures the size of the sliding window which is used to record the outcome of calls when the CircuitBreaker is closed.</p>
+      labelIcon=<Popover
+        hideOnOutsideClick={false}
+        bodyContent={<span>slidingWindowSize configures the size of the sliding window. Sliding window can either be count-based or time-based. If slidingWindowType is <code>COUNT_BASED</code>, the last slidingWindowSize calls are recorded and aggregated. If slidingWindowType is <code>TIME_BASED</code>, the calls of the last slidingWindowSize seconds are recorded and aggregated. The slidingWindowSize must be greater than 0. The minimumNumberOfCalls must be greater than 0. If the slidingWindowType is <code>COUNT_BASED</code>, the minimumNumberOfCalls cannot be greater than slidingWindowSize. If the <strong>slidingWindowType</strong> is <code>TIME_BASED</code>, you can pick whatever you want. Default <strong>slidingWindowSize</strong> is 100.</span>}
+      >
+        <button
+          type="button"
+          aria-label="More info for name field"
+          onClick={e => e.preventDefault()}
+          aria-describedby="simple-form-name-01"
+          className="pf-c-form__group-label-help"
+        >
+          <HelpIcon noVerticalAlign />
+        </button>
+      </Popover>
     >
       <NumberInput
         id="slidingWindowSize"
@@ -154,7 +183,7 @@ export function Resilience4jConfiguration({ onChange }: ConfigurationProps) {
       label="slidingWindowType"
       fieldId="slidingWindowType"
       helperText=<>
-        <p>Configures the type of the sliding window which is used to record the outcome of calls when the CircuitBreaker is closed. Sliding window can either be <code>count-based</code> or <code>time-based</code>. If slidingWindowType is <code>COUNT_BASED</code>, the last slidingWindowSize calls are recorded and aggregated. If slidingWindowType is <code>TIME_BASED</code>, the calls of the last slidingWindowSize seconds are recorded and aggregated. Default slidingWindowType is <code>COUNT_BASED</code>.</p>
+        <p>Configures the type of the sliding window which is used to record the outcome of calls when the CircuitBreaker is closed.<br />Default slidingWindowType is <code>COUNT_BASED</code></p>
         <div><span>Enum values:</span>
           <ul>
             <li><code>TIME_BASED</code></li>
@@ -162,6 +191,20 @@ export function Resilience4jConfiguration({ onChange }: ConfigurationProps) {
           </ul>
         </div>
       </>
+      labelIcon=<Popover
+        hideOnOutsideClick={false}
+        bodyContent={<p>Sliding window can either be <code>count-based</code> or <code>time-based</code>.<br />If slidingWindowType is <code>COUNT_BASED</code>, the last slidingWindowSize calls are recorded and aggregated. <br />If slidingWindowType is <code>TIME_BASED</code>, the calls of the last slidingWindowSize seconds are recorded and aggregated.</p>}
+      >
+        <button
+          type="button"
+          aria-label="More info for name field"
+          onClick={e => e.preventDefault()}
+          aria-describedby="simple-form-name-01"
+          className="pf-c-form__group-label-help"
+        >
+          <HelpIcon noVerticalAlign />
+        </button>
+      </Popover>
     >
       <Select
         variant={SelectVariant.single}
@@ -174,9 +217,23 @@ export function Resilience4jConfiguration({ onChange }: ConfigurationProps) {
     </FormGroup>
 
     <FormGroup
-      label="MinimumNumberOfCalls"
+      label="Minimum Number Of Calls"
       fieldId="minimumNumberOfCalls"
-      helperText=<p>Configures the minimum number of calls which are required (per sliding window period) before the CircuitBreaker can calculate the error rate. For example, if minimumNumberOfCalls is 10, then at least 10 calls must be recorded, before the failure rate can be calculated. If only 9 calls have been recorded the CircuitBreaker will not transition to open even if all 9 calls have failed. Default minimumNumberOfCalls is 100.</p>
+      helperText=<p>Configures the minimum number of calls which are required (per sliding window period) before the CircuitBreaker can calculate the error rate. Default minimumNumberOfCalls is 100.</p>
+      labelIcon=<Popover
+        hideOnOutsideClick={false}
+        bodyContent={<p>For example, if minimumNumberOfCalls is 10, then at least 10 calls must be recorded, before the failure rate can be calculated. If only 9 calls have been recorded the CircuitBreaker will not transition to open even if all 9 calls have failed.</p>}
+      >
+        <button
+          type="button"
+          aria-label="More info for name field"
+          onClick={e => e.preventDefault()}
+          aria-describedby="simple-form-name-01"
+          className="pf-c-form__group-label-help"
+        >
+          <HelpIcon noVerticalAlign />
+        </button>
+      </Popover>
     >
       <NumberInput
         id="minimumNumberOfCalls"
@@ -196,7 +253,7 @@ export function Resilience4jConfiguration({ onChange }: ConfigurationProps) {
       helperText=<span>Enables writable stack traces. When set to false, Exception.getStackTrace returns a zero length array. This may be used to reduce log spam when the circuit breaker is open as the cause of the exceptions is already known (the circuit breaker is short-circuiting calls).</span>
     >
       <Checkbox
-        id="writableStackTraceEnabled"
+        id="Writable Stack Trace Enabled"
         label=<span><strong>WritableStackTraceEnabled</strong></span>
         name="writableStackTraceEnabled"
         aria-describedby="writableStackTraceEnabled"
@@ -206,7 +263,7 @@ export function Resilience4jConfiguration({ onChange }: ConfigurationProps) {
     </FormGroup>
 
     <FormGroup
-      label="WaitDurationInOpenState"
+      label="Wait Duration In Open State"
       fieldId="waitDurationInOpenState"
       helperText=<p>Configures the wait duration (in seconds) which specifies how long the CircuitBreaker should stay open, before it switches to half open. Default value is 60 seconds.</p>
     >
@@ -228,7 +285,7 @@ export function Resilience4jConfiguration({ onChange }: ConfigurationProps) {
       helperText=<span>Enables automatic transition from OPEN to HALF_OPEN state once the waitDurationInOpenState has passed.</span>
     >
       <Checkbox
-        id="automaticTransitionFromOpenToHalfOpenEnabled"
+        id="Automatic Transition From Open To Half Open Enabled"
         label=<span><strong>AutomaticTransitionFromOpenToHalfOpenEnabled</strong></span>
         name="automaticTransitionFromOpenToHalfOpenEnabled"
         aria-describedby="automaticTransitionFromOpenToHalfOpenEnabled"
@@ -238,7 +295,7 @@ export function Resilience4jConfiguration({ onChange }: ConfigurationProps) {
     </FormGroup>
 
     <FormGroup
-      label="SlowCallRateThreshold"
+      label="Slow Call Rate Threshold"
       fieldId="slowCallRateThreshold"
       helperText=<p>Configures the failure rate threshold in percentage. If the failure rate is equal or greater than the threshold the CircuitBreaker transitions to open and starts short-circuiting calls. The threshold must be greater than 0 and not greater than 100. Default value is 50 percentage.</p>
     >
@@ -260,7 +317,7 @@ export function Resilience4jConfiguration({ onChange }: ConfigurationProps) {
     </FormGroup>
 
     <FormGroup
-      label="slowCallDurationThreshold"
+      label="Slow Call Duration Threshold"
       fieldId="slowCallDurationThreshold"
       helperText=<p>Configures the duration threshold (seconds) above which calls are considered as slow and increase the slow calls percentage. Default value is 60 seconds.</p>
     >
