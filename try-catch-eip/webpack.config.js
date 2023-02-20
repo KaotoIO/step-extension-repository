@@ -20,6 +20,7 @@ module.exports = {
   },
   devtool: 'eval-source-map',
   output: {
+    hashFunction: 'xxhash64',
     publicPath: 'auto',
   },
   module: {
