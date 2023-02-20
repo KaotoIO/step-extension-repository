@@ -1,0 +1,25 @@
+{
+  "baseUrl": ".",
+  "compilerOptions": {
+    "allowJs": false,
+    "baseUrl": ".",
+    "declaration": true,
+    "esModuleInterop": true,
+    "typeRoots": ["./node_modules/@types"],
+    "jsx": "react-jsx",
+    "importHelpers": true,
+    "lib": ["dom", "esnext"],
+    "module": "esnext",
+    "moduleResolution": "node",
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "outDir": "dist",
+    "sourceMap": true,
+    "strict": true,
+    "target": "es6"
+  },
+  "include": ["src", "webpack.common.js", "./src/setupTests.ts"]
+}
