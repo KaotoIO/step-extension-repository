@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "sourceMap": true,
+    "strict": true,
+    "jsx": "react",
+    "paths": {
+      "kaoto/*": ["./src/types/kaoto/*"]
+    },
+    "allowSyntheticDefaultImports": true
+  },
+  "include": [
+    "src/**/*"
+  ]
+}
