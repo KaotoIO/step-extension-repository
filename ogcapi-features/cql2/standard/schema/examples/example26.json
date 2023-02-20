@@ -1,0 +1,10 @@
+{
+  "op": "in",
+  "args": [
+    { "casei": { "property": "road_class" } },
+    [
+      { "casei": "Οδος" },
+      { "casei": "Straße" }
+    ]
+  ]
+}

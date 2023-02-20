@@ -1,0 +1,95 @@
+{
+  "name": "http-step-extension",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": "https://kaotoio.github.io/http-step-extension",
+  "port": "9001",
+  "devDependencies": {
+    "@babel/core": "7.15.5",
+    "@babel/preset-react": "7.14.5",
+    "@babel/preset-typescript": "7.15.0",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "@trivago/prettier-plugin-sort-imports": "^3.3.0",
+    "@types/jest": "^26.0.15",
+    "@types/node": "^12.0.0",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "18.0.3",
+    "@typescript-eslint/eslint-plugin": "^5.30.7",
+    "@typescript-eslint/parser": "5.29.0",
+    "babel-loader": "8.2.2",
+    "bundle-loader": "0.5.6",
+    "css-loader": "^6.2.0",
+    "eslint": "7.32.0",
+    "eslint-config-prettier": "8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jest-dom": "4.0.2",
+    "eslint-plugin-prettier": "4.2.1",
+    "eslint-plugin-react": "7.30.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "html-webpack-plugin": "5.3.2",
+    "mini-css-extract-plugin": "^2.6.1",
+    "null-loader": "^4.0.1",
+    "prettier": "2.7.1",
+    "sass": "^1.53.0",
+    "sass-loader": "^13.0.2",
+    "serve": "12.0.1",
+    "style-loader": "^3.2.1",
+    "typescript": "4.3.5",
+    "util": "^0.12.4",
+    "webpack": "5.52.1",
+    "webpack-cli": "4.10.0",
+    "webpack-dev-server": "4.2.0",
+    "webpack-merge": "5.8.0"
+  },
+  "dependencies": {
+    "@apidevtools/swagger-parser": "^10.1.0",
+    "@patternfly/patternfly": "4.185.1",
+    "@patternfly/react-core": "4.235.3",
+    "@patternfly/react-styles": "4.52.16",
+    "buffer": "^6.0.3",
+    "gh-pages": "^4.0.0",
+    "node-polyfill-webpack-plugin": "^2.0.1",
+    "openapi-types": "^12.0.0",
+    "react": "18.0.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "5.2.1",
+    "react-scripts": "^5.0.1",
+    "stream-http": "^3.2.0",
+    "web-vitals": "^1.0.1"
+  },
+  "scripts": {
+    "start:old": "webpack-cli serve",
+    "start:dev": "webpack-cli serve --https --hot --color --progress --config webpack.dev.js",
+    "build": "webpack --mode production --config webpack.common.js",
+    "start": "webpack-cli serve --hot --color --progress --config webpack.dev.js",
+    "predeploy": "webpack --mode production --config webpack.common.js",
+    "deploy": "gh-pages -d dist",
+    "serve": "serve dist -p 3002",
+    "clean": "rm -rf dist",
+    "format": "prettier --check 'src'",
+    "format:fix": "prettier --write --ignore-unknown 'src'",
+    "lint": "eslint --ext .ts,.tsx,.js ./src",
+    "lint:fix": "yarn lint --fix",
+    "lint-staged": "yarn lint:fix && yarn format:fix"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

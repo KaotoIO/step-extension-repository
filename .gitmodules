@@ -1,6 +1,0 @@
-[submodule "http"]
-	path = http
-	url = https://github.com/KaotoIO/http-step-extension.git
-[submodule "ogcapi-features-action"]
-	path = ogcapi-features-action
-	url = https://github.com/KaotoIO/step-extension-ogcapi-features-action.git

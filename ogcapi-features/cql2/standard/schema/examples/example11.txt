@@ -1,0 +1,3 @@
+EXAMPLE: Owner's name contains the string 'Jones'.
+
+owner LIKE '%Jones%'
