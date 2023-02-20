@@ -1,7 +1,0 @@
-[[req_basic-cql2_property]] 
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/basic-cql2/property* 
-^|A |The property name (rule `propertyName`) SHALL be a queryable of the data.
-^|B |The property name reference SHALL evaluate to its corresponding value, or `NULL` if unset.
-|===
