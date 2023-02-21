@@ -1,4 +1,5 @@
 import { CommonDefinition, FaultToleranceConfigurationDefinition, Resilience4jConfigurationDefinition } from './circuitbreaker.model';
+import { IStepPropsBranch } from './kaoto-api.model';
 
 export const commonDefinitionInitialState: CommonDefinition = {
   description: {
@@ -40,3 +41,16 @@ export const faultToleranceConfigurationDefinitionInitialState: FaultToleranceCo
   bulkheadWaitingTaskQueue: 10,
   bulkheadExecutorService: 'ExecutorService', // ExecutorService -> What to do here?
 };
+
+export const circuitBreakerBranches: IStepPropsBranch[] = [
+  {
+    identifier: 'steps',
+    steps: [],
+    branchUuid: ''
+  },
+  {
+    identifier: 'on-fallback',
+    steps: [],
+    branchUuid: ''
+  }
+];

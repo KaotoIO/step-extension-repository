@@ -1,27 +1,30 @@
-import { Tab, Tabs, TabTitleText } from '@patternfly/react-core';
-import { KeyboardEvent, MouseEvent, useCallback, useState } from 'react';
+import { Button, Tab, Tabs, TabTitleText } from '@patternfly/react-core';
+import { useCallback, useState } from 'react';
 import { Common } from './components/Common';
 import { FaultToleranceConfiguration } from './components/FaultToleranceConfiguration';
 import { Resilience4jConfiguration } from './components/Resilience4jConfiguration';
 import { CircuitBreakerDefinition, IKaotoApi, OnConfigurationChange } from './models';
+import { updateStepValues } from './utils';
 
-export const CircuitBreakerStep = (props: IKaotoApi) => {
-  const [circuitBreakerDefinition, setCircuitBreakerDefinition] = useState<CircuitBreakerDefinition>({});
+export const CircuitBreakerStep = (props: IKaotoApi<CircuitBreakerDefinition>) => {
+  const [circuitBreakerDefinition, setCircuitBreakerDefinition] = useState<CircuitBreakerDefinition>(props.stepParams);
   const [activeTabKey, setActiveTabKey] = useState<string | number>(0);
-  const handleTabClick = (
-    _: MouseEvent<any> | KeyboardEvent | MouseEvent,
-    tabIndex: string | number
-  ) => {
+  const handleTabClick = (_: unknown, tabIndex: string | number) => {
     setActiveTabKey(tabIndex);
   };
 
   const onConfigurationChange: OnConfigurationChange = useCallback((configuration) => {
-    setCircuitBreakerDefinition({ ...circuitBreakerDefinition, ...configuration });
-  }, [circuitBreakerDefinition]);
+    setCircuitBreakerDefinition((previousValues) => ({ ...previousValues, ...configuration }));
+  }, []);
+
+  const applyChanges = useCallback(() => {
+    const updatedStep = updateStepValues(props.step, circuitBreakerDefinition);
+    props.updateStep(updatedStep);
+  }, [circuitBreakerDefinition, props]);
 
   return (
     <>
-      <Common onChange={onConfigurationChange} />
+      <Common initialValue={props.stepParams} onChange={onConfigurationChange} />
       <br />
 
       <Tabs
@@ -35,7 +38,7 @@ export const CircuitBreakerStep = (props: IKaotoApi) => {
           title={<TabTitleText>Resilience4j Configuration</TabTitleText>}
           aria-label="Resilience4j configuration"
         >
-          <Resilience4jConfiguration onChange={onConfigurationChange} />
+          <Resilience4jConfiguration initialValue={props.stepParams.resilience4jConfiguration} onChange={onConfigurationChange} />
         </Tab>
 
         <Tab
@@ -43,9 +46,11 @@ export const CircuitBreakerStep = (props: IKaotoApi) => {
           title={<TabTitleText>FaultTolerance Configuration</TabTitleText>}
           aria-label="FaultTolerance configuration"
         >
-          <FaultToleranceConfiguration onChange={onConfigurationChange} />
+          <FaultToleranceConfiguration initialValue={props.stepParams.faultToleranceConfiguration} onChange={onConfigurationChange} />
         </Tab>
       </Tabs>
+
+      <Button onClick={applyChanges}>Apply</Button>
     </>
   );
 };

@@ -1,12 +1,12 @@
-import HelpIcon from '@patternfly/react-icons/dist/esm/icons/help-icon';
 import { Checkbox, Form, FormGroup, NumberInput, Popover, Select, SelectOption, SelectVariant, TextInput } from '@patternfly/react-core';
+import HelpIcon from '@patternfly/react-icons/dist/esm/icons/help-icon';
 import { FormEvent, useCallback, useState } from 'react';
-import { ConfigurationProps, Resilience4jConfigurationDefinition, resilience4jConfigurationDefinitionInitialState } from '../models';
+import { CommonProps, Resilience4jConfigurationDefinition, resilience4jConfigurationDefinitionInitialState } from '../models';
 import { hasOwn } from '../utils';
 
-export function Resilience4jConfiguration({ onChange }: ConfigurationProps) {
+export function Resilience4jConfiguration({ initialValue, onChange }: CommonProps<Resilience4jConfigurationDefinition>) {
   const [resilience4jConfiguration, setResilience4jConfiguration] = useState<Resilience4jConfigurationDefinition>(
-    resilience4jConfigurationDefinitionInitialState,
+    initialValue ?? resilience4jConfigurationDefinitionInitialState,
   );
 
   const noopFn = useCallback(() => {

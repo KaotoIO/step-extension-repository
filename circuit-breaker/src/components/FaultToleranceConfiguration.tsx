@@ -1,12 +1,12 @@
 import { Checkbox, Form, FormGroup, NumberInput, Popover, TextInput } from '@patternfly/react-core';
 import HelpIcon from '@patternfly/react-icons/dist/esm/icons/help-icon';
 import { FormEvent, useCallback, useState } from 'react';
-import { ConfigurationProps, FaultToleranceConfigurationDefinition, faultToleranceConfigurationDefinitionInitialState } from '../models';
+import { CommonProps, FaultToleranceConfigurationDefinition, faultToleranceConfigurationDefinitionInitialState } from '../models';
 import { hasOwn } from '../utils';
 
-export function FaultToleranceConfiguration({ onChange }: ConfigurationProps) {
+export function FaultToleranceConfiguration({ initialValue, onChange }: CommonProps<FaultToleranceConfigurationDefinition>) {
   const [faultToleranceConfiguration, setfaultToleranceConfiguration] = useState<FaultToleranceConfigurationDefinition>(
-    faultToleranceConfigurationDefinitionInitialState,
+    initialValue ?? faultToleranceConfigurationDefinitionInitialState,
   );
 
   const handleOnChange = useCallback((fieldName: string, value: string | number | boolean): void => {
@@ -48,7 +48,7 @@ export function FaultToleranceConfiguration({ onChange }: ConfigurationProps) {
     <FormGroup
       label="Circuit Breaker"
       fieldId="circuitBreaker"
-      helperText=<span>Refers to an existing <code>io.github.resilience4j.circuitbreaker.CircuitBreaker</code> instance to lookup and use from the registry.</span>
+      helperText=<span>Refers to an existing <code>io.smallrye.faulttolerance.core.circuit.breaker.CircuitBreaker</code> instance to lookup and use from the registry.</span>
       labelIcon=<Popover
         hideOnOutsideClick={false}
         bodyContent={<span> When using this, then any other circuit breaker options are not in use.</span>}

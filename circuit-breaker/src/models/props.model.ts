@@ -6,6 +6,7 @@ export type OnConfigurationChange = {
   (configuration: { faultToleranceConfiguration: FaultToleranceConfigurationDefinition }): void;
 }
 
-export interface ConfigurationProps {
+export interface CommonProps<T>  {
+  initialValue?: T;
   onChange: OnConfigurationChange;
 }

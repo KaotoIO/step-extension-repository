@@ -1,9 +1,13 @@
 import { Checkbox, Form, FormGroup, TextInput } from '@patternfly/react-core';
-import { FC, FormEvent, useCallback, useState } from 'react';
-import { CommonDefinition, commonDefinitionInitialState, ConfigurationProps } from '../models';
+import { FormEvent, useCallback, useState } from 'react';
+import { CommonDefinition, commonDefinitionInitialState, CommonProps } from '../models';
 
-export const Common: FC<ConfigurationProps> = (props) => {
-  const [commonDefinition, setCommonDefinition] = useState<CommonDefinition>(commonDefinitionInitialState);
+export function Common({ initialValue, onChange }: CommonProps<CommonDefinition>) {
+  const [commonDefinition, setCommonDefinition] = useState<CommonDefinition>({
+    description: initialValue?.description ?? commonDefinitionInitialState.description,
+    configuration: initialValue?.configuration ?? commonDefinitionInitialState.configuration,
+    disabled: initialValue?.disabled ?? commonDefinitionInitialState.disabled,
+  });
 
   const focusTextInput = useCallback((element: HTMLInputElement) => {
     element?.focus();
@@ -36,8 +40,8 @@ export const Common: FC<ConfigurationProps> = (props) => {
     }
 
     setCommonDefinition(updatedValue);
-    props.onChange(updatedValue);
-  }, [commonDefinition, props]);
+    onChange(updatedValue);
+  }, [commonDefinition, onChange]);
 
   return <Form>
     <FormGroup
@@ -101,6 +105,3 @@ export const Common: FC<ConfigurationProps> = (props) => {
     </FormGroup>
   </Form>
 };
-function useEffect(arg0: () => void, arg1: any[]) {
-  throw new Error('Function not implemented.');
-}
