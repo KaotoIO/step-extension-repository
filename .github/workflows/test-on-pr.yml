@@ -30,3 +30,15 @@ jobs:
     - name: 🧮 Run tests
       run: cd ${{ matrix.folder }}; yarn install; yarn test
 
+  # Attempt to build
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v3
+      - name: 🔧 Build extensions
+        run: ./build.sh
+      - name: 📤 Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: 'dist'
