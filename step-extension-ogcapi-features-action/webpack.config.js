@@ -14,6 +14,7 @@ module.exports = {
     port: 3002,
   },
   output: {
+    hashFunction: 'xxhash64',
     publicPath: 'auto',
   },
   resolve: {
