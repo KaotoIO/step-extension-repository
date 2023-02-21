@@ -1,5 +1,5 @@
 dist/
-yarn*
+
 node_modules
 
 #step extensions
