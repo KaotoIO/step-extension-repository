@@ -10,7 +10,7 @@
     "@babel/preset-typescript": "7.15.0",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^14.0.0",
-    "@testing-library/user-event": "^12.1.10",
+    "@testing-library/user-event": "^14.4.3",
     "@trivago/prettier-plugin-sort-imports": "^4.0.0",
     "@types/jest": "^26.0.15",
     "@types/node": "^18.14.2",
