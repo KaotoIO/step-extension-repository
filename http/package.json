@@ -47,7 +47,7 @@
     "@apidevtools/swagger-parser": "^10.1.0",
     "@patternfly/patternfly": "4.185.1",
     "@patternfly/react-core": "4.276.6",
-    "@patternfly/react-styles": "4.52.16",
+    "@patternfly/react-styles": "4.92.6",
     "buffer": "^6.0.3",
     "gh-pages": "^5.0.0",
     "node-polyfill-webpack-plugin": "^2.0.1",
