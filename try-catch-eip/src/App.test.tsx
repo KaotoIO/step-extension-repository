@@ -1,11 +1,11 @@
-import {fireEvent, render, screen, waitFor} from '@testing-library/react';
+import {fireEvent, render, screen} from '@testing-library/react';
 import {App} from './App';
 import {DoCatch} from "./DoCatch";
 import * as React from "react";
 
 test('renders try and finally blocks with explanation', () => {
   render(<App/>);
-  let description = screen.getByText(/First we have a block of steps to run./i);
+  let description = screen.getByText(/First, we have a block of steps to run./i);
   expect(description).toBeInTheDocument();
   description = screen.getByText(/The do-finally block is always executed at the end./i);
   expect(description).toBeInTheDocument();

@@ -65,16 +65,13 @@ export const DoCatch = ({ updateStep, step }: IDoCatchForm) => {
   const [catchClauses, setCatchClauses] = useState(branches);
 
   const saveHandler = () => {
-    const branches = [];
-    const i = 0;
-
     if (step.branches == null) {
       step.branches = [];
     }
 
     let tryclause = step.branches
       .filter((o: null) => o != null)
-      .filter((b: { identifier: string }) => b.identifier == 'steps');
+      .filter((b: { identifier: string }) => b.identifier === 'steps');
     if (tryclause.length > 0) {
       tryclause = tryclause[0];
     } else {
@@ -89,7 +86,7 @@ export const DoCatch = ({ updateStep, step }: IDoCatchForm) => {
 
     let finallyclause = step.branches
       .filter((o: null) => o != null)
-      .filter((b: { identifier: string }) => b.identifier == 'do-finally');
+      .filter((b: { identifier: string }) => b.identifier === 'do-finally');
     if (finallyclause.length > 0) {
       finallyclause = finallyclause[0];
     } else {
@@ -124,7 +121,7 @@ export const DoCatch = ({ updateStep, step }: IDoCatchForm) => {
 
   return (
     <div className={'do-try pf-u-py-lg'}>
-      <p>This EIP behaves like a try-catch-finally blocks in Java.</p>
+      <p>This EIP behaves like a try-catch-finally block in Java.</p>
       <p>You can define the steps of each block in the canvas. To add new catch blocks, use this tab.</p>
         <Button variant='link' icon={<PlusCircleIcon />} className={'new-do-catch'} data-testid='trycatch-add-catch-button' onClick={addNewCatch}>
           New Catch Block
