@@ -96,9 +96,9 @@ export const DynamicInputs = ({
             <div className='do-try-catch-eip-catch-clause'>
                 <form>
                     <div style={style}>
-                        <p>First we have a block of steps to run. </p>
+                        <p>First, we have a block of steps to run. </p>
                         <p>If an exception is raised on this block,
-                            it may be catch by one of the following
+                            it may be caught by one of the following
                             blocks.</p>
                     </div>
                     {Object.entries(catchClauses).map(([idx, value]) => {
@@ -179,7 +179,7 @@ export const DynamicInputs = ({
                     })}
                     <div style={style}>
                         <p>The do-finally block is always executed at the
-                            end, whether or not an exception was catch.</p>
+                            end, whether or not an exception was caught.</p>
                     </div>
                 </form>
             </div>
