@@ -27,6 +27,12 @@ updates:
     open-pull-requests-limit: 5
     
   - package-ecosystem: "npm" 
+    directory: "/load-balance"
+    schedule:
+      interval: "daily"
+    open-pull-requests-limit: 5
+    
+  - package-ecosystem: "npm" 
     directory: "/set-body" 
     schedule:
       interval: "daily"
