@@ -5,12 +5,7 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
-      
-  - package-ecosystem: "npm" # See documentation for possible values
-    directory: "/*" # Location of package manifests
-    schedule:
-      interval: "daily"
-    open-pull-requests-limit: 15
+
     
   # Extensions to watch
   # create a new element per extension
@@ -22,6 +17,12 @@ updates:
     
   - package-ecosystem: "npm" 
     directory: "/http" 
+    schedule:
+      interval: "daily"
+    open-pull-requests-limit: 5
+    
+  - package-ecosystem: "npm" 
+    directory: "/load-balance"
     schedule:
       interval: "daily"
     open-pull-requests-limit: 5
