@@ -92,7 +92,9 @@ module.exports = () => {
           },
         },
       }),
-      new NodePolyfillPlugin(),
+      new NodePolyfillPlugin({
+        includeAliases: ['https', 'process', 'Buffer'],
+      }),
       new DefinePlugin({
         browser: true,
       }),
