@@ -42,7 +42,6 @@ export const ChoiceStep = (props: any) => {
 
   function setCondition(branch: BranchProps, condition: string, syntax: string) {
     branch.condition = condition;
-    branch.identifier = condition;
     branch.conditionSyntax = syntax;
     setStep(step);
   }
@@ -78,6 +77,7 @@ export const ChoiceStep = (props: any) => {
       index = hasOtherwise ? step.branches?.length - 1 : step.branches?.length;
       step.branches.splice(index, 0, newWhen);
     }
+    newWhen.identifier = `when-${index}`;
     setStep(step);
     props.notifyKaoto(`When: ${index+1} added`);
     props.updateStep(step);
