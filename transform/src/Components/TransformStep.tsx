@@ -34,7 +34,7 @@ export const TransformStep = (props: any) => {
   }
 
   return (
-    <Form data-testid='hoge'>
+    <Form>
         <Expression
           initSyntax={initSyntax}
           initExpression={initExpression}
@@ -43,6 +43,7 @@ export const TransformStep = (props: any) => {
             const jq = syntax === 'jq' ? expression : undefined;
             updateStepParams(simple, jq);
           }}
+          hasExpressionObject={props?.stepParams?.expression != null}
         />
 
       <ActionGroup>

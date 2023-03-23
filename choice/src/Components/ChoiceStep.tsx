@@ -16,6 +16,7 @@ import {useState} from 'react';
 type BranchProps = {
   condition: string | null,
   conditionSyntax: string,
+  expression?: any,
   identifier: string,
   parameters: any[],
   steps: any[]
@@ -117,6 +118,7 @@ export const ChoiceStep = (props: any) => {
               title={title}
               setCondition={(syntax, condition) => setCondition(branch, condition, syntax)}
               onDelete={() => handleDeleteBranch(branch)}
+              hasExpressionObject={branch.expression != null}
             />
           </CardBody>
         </Card>

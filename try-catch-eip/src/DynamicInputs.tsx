@@ -41,6 +41,11 @@ export const DynamicInputs = ({
     return onwhen?.representerProperties?.jq ? 'JQ' : 'SIMPLE';
   }
 
+  const extractHasExpressionObject = (idx: string) => {
+    const onwhen = catchClauses[parseInt(idx)]['onwhen'];
+    return onwhen?.representerProperties?.expression != null;
+  }
+
   const handleOnWhen = (syntax: string, expression: string, idx: string) => {
     if (!expression || expression.trim().length == 0) {
       return;
@@ -173,6 +178,7 @@ export const DynamicInputs = ({
                                     initExpression={extractCondition(idx)}
                                     initSyntax={extractConditionSyntax(idx)}
                                     setPredicate={(syntax, expression) => handleOnWhen(syntax, expression, idx)}
+                                    hasExpressionObject={extractHasExpressionObject(idx)}
                                 />
                             </div>
                         );

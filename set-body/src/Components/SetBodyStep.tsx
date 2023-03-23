@@ -22,7 +22,6 @@ export const SetBodyStep = (props: any) => {
     initExpression = props.stepParams?.simple || '';
   }
 
-
   const [stepParams, setStepParams] = useState<SetBodyStepParams>({
         constant: props.stepParams?.constant,
         simple: props.stepParams?.simple,
@@ -50,6 +49,7 @@ export const SetBodyStep = (props: any) => {
             const jq = syntax === 'jq' ? expression : undefined;
             updateStepParams(constant, simple, jq);
           }}
+          hasExpressionObject={props?.stepParams?.expression != null}
         />
 
       <ActionGroup>

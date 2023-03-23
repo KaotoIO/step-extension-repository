@@ -1,11 +1,13 @@
 import {FormGroup, FormSelect, FormSelectOption, TextInput} from '@patternfly/react-core';
 import {useState} from 'react';
+import {ExpressionObjectLabel} from "./ExpressionObjectLabel";
 
 export type PredicateProps = {
     initSyntax: string,
     initExpression: string,
     identifier: string,
-    setPredicate: (syntax: string, expression: string) => void
+    setPredicate: (syntax: string, expression: string) => void,
+    hasExpressionObject: boolean
 }
 export const Predicate = (props: PredicateProps) => {
 
@@ -24,6 +26,9 @@ export const Predicate = (props: PredicateProps) => {
 
     return (
     <FormGroup>
+        {props.hasExpressionObject &&
+          <ExpressionObjectLabel/>
+        }
         <FormGroup label='Condition Syntax'>
             <FormSelect
               data-testid={props.identifier + '-predicate-syntax-select'}
