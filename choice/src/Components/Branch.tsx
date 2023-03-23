@@ -10,6 +10,7 @@ export type BranchProps = {
   isConditioned: boolean
   setCondition: (syntax: string, condition: string) => void;
   onDelete: () => void;
+  hasExpressionObject: boolean;
 }
 
 export const Branch = (props: BranchProps) => {
@@ -41,6 +42,7 @@ export const Branch = (props: BranchProps) => {
             initSyntax={props.conditionSyntax || 'SIMPLE'}
             initExpression={props.condition || ''}
             setPredicate={handleCondition}
+            hasExpressionObject={props.hasExpressionObject}
           />
         )}
       </GridItem>

@@ -1,10 +1,12 @@
 import {FormGroup, FormSelect, FormSelectOption, TextInput} from "@patternfly/react-core";
 import {useState} from "react";
+import {ExpressionObjectLabel} from "./ExpressionObjectLabel";
 
 export type ExpressionSelectProps = {
     initSyntax: string,
     initExpression: string,
     setExpression: (syntax: string, expression: string) => void
+    hasExpressionObject: boolean;
 }
 export const Expression = (props: ExpressionSelectProps) => {
 
@@ -23,6 +25,9 @@ export const Expression = (props: ExpressionSelectProps) => {
 
     return (
     <FormGroup>
+        {props.hasExpressionObject &&
+          <ExpressionObjectLabel/>
+        }
         <FormGroup label="Expression Syntax">
             <FormSelect
               data-testid='expression-syntax-select'

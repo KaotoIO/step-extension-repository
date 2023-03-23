@@ -67,6 +67,7 @@ export const SetHeaderStep = (props: any) => {
           const jq = syntax === 'jq' ? expression : undefined;
           updateStepParams(constant, simple, jq);
         }}
+        hasExpressionObject={props?.stepParams?.expression != null}
       />
 
       <ActionGroup>
