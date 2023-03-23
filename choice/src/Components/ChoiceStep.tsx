@@ -48,7 +48,7 @@ export const ChoiceStep = (props: any) => {
 
   function handleDeleteBranch(branch: BranchProps) {
     const index = step.branches?.indexOf(branch);
-    if (step.branches && index && index !== -1) {
+    if (step.branches && index != undefined && index !== -1) {
       const newBranches = step.branches.filter((_b, i) => i !== index);
       step.branches = newBranches;
       const isOtherwise = branch.identifier === 'otherwise';
