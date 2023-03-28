@@ -73,7 +73,7 @@ export const loadBalanceStrategies: ILoadBalanceStrategy[] = [
         configuration: new Map<string, ILBConfigurationField>([
             ['id', createConfigurationField('ID', '', false, '')],
             ['distribution-ratio', createConfigurationField('Distribution Ratio', 'The distribution ratio is a delimited String consisting on integer weights ' +
-                'separated by delimiters for example 2,3,5. The distributionRatio must match the number of endpoints and/or' +
+                'separated by delimiters for example 2,3,5. The distributionRatio must match the number of endpoints and/or ' +
                 'processors specified in the load balancer list.', true, '')],
             ['distributionRatioDelimiter', createConfigurationField('Distribution Ratio Delimiter', 'Delimiter used to specify the distribution ratio. The default value is , (comma).', false, '')],
             ['roundRobin', createConfigurationField('Round Robin', 'To enable round robin mode. By default the weighted distribution mode is used. The default value is false.', false, false)]])
