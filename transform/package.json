@@ -4,7 +4,7 @@
   "private": true,
   "port": 9001,
   "devDependencies": {
-    "@babel/core": "7.21.3",
+    "@babel/core": "7.21.4",
     "@babel/preset-react": "^7.18.6",
     "@babel/preset-typescript": "7.21.0",
     "@testing-library/jest-dom": "^5.16.5",
