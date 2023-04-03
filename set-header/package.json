@@ -24,7 +24,7 @@
     "null-loader": "^4.0.1",
     "serve": "14.2.0",
     "style-loader": "^3.3.2",
-    "ts-jest": "^29.0.5",
+    "ts-jest": "^29.1.0",
     "typescript": "5.0.2",
     "util": "^0.12.5",
     "webpack": "^5.76.3",
