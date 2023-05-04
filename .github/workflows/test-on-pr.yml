@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  folders:
+  extensions:
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
@@ -15,21 +15,21 @@ jobs:
     - name: 🎡  Set Matrix
       id: set-matrix
       run: |
-          files=$(find . -maxdepth 1 -mindepth 1 -not -name '.*' -type d -printf '"%P",' );
-          echo "matrix=["${files%?}"]" >> $GITHUB_OUTPUT
+          extensions=$(yarn workspaces list --json|jq .name|grep -v step-extension-repository|tr '\n' ',');
+          echo "matrix=["${extensions%?}"]" >> $GITHUB_OUTPUT
   run-tests:
-    needs: folders
+    needs: extensions
     runs-on: ubuntu-latest
     strategy:
       matrix: 
-        folder: ${{ fromJson(needs.folders.outputs.matrix) }}
+        extension: ${{ fromJson(needs.extensions.outputs.matrix) }}
       fail-fast: false
     steps:
     - name: 📥 Checkout
       uses: actions/checkout@v3
     - name: 🧮 Run install
-      run: cd ${{ matrix.folder }}; yarn install
+      run: yarn workspaces focus ${{ matrix.extension }}
     - name: 🧮 Run tests
-      run: cd ${{ matrix.folder }}; yarn test 
+      run: yarn workspace ${{ matrix.extension }} run test
     - name: 🧮 Run build
-      run: cd ${{ matrix.folder }}; yarn build
+      run: yarn workspace ${{ matrix.extension }} run build
