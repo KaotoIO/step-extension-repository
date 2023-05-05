@@ -3495,18 +3495,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:18.0.37":
-  version: 18.0.37
-  resolution: "@types/react@npm:18.0.37"
-  dependencies:
-    "@types/prop-types": "*"
-    "@types/scheduler": "*"
-    csstype: ^3.0.2
-  checksum: 6a6c8feada1d6aa2d01a38c44ce09598d93688e97ed21511d5e34fd7fe748b760dd957a5ac0725f5643d8d7e1a0ade6478ebd4be96c9605c5d6816b17ad35d2d
-  languageName: node
-  linkType: hard
-
-"@types/react@npm:^18.0.37":
+"@types/react@npm:^18.2.5":
   version: 18.2.5
   resolution: "@types/react@npm:18.2.5"
   dependencies:
@@ -5685,7 +5674,7 @@ __metadata:
     "@testing-library/user-event": ^14.4.3
     "@types/jest": ^29.5.1
     "@types/node": ^18.15.11
-    "@types/react": ^18.0.37
+    "@types/react": ^18.2.5
     "@types/react-dom": ^18.0.10
     babel-loader: 9.1.2
     buffer: ^6.0.3
@@ -8766,21 +8755,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"html-webpack-plugin@npm:5.5.0, html-webpack-plugin@npm:^5.5.0":
-  version: 5.5.0
-  resolution: "html-webpack-plugin@npm:5.5.0"
-  dependencies:
-    "@types/html-minifier-terser": ^6.0.0
-    html-minifier-terser: ^6.0.2
-    lodash: ^4.17.21
-    pretty-error: ^4.0.0
-    tapable: ^2.0.0
-  peerDependencies:
-    webpack: ^5.20.0
-  checksum: f3d84d0df71fe2f5bac533cc74dce41ab058558cdcc6ff767d166a2abf1cf6fb8491d54d60ddbb34e95c00394e379ba52e0468e0284d1d0cc6a42987056e8219
-  languageName: node
-  linkType: hard
-
 "html-webpack-plugin@npm:5.5.1":
   version: 5.5.1
   resolution: "html-webpack-plugin@npm:5.5.1"
@@ -8793,6 +8767,21 @@ __metadata:
   peerDependencies:
     webpack: ^5.20.0
   checksum: f4b43271171e6374b10a49b5231bbab94610a344d58f4f7d95cd130520feb474f98006e1ab71ea102c57fe5a107b273ff7c19e7e1bc2314d611dbb791fcc0a98
+  languageName: node
+  linkType: hard
+
+"html-webpack-plugin@npm:^5.5.0":
+  version: 5.5.0
+  resolution: "html-webpack-plugin@npm:5.5.0"
+  dependencies:
+    "@types/html-minifier-terser": ^6.0.0
+    html-minifier-terser: ^6.0.2
+    lodash: ^4.17.21
+    pretty-error: ^4.0.0
+    tapable: ^2.0.0
+  peerDependencies:
+    webpack: ^5.20.0
+  checksum: f3d84d0df71fe2f5bac533cc74dce41ab058558cdcc6ff767d166a2abf1cf6fb8491d54d60ddbb34e95c00394e379ba52e0468e0284d1d0cc6a42987056e8219
   languageName: node
   linkType: hard
 
@@ -8922,7 +8911,7 @@ __metadata:
     "@trivago/prettier-plugin-sort-imports": ^4.1.1
     "@types/jest": ^29.5.1
     "@types/node": ^18.15.11
-    "@types/react": ^18.0.37
+    "@types/react": ^18.2.5
     "@types/react-dom": 18.0.11
     "@typescript-eslint/eslint-plugin": ^5.59.0
     "@typescript-eslint/parser": 5.59.0
@@ -8943,7 +8932,7 @@ __metadata:
     node-polyfill-webpack-plugin: ^2.0.1
     null-loader: ^4.0.1
     openapi-types: ^12.0.0
-    prettier: 2.8.7
+    prettier: 2.8.8
     react: 18.2.0
     react-dom: ^18.2.0
     react-router-dom: 6.10.0
@@ -13141,7 +13130,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:2.8.7, prettier@npm:^2.8.7":
+"prettier@npm:2.8.8":
+  version: 2.8.8
+  resolution: "prettier@npm:2.8.8"
+  bin:
+    prettier: bin-prettier.js
+  checksum: b49e409431bf129dd89238d64299ba80717b57ff5a6d1c1a8b1a28b590d998a34e083fa13573bc732bb8d2305becb4c9a4407f8486c81fa7d55100eb08263cf8
+  languageName: node
+  linkType: hard
+
+"prettier@npm:^2.8.7":
   version: 2.8.7
   resolution: "prettier@npm:2.8.7"
   bin:
@@ -14428,7 +14426,7 @@ __metadata:
     "@testing-library/user-event": ^14.4.3
     "@types/jest": ^29.5.1
     "@types/node": ^18.15.11
-    "@types/react": 18.0.37
+    "@types/react": ^18.2.5
     "@types/react-dom": ^18.0.10
     babel-loader: 9.1.2
     buffer: ^6.0.3
@@ -14473,7 +14471,7 @@ __metadata:
     "@testing-library/user-event": ^14.4.3
     "@types/jest": ^29.5.1
     "@types/node": ^18.15.13
-    "@types/react": 18.0.37
+    "@types/react": ^18.2.5
     "@types/react-dom": ^18.0.10
     babel-loader: 9.1.2
     buffer: ^6.0.3
@@ -14518,7 +14516,7 @@ __metadata:
     "@testing-library/user-event": ^14.4.3
     "@types/jest": ^29.5.1
     "@types/node": ^18.15.11
-    "@types/react": ^18.0.37
+    "@types/react": ^18.2.5
     "@types/react-dom": ^18.0.10
     babel-loader: 9.1.2
     buffer: ^6.0.3
@@ -14870,7 +14868,7 @@ __metadata:
     "@testing-library/user-event": ^14.4.3
     "@types/jest": ^29.5.1
     "@types/node": ^18.15.11
-    "@types/react": ^18.0.37
+    "@types/react": ^18.2.5
     "@types/react-dom": ^18.0.10
     babel-loader: 9.1.2
     buffer: ^6.0.3
@@ -14911,7 +14909,7 @@ __metadata:
     "@testing-library/user-event": ^14.4.3
     "@types/jest": ^29.5.1
     "@types/node": ^18.15.11
-    "@types/react": ^18.0.37
+    "@types/react": ^18.2.5
     "@types/react-dom": 18.0.11
     "@typescript-eslint/eslint-plugin": ^5.59.0
     "@typescript-eslint/parser": ^5.59.0
@@ -14921,7 +14919,7 @@ __metadata:
     eslint: ^8.37.0
     eslint-config-prettier: ^8.8.0
     eslint-plugin-react: ^7.30.1
-    html-webpack-plugin: 5.5.0
+    html-webpack-plugin: 5.5.1
     prettier: ^2.8.7
     react: 18.2.0
     react-dom: ^18.2.0
@@ -14951,7 +14949,7 @@ __metadata:
     "@trivago/prettier-plugin-sort-imports": ^4.1.1
     "@types/jest": ^29.5.1
     "@types/node": ^18.15.13
-    "@types/react": ^18.0.37
+    "@types/react": ^18.2.5
     "@types/react-dom": ^18.0.0
     css-loader: ^6.2.0
     html-webpack-plugin: 5.5.1
@@ -14959,7 +14957,7 @@ __metadata:
     jest-environment-jsdom: ^29.5.0
     mini-css-extract-plugin: ^2.7.5
     null-loader: ^4.0.1
-    prettier: 2.8.7
+    prettier: 2.8.8
     react: ^18.0.0
     react-dom: ^18.0.0
     react-scripts: 5.0.1
@@ -15638,7 +15636,7 @@ __metadata:
     "@testing-library/user-event": ^14.4.3
     "@types/jest": ^29.5.1
     "@types/node": ^18.15.13
-    "@types/react": ^18.0.37
+    "@types/react": ^18.2.5
     "@types/react-dom": ^18.0.10
     babel-loader: 9.1.2
     buffer: ^6.0.3
