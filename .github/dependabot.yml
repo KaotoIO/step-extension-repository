@@ -6,59 +6,9 @@ updates:
     schedule:
       interval: "daily"
 
-    
-  # Extensions to watch
-  # create a new element per extension
-  - package-ecosystem: "npm" 
-    directory: "/choice" 
-    schedule:
-      interval: "daily"
-    open-pull-requests-limit: 5
-    
-  - package-ecosystem: "npm" 
-    directory: "/http" 
-    schedule:
-      interval: "daily"
-    open-pull-requests-limit: 5
-    
-  - package-ecosystem: "npm" 
-    directory: "/load-balance"
-    schedule:
-      interval: "daily"
-    open-pull-requests-limit: 5
-    
-  - package-ecosystem: "npm" 
-    directory: "/set-body" 
-    schedule:
-      interval: "daily"
-    open-pull-requests-limit: 5
-    
-  - package-ecosystem: "npm" 
-    directory: "/set-header" 
-    schedule:
-      interval: "daily"
-    open-pull-requests-limit: 5
-    
-  - package-ecosystem: "npm" 
-    directory: "/set-property" 
-    schedule:
-      interval: "daily"
-    open-pull-requests-limit: 5
-    
-  - package-ecosystem: "npm" 
-    directory: "/step-extension-ogcapi-features-action" 
-    schedule:
-      interval: "daily"
-    open-pull-requests-limit: 5
-    
-  - package-ecosystem: "npm" 
-    directory: "/transform" 
-    schedule:
-      interval: "daily"
-    open-pull-requests-limit: 5
-    
-  - package-ecosystem: "npm" 
-    directory: "/try-catch-eip" 
+  # Root yarn workspace
+  - package-ecosystem: "npm"
+    directory: "/"
     schedule:
       interval: "daily"
     open-pull-requests-limit: 5
