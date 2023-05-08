@@ -14,7 +14,5 @@ Please ensure your pull request adheres to the following guidelines:
 - [ ] There are tests that cover at least 75% of the step extension code
 - [ ] All tests pass with `yarn test`
 - [ ] There commands `yarn clean`, `yarn install`, `yarn test`, and `yarn build` finish without errors
-- [ ] The file `/.github/dependabot.yml` contains an entry for this extension
-- [ ] The extension contains a `yarn.lock` file
 - [ ] Improvements of existing step extensions should be backwards compatible unless specified otherwise.
 - [ ] There is a corresponding view definition in the catalog https://github.com/KaotoIO/kaoto-viewdefinition-catalog
