@@ -3486,7 +3486,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:18.0.11, @types/react-dom@npm:^18.0.0, @types/react-dom@npm:^18.0.10":
+"@types/react-dom@npm:18.2.4, @types/react-dom@npm:^18.2.4":
+  version: 18.2.4
+  resolution: "@types/react-dom@npm:18.2.4"
+  dependencies:
+    "@types/react": "*"
+  checksum: 8301f35cf1cbfec8c723e9477aecf87774e3c168bd457d353b23c45064737213d3e8008b067c6767b7b08e4f2b3823ee239242a6c225fc91e7f8725ef8734124
+  languageName: node
+  linkType: hard
+
+"@types/react-dom@npm:^18.0.0":
   version: 18.0.11
   resolution: "@types/react-dom@npm:18.0.11"
   dependencies:
@@ -5669,7 +5678,7 @@ __metadata:
     "@types/jest": ^29.5.1
     "@types/node": ^18.15.11
     "@types/react": ^18.2.6
-    "@types/react-dom": ^18.0.10
+    "@types/react-dom": ^18.2.4
     babel-loader: 9.1.2
     buffer: ^6.0.3
     css-loader: ^6.2.0
@@ -8906,7 +8915,7 @@ __metadata:
     "@types/jest": ^29.5.1
     "@types/node": ^18.15.11
     "@types/react": ^18.2.6
-    "@types/react-dom": 18.0.11
+    "@types/react-dom": 18.2.4
     "@typescript-eslint/eslint-plugin": ^5.59.5
     "@typescript-eslint/parser": 5.59.2
     babel-loader: 9.1.2
@@ -14421,7 +14430,7 @@ __metadata:
     "@types/jest": ^29.5.1
     "@types/node": ^18.15.11
     "@types/react": ^18.2.6
-    "@types/react-dom": ^18.0.10
+    "@types/react-dom": ^18.2.4
     babel-loader: 9.1.2
     buffer: ^6.0.3
     css-loader: ^6.2.0
@@ -14466,7 +14475,7 @@ __metadata:
     "@types/jest": ^29.5.1
     "@types/node": ^18.15.13
     "@types/react": ^18.2.6
-    "@types/react-dom": ^18.0.10
+    "@types/react-dom": ^18.2.4
     babel-loader: 9.1.2
     buffer: ^6.0.3
     css-loader: ^6.2.0
@@ -14511,7 +14520,7 @@ __metadata:
     "@types/jest": ^29.5.1
     "@types/node": ^18.15.11
     "@types/react": ^18.2.6
-    "@types/react-dom": ^18.0.10
+    "@types/react-dom": ^18.2.4
     babel-loader: 9.1.2
     buffer: ^6.0.3
     css-loader: ^6.2.0
@@ -14863,7 +14872,7 @@ __metadata:
     "@types/jest": ^29.5.1
     "@types/node": ^18.15.11
     "@types/react": ^18.2.6
-    "@types/react-dom": ^18.0.10
+    "@types/react-dom": ^18.2.4
     babel-loader: 9.1.2
     buffer: ^6.0.3
     css-loader: ^6.2.0
@@ -14904,7 +14913,7 @@ __metadata:
     "@types/jest": ^29.5.1
     "@types/node": ^18.15.11
     "@types/react": ^18.2.6
-    "@types/react-dom": 18.0.11
+    "@types/react-dom": 18.2.4
     "@typescript-eslint/eslint-plugin": ^5.59.5
     "@typescript-eslint/parser": ^5.59.2
     babel-loader: 9.1.2
@@ -14944,7 +14953,7 @@ __metadata:
     "@types/jest": ^29.5.1
     "@types/node": ^18.15.13
     "@types/react": ^18.2.6
-    "@types/react-dom": ^18.0.0
+    "@types/react-dom": ^18.2.4
     css-loader: ^6.2.0
     html-webpack-plugin: 5.5.1
     jest: 29.5.0
@@ -15631,7 +15640,7 @@ __metadata:
     "@types/jest": ^29.5.1
     "@types/node": ^18.15.13
     "@types/react": ^18.2.6
-    "@types/react-dom": ^18.0.10
+    "@types/react-dom": ^18.2.4
     babel-loader: 9.1.2
     buffer: ^6.0.3
     css-loader: ^6.2.0
