@@ -6,6 +6,7 @@
     "./choice",
     "./http",
     "./load-balance",
+    "./rest-rest",
     "./set-body",
     "./set-header",
     "./set-property",
