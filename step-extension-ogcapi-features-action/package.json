@@ -27,7 +27,7 @@
     "typescript": "5.0.4",
     "webpack": "^5.77.0",
     "webpack-cli": "^5.1.1",
-    "webpack-dev-server": "^4.13.3",
+    "webpack-dev-server": "^4.15.0",
     "webpack-remote-types-plugin": "^0.2.7"
   },
   "dependencies": {
