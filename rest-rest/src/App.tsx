@@ -1,4 +1,4 @@
-import { HttpStep } from './Components/HttpStep';
+import { RestStep } from './Components/RestStep';
 import '@patternfly/patternfly/patternfly.css';
 import '@patternfly/patternfly/utilities/Accessibility/accessibility.css';
 import '@patternfly/patternfly/utilities/Display/display.css';
@@ -14,7 +14,7 @@ const App = () => {
       <header className="App-header">
         <p></p>
       </header>
-      <HttpStep />
+      <RestStep />
     </div>
   );
 };

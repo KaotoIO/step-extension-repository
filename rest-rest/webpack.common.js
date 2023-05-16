@@ -60,10 +60,10 @@ module.exports = () => {
     plugins: [
       new MiniCssExtractPlugin(),
       new ModuleFederationPlugin({
-        name: 'httpStep',
+        name: 'restStep',
         filename: 'remoteEntry.js',
         exposes: {
-          './HttpStep': './src/Components/HttpStep',
+          './RestStep': './src/Components/RestStep',
         },
         shared: {
           ...dependencies,
