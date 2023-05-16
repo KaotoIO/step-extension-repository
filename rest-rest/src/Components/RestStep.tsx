@@ -13,7 +13,7 @@ import {
 import { OpenAPI, OpenAPIV3, OpenAPIV2, OpenAPIV3_1 } from 'openapi-types';
 import { FormEvent, Key, useEffect, useState } from 'react';
 import SwaggerParser from '@apidevtools/swagger-parser';
-import { IStepProps } from '../../try-catch-eip/kaoto/types/';
+import { IStepProps } from '../../../try-catch-eip/kaoto/types/dts/src/types.js';
 import { TrashIcon } from '@patternfly/react-icons';
 
 export interface IEndpoint {
@@ -22,6 +22,7 @@ export interface IEndpoint {
   | OpenAPIV2.PathItemObject
   | OpenAPIV3.PathItemObject
   | OpenAPIV3_1.PathItemObject
+  | string
   | undefined;
   operations: Map<string, OpenAPI.Operation>;
   produces: Map<string, string[]>;
@@ -78,9 +79,75 @@ export interface IRestForm {
   fetchStepDetails: (stepId: string) => Promise<IStepProps>;
 }
 
+export function recoverEndpoints(step: IStepProps): IEndpoint[] {
+
+  let endpoints: IEndpoint[] = [];
+
+  if (step.branches) {
+    for (const branch of step.branches) {
+      if (branch.steps && branch.steps?.length > 0) {
+        let verbStep: IStepProps = branch.steps[0];
+        let verb = branch.identifier;
+
+        if (verbStep.branches) {
+          for (const consumeBranch of verbStep.branches) {
+            if (consumeBranch.steps && consumeBranch.steps?.length > 0) {
+
+              let consumeStep = consumeBranch.steps[0];
+
+              if (consumeStep.parameters) {
+
+                let path = "";
+                let prod = "";
+                let cons = "";
+
+                for (const parameter of consumeStep.parameters) {
+                  if (parameter.id == "uri") {
+                    path = parameter.value;
+                  } else if (parameter.id == "consumes") {
+                    cons = parameter.value;
+                  } else if (parameter.id == "produces") {
+                    prod = parameter.value;
+                  }
+                }
+
+                let consume = new Map<string, string>();
+                consume.set(verb, cons);
+                let produce = new Map<string, string>();
+                produce.set(verb, prod);
+                let consumes = new Map<string, string[]>();
+                consumes.set(verb, [cons]);
+                let produces = new Map<string, string[]>();
+                produces.set(verb, [prod]);
+                let operations = new Map<string, OpenAPI.Operation>();
+
+                endpoints.push(
+                  {
+                    name: verb,
+                    pathItem: path,
+                    operations: operations,
+                    produces: produces,
+                    consumes: consumes,
+                    produce: produce,
+                    consume: consume,
+                    useOnGeneration: true
+                  });
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  return endpoints;
+};
+
+
 export const RestStep = ({ updateStep, step, fetchStepDetails }: IRestForm) => {
   const [openApiSpecText, setOpenApiSpecText] = useState('');
   const [endpoints, setEndpoints] = useState<IEndpoint[]>([]);
+  const [currentEndpoints, setCurrentEndpoints] = useState<IEndpoint[]>(recoverEndpoints(step));
   const [upload, setUpload] = useState<boolean>(false);
   const [clean, setClean] = useState<boolean>(true);
   const [apiSpecUrl, setApiUrl] = useState<string>('https://api.chucknorris.io/documentation');
@@ -160,7 +227,7 @@ export const RestStep = ({ updateStep, step, fetchStepDetails }: IRestForm) => {
 
           let promiseResolve: (value: Boolean | PromiseLike<Boolean>) => void;
 
-          allDone.push(new Promise<Boolean>(function (resolve) { promiseResolve = resolve ; }));
+          allDone.push(new Promise<Boolean>(function (resolve) { promiseResolve = resolve; }));
 
           Promise.all([steps_cache.get("consumes"), steps_cache.get("direct")])
             .then((steps) => {
@@ -186,8 +253,6 @@ export const RestStep = ({ updateStep, step, fetchStepDetails }: IRestForm) => {
               }
               operation_branch.steps.push(direct);
               promiseResolve(true);
-              console.log("Resolved");
-              console.log(allDone);
               return direct;
             });
 
@@ -202,23 +267,19 @@ export const RestStep = ({ updateStep, step, fetchStepDetails }: IRestForm) => {
             step.branches.push(branch);
             steps_cache.get(verb).then((s: any) => {
               branch['steps'].push(s);
-              console.log(s);
               return s;
             });
           }
 
           let promiseResolve2: (value: Boolean | PromiseLike<Boolean>) => void;
 
-          allDone.push(new Promise<Boolean>(function (resolve) { promiseResolve2 = resolve ; }));
+          allDone.push(new Promise<Boolean>(function (resolve) { promiseResolve2 = resolve; }));
           steps_cache.get(verb).then((s: any) => {
             if (s.branches == null) {
               s.branches = [];
             }
             s.branches.push(operation_branch);
-            console.log(s);
             promiseResolve2(true);
-            console.log("Resolved");
-            console.log(allDone);
             return s;
           });
         }
@@ -227,7 +288,6 @@ export const RestStep = ({ updateStep, step, fetchStepDetails }: IRestForm) => {
 
     if (updateStep) {
       Promise.all(allDone).then(() => {
-        console.log(step);
         updateStep(step);
       });
     }
@@ -330,3 +390,7 @@ export const RestStep = ({ updateStep, step, fetchStepDetails }: IRestForm) => {
 };
 
 export default RestStep;
+function getEndpoints(step: any): IEndpoint[] | (() => IEndpoint[]) {
+  throw new Error('Function not implemented.');
+}
+
