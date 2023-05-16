@@ -84,6 +84,7 @@ export interface IStepProps {
 }
 
 export interface IStepPropsBranch {
+  identifier: string;
   steps?: IStepProps[];
   parameters?: IStepPropsParameters[];
 }
