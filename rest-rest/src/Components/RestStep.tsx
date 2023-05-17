@@ -7,14 +7,12 @@ import {
   FileUpload,
   InputGroup,
   Checkbox,
-  FormSelect,
-  FormSelectOption,
 } from '@patternfly/react-core';
+import { Endpoint } from './Endpoint';
 import { OpenAPI, OpenAPIV3, OpenAPIV2, OpenAPIV3_1 } from 'openapi-types';
-import { FormEvent, Key, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import SwaggerParser from '@apidevtools/swagger-parser';
 import { IStepProps } from '../../../try-catch-eip/kaoto/types/dts/src/types.js';
-import { TrashIcon } from '@patternfly/react-icons';
 
 export interface IEndpoint {
   name: string;
@@ -24,12 +22,13 @@ export interface IEndpoint {
   | OpenAPIV3_1.PathItemObject
   | string
   | undefined;
-  operations: Map<string, OpenAPI.Operation>;
+  operations:
+  | Map<string, OpenAPI.Operation>
+  | Map<string, [string, {}]>;
   produces: Map<string, string[]>;
   consumes: Map<string, string[]>;
   produce: Map<string, string>;
   consume: Map<string, string>;
-  useOnGeneration: boolean;
 }
 
 async function parseApiSpec(
@@ -74,7 +73,7 @@ async function parseApiSpec(
 }
 
 export interface IRestForm {
-  updateStep?: (newConfig: any[]) => void;
+  updateStep?: (newConfig: IStepProps[]) => void;
   step?: IStepProps;
   fetchStepDetails: (stepId: string) => Promise<IStepProps>;
 }
@@ -83,55 +82,65 @@ export function recoverEndpoints(step: IStepProps): IEndpoint[] {
 
   let endpoints: IEndpoint[] = [];
 
-  if (step.branches) {
-    for (const branch of step.branches) {
-      if (branch.steps && branch.steps?.length > 0) {
-        let verbStep: IStepProps = branch.steps[0];
-        let verb = branch.identifier;
+  if (step) {
+    if (step.branches) {
+      for (const branch of step.branches) {
+        if (branch.steps && branch.steps?.length > 0) {
+          let verbStep: IStepProps = branch.steps[0];
+          let verb = branch.identifier;
 
-        if (verbStep.branches) {
-          for (const consumeBranch of verbStep.branches) {
-            if (consumeBranch.steps && consumeBranch.steps?.length > 0) {
+          if (verbStep.branches) {
+            for (const consumeBranch of verbStep.branches) {
+              if (consumeBranch.steps && consumeBranch.steps?.length > 0) {
 
-              let consumeStep = consumeBranch.steps[0];
+                let consumeStep = consumeBranch.steps[0];
 
-              if (consumeStep.parameters) {
+                if (consumeStep.parameters) {
 
-                let path = "";
-                let prod = "";
-                let cons = "";
+                  let path = "";
+                  let prod = "";
+                  let cons = "";
 
-                for (const parameter of consumeStep.parameters) {
-                  if (parameter.id == "uri") {
-                    path = parameter.value;
-                  } else if (parameter.id == "consumes") {
-                    cons = parameter.value;
-                  } else if (parameter.id == "produces") {
-                    prod = parameter.value;
+                  for (const parameter of consumeStep.parameters) {
+                    if (parameter.id == "uri") {
+                      path = parameter.value;
+                    } else if (parameter.id == "consumes") {
+                      cons = parameter.value;
+                    } else if (parameter.id == "produces") {
+                      prod = parameter.value;
+                    }
                   }
+
+                  let consume = new Map<string, string>();
+                  if (cons) {
+                    consume.set(verb, cons);
+                  }
+                  let produce = new Map<string, string>();
+                  produce.set(verb, prod);
+                  let consumes = new Map<string, string[]>();
+                  if (cons) {
+                    consumes.set(verb, [cons]);
+                  }
+                  let produces = new Map<string, string[]>();
+                  produces.set(verb, [prod]);
+                  let operations = new Map<string, [string, {}]>();
+                  operations.set(verb, [verb, {
+                    produces: [prod],
+                    consumes: (cons ? [cons] : []),
+                    operationId: consumeBranch.identifier,
+                  }]);
+
+                  endpoints.push(
+                    {
+                      name: path,
+                      pathItem: path,
+                      operations: operations,
+                      produces: produces,
+                      consumes: consumes,
+                      produce: produce,
+                      consume: consume,
+                    });
                 }
-
-                let consume = new Map<string, string>();
-                consume.set(verb, cons);
-                let produce = new Map<string, string>();
-                produce.set(verb, prod);
-                let consumes = new Map<string, string[]>();
-                consumes.set(verb, [cons]);
-                let produces = new Map<string, string[]>();
-                produces.set(verb, [prod]);
-                let operations = new Map<string, OpenAPI.Operation>();
-
-                endpoints.push(
-                  {
-                    name: verb,
-                    pathItem: path,
-                    operations: operations,
-                    produces: produces,
-                    consumes: consumes,
-                    produce: produce,
-                    consume: consume,
-                    useOnGeneration: true
-                  });
               }
             }
           }
@@ -149,7 +158,6 @@ export const RestStep = ({ updateStep, step, fetchStepDetails }: IRestForm) => {
   const [endpoints, setEndpoints] = useState<IEndpoint[]>([]);
   const [currentEndpoints, setCurrentEndpoints] = useState<IEndpoint[]>(recoverEndpoints(step));
   const [upload, setUpload] = useState<boolean>(false);
-  const [clean, setClean] = useState<boolean>(true);
   const [apiSpecUrl, setApiUrl] = useState<string>('https://api.chucknorris.io/documentation');
 
   const parseSpec = async (input: string) => {
@@ -178,25 +186,35 @@ export const RestStep = ({ updateStep, step, fetchStepDetails }: IRestForm) => {
     setOpenApiSpecText('');
   };
 
-  const removeEndpoint = (index: number) => {
-    endpoints.splice(index, 1);
-    setEndpoints(endpoints.slice());
-  };
-
-  const toggleEndpoint = (index: number, checked: boolean) => {
-    endpoints[index]['useOnGeneration'] = checked;
-    setEndpoints(endpoints.slice());
-  };
-
-  const updateMetaType = (index: number, verb: string, type: string, value: string, event: FormEvent<HTMLSelectElement> | undefined) => {
-    endpoints[index][type][verb] = value;
-    setEndpoints(endpoints.slice());
-  };
-
-
   const saveHandler = () => {
-    if (clean || step.branches == null) {
-      step.branches = [];
+    const finalBranches: any[] = [];
+    const existingSteps: Map<string, Map<string, IStepProps>> = new Map<string, Map<string, IStepProps>>();
+
+    if (step && step.branches) {
+      for (const verbBranch of step.branches) {
+        if (verbBranch.steps && verbBranch.steps.length > 0) {
+          const verb = verbBranch.identifier;
+
+          if (verbBranch.steps[0].branches != null) {
+            for (const consumeBranch of verbBranch.steps[0].branches) {
+              if (consumeBranch.steps && consumeBranch.steps.length > 1) {
+                const consumeStep: IStepProps = consumeBranch.steps[0];
+                const finalStep: IStepProps = consumeBranch.steps[1];
+                existingSteps.set(verb, new Map<string, IStepProps>());
+                let path = "";
+                if (consumeStep && consumeStep.parameters) {
+                  for (const param of consumeStep.parameters) {
+                    if (param.id == "uri") {
+                      path = param.value;
+                    }
+                  }
+                  existingSteps.get(verb)?.set(path, finalStep);
+                }
+              }
+            }
+          }
+        }
+      }
     }
 
     let steps_cache: Map<string, any> = new Map<string, any>();
@@ -205,35 +223,53 @@ export const RestStep = ({ updateStep, step, fetchStepDetails }: IRestForm) => {
 
     let allDone: Promise<Boolean>[] = [];
 
-    for (const endpoint of endpoints) {
-      if (endpoint.useOnGeneration) {
-        for (const operation of endpoint['operations']) {
+    let allEndpoints: IEndpoint[] = [];
+    allEndpoints = allEndpoints.concat(currentEndpoints).concat(endpoints);
 
-          let verb = operation[0];
+    for (const endpoint of allEndpoints) {
+      for (const operation of endpoint['operations']) {
 
-          if (!steps_cache.has(verb)) {
-            steps_cache.set(verb, fetchStepDetails("camel-rest-verb-" + verb));
+        let verb = operation[0];
+
+        if (!steps_cache.has(verb)) {
+          steps_cache.set(verb, fetchStepDetails("camel-rest-verb-" + verb));
+        }
+
+        let produces = endpoint.produce.get(verb);
+        let consumes = endpoint.consume.get(verb);
+
+        let identifier = operation[1]['operationId'];
+        let followingStep: IStepProps | undefined;
+        if (existingSteps.has(verb)) {
+          let verbMap = existingSteps.get(verb);
+          if (verbMap && verbMap.has(endpoint['name'])) {
+            followingStep = existingSteps.get(verb)?.get(endpoint['name']);
           }
+        }
 
-          let produces = endpoint.produce.get(verb);
-          let consumes = endpoint.consume.get(verb);
+        const operation_branch: {
+          steps: IStepProps[];
+          parameters: string[];
+          condition: any;
+          identifier: any;
+        }
+          = {
+          steps: [],
+          parameters: [],
+          condition: null,
+          identifier: identifier,
+        };
 
-          const operation_branch = {
-            steps: [],
-            parameters: [],
-            condition: null,
-            identifier: operation[1]['operationId']
-          };
+        let promiseResolve: (value: Boolean | PromiseLike<Boolean>) => void;
 
-          let promiseResolve: (value: Boolean | PromiseLike<Boolean>) => void;
+        allDone.push(new Promise<Boolean>(function (resolve) { promiseResolve = resolve; }));
 
-          allDone.push(new Promise<Boolean>(function (resolve) { promiseResolve = resolve; }));
-
-          Promise.all([steps_cache.get("consumes"), steps_cache.get("direct")])
-            .then((steps) => {
-              //clone the step
-              //consume
-              let consume: any = JSON.parse(JSON.stringify(steps[0]));
+        Promise.all([steps_cache.get("consumes"), steps_cache.get("direct")])
+          .then((steps) => {
+            //clone the step
+            //consume
+            let consume: IStepProps = JSON.parse(JSON.stringify(steps[0]));
+            if (consume.parameters) {
               for (const parameter of consume.parameters) {
                 if (parameter['id'] == "consumes") {
                   parameter['value'] = consumes;
@@ -243,52 +279,61 @@ export const RestStep = ({ updateStep, step, fetchStepDetails }: IRestForm) => {
                   parameter['value'] = endpoint['name'];
                 }
               }
-              operation_branch['steps'].push(consume);
-              //and now the direct
-              let direct = JSON.parse(JSON.stringify(steps[1]));
-              for (const parameter of direct.parameters) {
-                if (parameter['id'] == "name") {
-                  parameter['value'] = operation[1]['operationId'];
+            }
+            operation_branch['steps'].push(consume);
+            //and now the direct
+            if (followingStep == null) {
+              let direct: IStepProps = JSON.parse(JSON.stringify(steps[1]));
+              if (direct.parameters) {
+                for (const parameter of direct.parameters) {
+                  if (parameter['id'] == "name") {
+                    parameter['value'] = identifier;
+                  }
                 }
               }
               operation_branch.steps.push(direct);
-              promiseResolve(true);
-              return direct;
-            });
-
-          let branch = step.branches.find(b => b.identifier == verb);
-          if (branch == null) {
-            branch = {
-              steps: [],
-              parameters: [],
-              condition: null,
-              identifier: verb
-            };
-            step.branches.push(branch);
-            steps_cache.get(verb).then((s: any) => {
-              branch['steps'].push(s);
-              return s;
-            });
-          }
-
-          let promiseResolve2: (value: Boolean | PromiseLike<Boolean>) => void;
-
-          allDone.push(new Promise<Boolean>(function (resolve) { promiseResolve2 = resolve; }));
-          steps_cache.get(verb).then((s: any) => {
-            if (s.branches == null) {
-              s.branches = [];
+            } else {
+              operation_branch.steps.push(followingStep);
             }
-            s.branches.push(operation_branch);
-            promiseResolve2(true);
+            promiseResolve(true);
+            return consume;
+          });
+
+        let branch: any = finalBranches.find(b => b.identifier == verb);
+        if (branch == null) {
+          branch = {
+            steps: [],
+            parameters: [],
+            condition: null,
+            identifier: verb
+          };
+          finalBranches.push(branch);
+          steps_cache.get(verb).then((s: any) => {
+            branch['steps'].push(s);
             return s;
           });
         }
+
+        let promiseResolve2: (value: Boolean | PromiseLike<Boolean>) => void;
+
+        allDone.push(new Promise<Boolean>(function (resolve) { promiseResolve2 = resolve; }));
+        steps_cache.get(verb).then((s: any) => {
+          if (s.branches == null) {
+            s.branches = [];
+          }
+          s.branches.push(operation_branch);
+          promiseResolve2(true);
+          return s;
+        });
       }
     }
 
     if (updateStep) {
       Promise.all(allDone).then(() => {
-        updateStep(step);
+        if (step) {
+          step.branches = finalBranches;
+          updateStep(step);
+        }
       });
     }
   }
@@ -299,9 +344,6 @@ export const RestStep = ({ updateStep, step, fetchStepDetails }: IRestForm) => {
 
   return (
     <Form>
-      <FormGroup label="Start from scratch" fieldId="rest-clean-all">
-        <Checkbox id="inputType" label="Clean existing endpoints" isChecked={clean} onChange={setClean} />
-      </FormGroup>
       <FormGroup label="OpenApi" fieldId="open-api-file-upload">
         <Checkbox id="inputType" label="Upload spec" isChecked={upload} onChange={setUpload} />
 
@@ -327,53 +369,36 @@ export const RestStep = ({ updateStep, step, fetchStepDetails }: IRestForm) => {
           </InputGroup>
         )}
       </FormGroup>
+      {currentEndpoints.length > 0 &&
+        <FormGroup label="Existing Endpoints">
+          {
+            currentEndpoints.map((element, elid) => {
+              return Array.from(element.produces).map(([verb, operations]) => (
+                <Endpoint
+                  elid={elid}
+                  element={element}
+                  verb={verb}
+                  operations={operations}
+                  setEndpoints={setCurrentEndpoints}
+                  endpoints={currentEndpoints} />
+              ));
+            }
+            )
+          }
+        </FormGroup>
+      }
       <FormGroup label="Endpoints">
         {
           endpoints.map((element, elid) => {
-            return Array.from(element.produces).map(([verb, operations]) => {
-              return (
-                <div key={'endpoint-block-' + elid}>
-                  <Button
-                    style={{ float: 'left' }}
-                    variant='link'
-                    icon={<TrashIcon />}
-                    className={'remove-do-catch'}
-                    data-element-id={elid}
-                    data-testid={'endpoint-remove-' + element['name']}
-                    onClick={() => { removeEndpoint(elid); }}
-                  />
-                  <Checkbox id="inputType"
-                    label={element['name']}
-                    isChecked={element['useOnGeneration']}
-                    onChange={(toggle) => { toggleEndpoint(elid, toggle); }} />
-                  <span>{verb}</span>
-                  <FormSelect
-                    label="Produces"
-                    aria-label='OperationSelect'
-                    onChange={(value, event) => updateMetaType(elid, verb, 'produce', value, event)}
-                    value={element.produce.get(verb)}>
-                    {
-                      operations.map((option: string, index: Key | null | undefined) => (
-                        <FormSelectOption key={index} value={element.produce.get(verb)} label={option} />
-                      ))
-                    }
-                  </FormSelect>
-                  {
-                    Object.values(element['consumes']).length > 0 &&
-                    <FormSelect
-                      label="Consumes"
-                      aria-label='OperationSelect'
-                      onChange={(value, event) => updateMetaType(elid, verb, 'consume', value, event)}
-                      value={element.consume.get(verb)}>
-                      {Object.entries(element['consumes']).map(([verb, operations]) =>
-                        operations.map((option: string, index: Key | null | undefined) => (
-                          <FormSelectOption key={index} value={element.consume.get(verb)} label={option} />
-                        )))}
-                    </FormSelect>
-                  }
-                </div>
-              );
-            }
+            return Array.from(element.produces).map(([verb, operations]) => (
+              <Endpoint
+                elid={elid}
+                element={element}
+                verb={verb}
+                operations={operations}
+                setEndpoints={setEndpoints}
+                endpoints={endpoints} ></Endpoint>
+            )
             );
           }
           )
@@ -381,8 +406,9 @@ export const RestStep = ({ updateStep, step, fetchStepDetails }: IRestForm) => {
       </FormGroup>
 
       <ActionGroup>
-        <Button variant="primary" onClick={saveHandler} isDisabled={endpoints.length == 0} >
-          Generate {endpoints.length} Endpoints
+        <Button variant="primary" onClick={saveHandler}
+          isDisabled={endpoints.length + currentEndpoints.length == 0} >
+          Generate {endpoints.length + currentEndpoints.length} Endpoints
         </Button>
       </ActionGroup>
     </Form>
@@ -390,7 +416,4 @@ export const RestStep = ({ updateStep, step, fetchStepDetails }: IRestForm) => {
 };
 
 export default RestStep;
-function getEndpoints(step: any): IEndpoint[] | (() => IEndpoint[]) {
-  throw new Error('Function not implemented.');
-}
 
