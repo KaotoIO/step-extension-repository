@@ -7,12 +7,21 @@ import {
   FileUpload,
   InputGroup,
   Checkbox,
+  Flex,
+  FlexItem,
+  FormSelect,
+  FormSelectOption,
+  Stack,
+  StackItem,
+  Card,
+  CardBody,
 } from '@patternfly/react-core';
 import { Endpoint } from './Endpoint';
 import { OpenAPI, OpenAPIV3, OpenAPIV2, OpenAPIV3_1 } from 'openapi-types';
 import { useEffect, useState } from 'react';
 import SwaggerParser from '@apidevtools/swagger-parser';
 import { IStepProps } from '../../../try-catch-eip/kaoto/types/dts/src/types.js';
+import MimeTypes from './MimeTypes';
 
 export interface IEndpoint {
   name: string;
@@ -24,7 +33,7 @@ export interface IEndpoint {
   | undefined;
   operations:
   | Map<string, OpenAPI.Operation>
-  | Map<string, [string, {}]>;
+  | Map<string, {}>;
   produces: Map<string, string[]>;
   consumes: Map<string, string[]>;
   produce: Map<string, string>;
@@ -123,12 +132,12 @@ export function recoverEndpoints(step: IStepProps): IEndpoint[] {
                   }
                   let produces = new Map<string, string[]>();
                   produces.set(verb, [prod]);
-                  let operations = new Map<string, [string, {}]>();
-                  operations.set(verb, [verb, {
+                  let operations = new Map<string, {}>();
+                  operations.set(verb, {
                     produces: [prod],
                     consumes: (cons ? [cons] : []),
                     operationId: consumeBranch.identifier,
-                  }]);
+                  });
 
                   endpoints.push(
                     {
@@ -157,8 +166,14 @@ export const RestStep = ({ updateStep, step, fetchStepDetails }: IRestForm) => {
   const [openApiSpecText, setOpenApiSpecText] = useState('');
   const [endpoints, setEndpoints] = useState<IEndpoint[]>([]);
   const [currentEndpoints, setCurrentEndpoints] = useState<IEndpoint[]>(recoverEndpoints(step));
+  const [customEndpoints, setCustomEndpoints] = useState<IEndpoint[]>([]);
   const [upload, setUpload] = useState<boolean>(false);
   const [apiSpecUrl, setApiUrl] = useState<string>('https://api.chucknorris.io/documentation');
+  const [newEndpointName, setNewEndpointName] = useState('');
+  const [newEndpointPath, setNewEndpointPath] = useState('/');
+  const [newEndpointConsumes, setNewEndpointConsumes] = useState('');
+  const [newEndpointProduces, setNewEndpointProduces] = useState('text/plain');
+  const [newEndpointVerb, setNewEndpointVerb] = useState('get');
 
   const parseSpec = async (input: string) => {
     let e = await parseApiSpec(input);
@@ -184,6 +199,41 @@ export const RestStep = ({ updateStep, step, fetchStepDetails }: IRestForm) => {
 
   const handleClear = (_event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     setOpenApiSpecText('');
+  };
+
+  const createEndpoint = () => {
+
+    let consume = new Map<string, string>();
+    if (newEndpointConsumes) {
+      consume.set(newEndpointVerb, newEndpointConsumes);
+    }
+    let produce = new Map<string, string>();
+    produce.set(newEndpointVerb, newEndpointProduces);
+    let consumes = new Map<string, string[]>();
+    if (newEndpointConsumes) {
+      consumes.set(newEndpointVerb, [newEndpointConsumes]);
+    }
+    let produces = new Map<string, string[]>();
+    produces.set(newEndpointVerb, [newEndpointProduces]);
+    let operations = new Map<string, {}>();
+    operations.set(newEndpointVerb, {
+      produces: [newEndpointProduces],
+      consumes: (newEndpointConsumes ? [newEndpointConsumes] : []),
+      operationId: newEndpointName,
+    });
+
+    let endpoint : IEndpoint = {
+      name: newEndpointName,
+      operations: operations,
+      pathItem: newEndpointPath,
+      consume: consume,
+      produce: produce,
+      consumes: consumes,
+      produces: produces,
+    };
+
+    customEndpoints.push(endpoint);
+    setCustomEndpoints(customEndpoints.slice());
   };
 
   const saveHandler = () => {
@@ -224,7 +274,7 @@ export const RestStep = ({ updateStep, step, fetchStepDetails }: IRestForm) => {
     let allDone: Promise<Boolean>[] = [];
 
     let allEndpoints: IEndpoint[] = [];
-    allEndpoints = allEndpoints.concat(currentEndpoints).concat(endpoints);
+    allEndpoints = allEndpoints.concat(currentEndpoints).concat(endpoints).concat(customEndpoints);
 
     for (const endpoint of allEndpoints) {
       for (const operation of endpoint['operations']) {
@@ -343,8 +393,8 @@ export const RestStep = ({ updateStep, step, fetchStepDetails }: IRestForm) => {
   };
 
   return (
-    <Form>
-      <FormGroup label="OpenApi" fieldId="open-api-file-upload">
+    <Form>                    
+        <FormGroup label="OpenApi" fieldId="open-api-file-upload">
         <Checkbox id="inputType" label="Upload spec" isChecked={upload} onChange={setUpload} />
 
         {upload && (
@@ -389,6 +439,21 @@ export const RestStep = ({ updateStep, step, fetchStepDetails }: IRestForm) => {
       }
       <FormGroup label="Endpoints">
         {
+          customEndpoints.map((element, elid) => {
+            return Array.from(element.produces).map(([verb, operations]) => (
+              <Endpoint
+                elid={elid}
+                element={element}
+                verb={verb}
+                operations={operations}
+                setEndpoints={setCustomEndpoints}
+                endpoints={endpoints} ></Endpoint>
+            )
+            );
+          }
+          )
+        }
+        {
           endpoints.map((element, elid) => {
             return Array.from(element.produces).map(([verb, operations]) => (
               <Endpoint
@@ -404,11 +469,97 @@ export const RestStep = ({ updateStep, step, fetchStepDetails }: IRestForm) => {
           )
         }
       </FormGroup>
+      <FormGroup>
+        <Card>
+          <label><strong>Add a new Endpoint</strong></label>
+          <CardBody>
+            <Stack>
+              <StackItem>
+                <Flex>
+                  <FlexItem align={{ default: 'alignLeft' }}>
+                    <label>Name</label>
+                  </FlexItem>
+                  <FlexItem align={{ default: 'alignLeft' }}>
+                    <TextInput
+                      type="text"
+                      onChange={(value) => setNewEndpointName(value) }
+                      value={newEndpointName}
+                      aria-label="Name of the new endpoint" />
+                  </FlexItem>
+                </Flex>
+              </StackItem>
+              <StackItem>
+                <Flex>
+                  <FlexItem align={{ default: 'alignLeft' }}>
+                    <label>Path</label>
+                  </FlexItem>
+                  <FlexItem align={{ default: 'alignLeft' }}>
+                    <TextInput
+                      type="text"
+                      onChange={(value) => setNewEndpointPath(value) }
+                      value={newEndpointPath}
+                      aria-label="Uri Path of the new endpoint" />
+                  </FlexItem>
+                </Flex>
+              </StackItem>
+              <StackItem>
+                <Flex>
+                  <FlexItem align={{ default: 'alignLeft' }}>
+                    <label>HTTP Verb</label>
+                  </FlexItem>
+                  <FlexItem align={{ default: 'alignLeft' }}>
+                    <FormSelect
+                      label="HTTP Verb"
+                      onChange={(value) => setNewEndpointVerb(value) }
+                      value={newEndpointVerb}
+                      aria-label='Http Verb select'>
+                      <FormSelectOption value="get" label="GET" />
+                      <FormSelectOption value="post" label="POST" />
+                      <FormSelectOption value="head" label="HEAD" />
+                      <FormSelectOption value="put" label="PUT" />
+                      <FormSelectOption value="delete" label="DELETE" />
+                      <FormSelectOption value="connect" label="CONNECT" />
+                      <FormSelectOption value="options" label="OPTIONS" />
+                      <FormSelectOption value="trace" label="TRACE" />
+                      <FormSelectOption value="patch" label="PATCH" />
+                    </FormSelect>
+                  </FlexItem>
+                </Flex>
+              </StackItem>
+              <StackItem>
+                <Flex>
+                  <FlexItem align={{ default: 'alignLeft' }}>
+                    <label>Produces</label>
+                  </FlexItem>
+                  <FlexItem align={{ default: 'alignLeft' }}>
+                    <MimeTypes label="Produces" onChange={(value : string) => setNewEndpointProduces(value) } value={newEndpointProduces} />
+                  </FlexItem>
+                </Flex>
+              </StackItem>
+              <StackItem>
+                <Flex>
+                  <FlexItem align={{ default: 'alignLeft' }}>
+                    <label>Consumes</label>
+                  </FlexItem>
+                  <FlexItem align={{ default: 'alignLeft' }}>
+                    <MimeTypes label="Consumes" onChange={(value : string) => setNewEndpointConsumes(value) } value={newEndpointConsumes} />
+                  </FlexItem>
+                </Flex>
+              </StackItem>
+              <StackItem>
+                <Button variant="primary" onClick={createEndpoint} >
+                  Add Endpoint to the list
+                </Button>
+              </StackItem>
+            </Stack>
+          </CardBody>
+        </Card>
+      </FormGroup>
 
       <ActionGroup>
         <Button variant="primary" onClick={saveHandler}
-          isDisabled={endpoints.length + currentEndpoints.length == 0} >
-          Generate {endpoints.length + currentEndpoints.length} Endpoints
+          isDisabled={endpoints.length + currentEndpoints.length + customEndpoints.length == 0} >
+          Generate {endpoints.length + currentEndpoints.length + customEndpoints.length} Endpoints
         </Button>
       </ActionGroup>
     </Form>
