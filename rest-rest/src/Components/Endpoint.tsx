@@ -3,6 +3,7 @@ import {
   Card,
   CardBody,
   Form,
+  FormGroup,
   Grid,
   GridItem,
 } from '@patternfly/react-core';
@@ -38,7 +39,7 @@ export const Endpoint = ({ elid, element, verb, operations, setEndpoints, endpoi
 
 
   return (
-    <Form key={'endpoint-block-' + elid + element['name']}>
+    <FormGroup key={'endpoint-block-' + elid + element['name']}>
       <Card>
         <CardBody>
           <Grid>
@@ -96,7 +97,7 @@ export const Endpoint = ({ elid, element, verb, operations, setEndpoints, endpoi
           </Grid>
         </CardBody>
       </Card>
-    </Form>
+    </FormGroup>
   );
 }
 
