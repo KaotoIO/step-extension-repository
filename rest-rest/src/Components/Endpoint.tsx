@@ -2,11 +2,9 @@ import {
   Button,
   Card,
   CardBody,
-  Flex,
-  FlexItem,
   Form,
-  Stack,
-  StackItem,
+  Grid,
+  GridItem,
 } from '@patternfly/react-core';
 import { TrashIcon } from '@patternfly/react-icons';
 import { IEndpoint } from './RestStep';
@@ -43,52 +41,59 @@ export const Endpoint = ({ elid, element, verb, operations, setEndpoints, endpoi
     <Form key={'endpoint-block-' + elid + element['name']}>
       <Card>
         <CardBody>
-          <Stack>
-            <StackItem>
-              <Flex>
-                <FlexItem align={{ default: 'alignLeft' }}>
-                  <Button
-                    variant='link'
-                    icon={<TrashIcon />}
-                    className={'remove-do-catch'}
-                    data-element-id={elid}
-                    data-testid={'endpoint-remove-' + element['name']}
-                    onClick={() => { removeEndpoint(elid); }}
-                  />
-                  <label><strong>{verb.toUpperCase()}</strong>&nbsp;{element['name']}</label>
-                </FlexItem>
-              </Flex>
-            </StackItem>
-            <StackItem>
-              <Flex>
-                <FlexItem align={{ default: 'alignLeft' }}>
-                  <label>Produces</label>
-                </FlexItem>
-                <FlexItem align={{ default: 'alignLeft' }}>
+          <Grid>
+            <GridItem span={2} rowSpan={4}>
+              <Button
+                variant='link'
+                icon={<TrashIcon cellPadding={'1px'} />}
+                className={'remove-do-catch'}
+                data-element-id={elid}
+                data-testid={'endpoint-remove-' + element['name']}
+                onClick={() => { removeEndpoint(elid); }}
+              />
+            </GridItem>
+            <GridItem span={10}>
+              <Grid>
+                <GridItem span={3} rowSpan={2}>
+                  <label><strong>{verb.toUpperCase()}</strong></label>
+                </GridItem>
+                <GridItem span={9}>
+                  <label>{element.name}</label>
+                </GridItem>
+                <GridItem span={9}>
+                  {element.pathItem && element.pathItem[verb] &&
+                    <label>{ element.pathItem[verb].operationId }</label>
+                  }
+                  {element.pathItem && !element.pathItem[verb] &&
+                    <label>{ element.pathItem }</label>
+                  }
+                </GridItem>
+                <GridItem span={4}>
+                  <label>Produces: </label>
+                </GridItem>
+                <GridItem span={8}>
                   <MimeTypes label="Produces"
-                    onChange={(value: string) => updateMetaType(elid, verb, false, value)} 
+                    onChange={(value: string) => updateMetaType(elid, verb, false, value)}
                     value={element.produce.get(verb) || ""}
                     values={operations} />
-                </FlexItem>
-              </Flex>
-            </StackItem>
-            {
-              element.consumes.size > 0 &&
-              <StackItem>
-                <Flex>
-                  <FlexItem align={{ default: 'alignLeft' }}>
+                </GridItem>
+              </Grid>
+              {
+                element.consumes.size > 0 &&
+                <Grid>
+                  <GridItem span={4}>
                     <label>Consumes</label>
-                  </FlexItem>
-                  <FlexItem align={{ default: 'alignLeft' }}>
-                    <MimeTypes label="Consumes"
+                  </GridItem>
+                  <GridItem span={8}>
+                    <MimeTypes label="Consumes: "
                       onChange={(value: string) => updateMetaType(elid, verb, true, value)}
                       value={element.consume.get(verb) || ""}
                       values={element.consumes.get(verb) || []} />
-                  </FlexItem>
-                </Flex>
-              </StackItem>
-            }
-          </Stack>
+                  </GridItem>
+                </Grid>
+              }
+            </GridItem>
+          </Grid>
         </CardBody>
       </Card>
     </Form>
