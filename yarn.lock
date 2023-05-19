@@ -14197,6 +14197,7 @@ __metadata:
     webpack-cli: ^5.0.1
     webpack-dev-server: ^4.13.3
     webpack-merge: ^5.8.0
+    yaml: ^2.2.2
   languageName: unknown
   linkType: soft
 
@@ -17284,7 +17285,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"yaml@npm:^2.1.1":
+"yaml@npm:^2.1.1, yaml@npm:^2.2.2":
   version: 2.3.0
   resolution: "yaml@npm:2.3.0"
   checksum: 9c3d16c226472041fbdc9fb55e1645786d3a3e8d4fde67a502ed7bfbd9067b811e466679db590a0731b4405d4a3bef1f35d098fb650d2cf4bc24732fc829b961

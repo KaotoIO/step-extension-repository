@@ -20,6 +20,7 @@ import SwaggerParser from '@apidevtools/swagger-parser';
 import { IStepProps } from '../../../try-catch-eip/kaoto/types/dts/src/types.js';
 import MimeTypes from './MimeTypes';
 import { HelpIcon, TrashIcon, PlusCircleIcon } from '@patternfly/react-icons';
+import YAML from 'yaml';
 
 export interface IEndpoint {
   name: string;
@@ -181,7 +182,7 @@ export const RestStep = ({ updateStep, step, fetchStepDetails }: IRestForm) => {
   useEffect(() => {
     let apiDoc = '';
     if (upload && openApiSpecText !== '') {
-      apiDoc = JSON.parse(openApiSpecText);
+      apiDoc = YAML.parse(openApiSpecText);
       parseSpec(apiDoc).catch(console.error);
     }
   }, [openApiSpecText, upload]);
@@ -193,10 +194,6 @@ export const RestStep = ({ updateStep, step, fetchStepDetails }: IRestForm) => {
     file.text().then((input) => {
       setOpenApiSpecText(input);
     });
-  };
-
-  const handleClear = (_event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    setOpenApiSpecText('');
   };
 
   const createEndpoint = () => {
@@ -442,7 +439,6 @@ export const RestStep = ({ updateStep, step, fetchStepDetails }: IRestForm) => {
               value={openApiSpecText}
               filenamePlaceholder="Drag and drop a open API spec or upload one"
               onFileInputChange={handleFileInputChange}
-              onClearClick={handleClear}
               browseButtonText="Upload"
             />
           )}
