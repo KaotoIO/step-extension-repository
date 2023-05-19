@@ -7,14 +7,11 @@ import {
   FileUpload,
   InputGroup,
   Checkbox,
-  Flex,
-  FlexItem,
   FormSelect,
   FormSelectOption,
-  Stack,
-  StackItem,
-  Card,
-  CardBody,
+  Popover,
+  Grid,
+  GridItem,
 } from '@patternfly/react-core';
 import { Endpoint } from './Endpoint';
 import { OpenAPI, OpenAPIV3, OpenAPIV2, OpenAPIV3_1 } from 'openapi-types';
@@ -22,6 +19,7 @@ import { useEffect, useState } from 'react';
 import SwaggerParser from '@apidevtools/swagger-parser';
 import { IStepProps } from '../../../try-catch-eip/kaoto/types/dts/src/types.js';
 import MimeTypes from './MimeTypes';
+import { HelpIcon, TrashIcon, PlusCircleIcon } from '@patternfly/react-icons';
 
 export interface IEndpoint {
   name: string;
@@ -204,13 +202,13 @@ export const RestStep = ({ updateStep, step, fetchStepDetails }: IRestForm) => {
   const createEndpoint = () => {
 
     let consume = new Map<string, string>();
-    if (newEndpointConsumes) {
+    if (newEndpointConsumes && newEndpointVerb != "get") {
       consume.set(newEndpointVerb, newEndpointConsumes);
     }
     let produce = new Map<string, string>();
     produce.set(newEndpointVerb, newEndpointProduces);
     let consumes = new Map<string, string[]>();
-    if (newEndpointConsumes) {
+    if (newEndpointConsumes && newEndpointVerb != "get") {
       consumes.set(newEndpointVerb, [newEndpointConsumes]);
     }
     let produces = new Map<string, string[]>();
@@ -222,7 +220,7 @@ export const RestStep = ({ updateStep, step, fetchStepDetails }: IRestForm) => {
       operationId: newEndpointName,
     });
 
-    let endpoint : IEndpoint = {
+    let endpoint: IEndpoint = {
       name: newEndpointName,
       operations: operations,
       pathItem: newEndpointPath,
@@ -393,34 +391,202 @@ export const RestStep = ({ updateStep, step, fetchStepDetails }: IRestForm) => {
   };
 
   return (
-    <Form>                    
-        <FormGroup label="OpenApi" fieldId="open-api-file-upload">
-        <Checkbox id="inputType" label="Upload spec" isChecked={upload} onChange={setUpload} />
+    <Form>
+      <strong style={{ fontSize: '120%' }}>Manage your REST Endpoints</strong>
+      <p>You can define here the endpoints your REST server will offer. No changes will be applied to your flow until you click on the Generate Endpoints button at the end.</p>
+      <strong>Add new Endpoint definitions</strong>
+      <p>Use the following section to define the services to implement.</p>
+      <FormGroup
+        isHelperTextBeforeField
+        hasNoPaddingTop
+        isStack>
+        <FormGroup
+          label="Using an OpenApi Specification"
+          isHelperTextBeforeField
+          hasNoPaddingTop
+          isStack
+          labelIcon={
+            <Popover
+              headerContent={
+                <div>
+                  Add a new Endpoint
+                </div>
+              }
+              bodyContent={
+                <div>
+                  <p>You can use a swagger or OpenAPI specification to load the list of endpoints to generate.</p>
+                </div>
+              }
+            >
+              <button
+                type="button"
+                aria-label="More info for name field"
+                onClick={e => e.preventDefault()}
+                aria-describedby="form-group-label-info"
+                className="pf-c-form__group-label-help"
+              >
+                <HelpIcon noVerticalAlign />
+              </button>
+            </Popover>
+          }
+        >
+          <Checkbox
+            id="inputType"
+            label="Upload spec (enable to upload file)"
+            isChecked={upload}
+            onChange={setUpload} />
 
-        {upload && (
-          <FileUpload
-            id="simple-file"
-            value={openApiSpecText}
-            filenamePlaceholder="Drag and drop a open API spec or upload one"
-            onFileInputChange={handleFileInputChange}
-            onClearClick={handleClear}
-            browseButtonText="Upload"
-          />
-        )}
-        {!upload && (
-          <InputGroup>
-            <TextInput
-              id="specUrlInput"
-              aria-label="Api spec url"
-              value={apiSpecUrl}
-              onChange={setApiUrl}
+          {upload && (
+            <FileUpload
+              id="simple-file"
+              value={openApiSpecText}
+              filenamePlaceholder="Drag and drop a open API spec or upload one"
+              onFileInputChange={handleFileInputChange}
+              onClearClick={handleClear}
+              browseButtonText="Upload"
             />
-            <Button onClick={handleLoadClick}>Load</Button>
-          </InputGroup>
-        )}
+          )}
+          {!upload && (
+            <InputGroup>
+              <TextInput
+                id="specUrlInput"
+                aria-label="Api spec url"
+                value={apiSpecUrl}
+                onChange={setApiUrl}
+              />
+              <Button onClick={handleLoadClick}>Load</Button>
+            </InputGroup>
+          )}
+        </FormGroup>
+
+        <FormGroup label="Add a new Endpoint manually"
+          isHelperTextBeforeField
+          hasNoPaddingTop
+          isStack
+          labelIcon={
+            <Popover
+              headerContent={
+                <div>
+                  Add a new Endpoint
+                </div>
+              }
+              bodyContent={
+                <div>
+                  <p>Use the following form to add a new endpoint to the list of endpoints that will be generated.</p>
+                </div>
+              }
+            >
+              <button
+                type="button"
+                aria-label="More info for name field"
+                onClick={e => e.preventDefault()}
+                aria-describedby="form-group-label-info"
+                className="pf-c-form__group-label-help"
+              >
+                <HelpIcon noVerticalAlign />
+              </button>
+            </Popover>
+          }
+        >
+          <Grid>
+            <GridItem span={4}>
+              <label style={{textAlign:"right", display:"block", paddingRight:"2%"}}>Name: </label>
+            </GridItem>
+            <GridItem span={8}>
+              <TextInput
+                type="text"
+                onChange={(value) => setNewEndpointName(value)}
+                value={newEndpointName}
+                aria-label="Name of the new endpoint" />
+            </GridItem>
+            <GridItem span={4}>
+              <label style={{textAlign:"right", display:"block", paddingRight:"2%"}}>Path: </label>
+            </GridItem>
+            <GridItem span={8}>
+              <TextInput
+                type="text"
+                onChange={(value) => setNewEndpointPath(value)}
+                value={newEndpointPath}
+                aria-label="Uri Path of the new endpoint" />
+            </GridItem>
+            <GridItem span={4}>
+              <label style={{textAlign:"right", display:"block", paddingRight:"2%"}}>HTTP Verb: </label>
+            </GridItem>
+            <GridItem span={8}>
+              <FormSelect
+                label="HTTP Verb"
+                onChange={(value) => setNewEndpointVerb(value)}
+                value={newEndpointVerb}
+                aria-label='Http Verb select'>
+                <FormSelectOption value="get" label="GET" />
+                <FormSelectOption value="post" label="POST" />
+                <FormSelectOption value="head" label="HEAD" />
+                <FormSelectOption value="put" label="PUT" />
+                <FormSelectOption value="delete" label="DELETE" />
+                <FormSelectOption value="connect" label="CONNECT" />
+                <FormSelectOption value="options" label="OPTIONS" />
+                <FormSelectOption value="trace" label="TRACE" />
+                <FormSelectOption value="patch" label="PATCH" />
+              </FormSelect>
+            </GridItem>
+            <GridItem span={4}>
+              <label style={{textAlign:"right", display:"block", paddingRight:"2%"}}>Produces: </label>
+            </GridItem>
+            <GridItem span={8}>
+              <MimeTypes label="Produces" onChange={(value: string) => setNewEndpointProduces(value)} value={newEndpointProduces} values={[]} />
+
+            </GridItem>
+            <GridItem span={4}>
+              <label style={{textAlign:"right", display:"block", paddingRight:"2%"}}>Consumes: </label>
+            </GridItem>
+            <GridItem span={8}>
+              <MimeTypes label="Consumes" onChange={(value: string) => setNewEndpointConsumes(value)} value={newEndpointConsumes} values={[]} />
+            </GridItem>
+            <GridItem span={4}>
+            </GridItem>
+            <GridItem span={8}>
+              <Button variant="link" icon={<PlusCircleIcon />} onClick={createEndpoint} >
+                Create new Endpoint
+              </Button>
+            </GridItem>
+          </Grid>
+        </FormGroup>
       </FormGroup>
-      {currentEndpoints.length > 0 &&
-        <FormGroup label="Existing Endpoints">
+      <strong>Defined Endpoints</strong>
+
+      {
+        currentEndpoints.length + endpoints.length + customEndpoints.length == 0 &&
+        <p>Add new endpoint definintions to populate this list.</p>
+      }
+      {
+        currentEndpoints.length > 0 &&
+        <FormGroup label="Existing Endpoints"
+          labelIcon={
+            <Popover
+              headerContent={
+                <div>
+                  Existing Endpoints in your flow
+                </div>
+              }
+              bodyContent={
+                <div>
+                  <p>The following endpoints are already defined in your flow. </p>
+                  <p>You can remove endpoints from this list by clicking on the trash icon.</p>
+                </div>
+              }
+            >
+              <button
+                type="button"
+                aria-label="More info for name field"
+                onClick={e => e.preventDefault()}
+                aria-describedby="form-group-label-info"
+                className="pf-c-form__group-label-help"
+              >
+                <HelpIcon noVerticalAlign />
+              </button>
+            </Popover>
+          }
+        >
           {
             currentEndpoints.map((element, elid) => {
               return Array.from(element.produces).map(([verb, operations]) => (
@@ -437,7 +603,36 @@ export const RestStep = ({ updateStep, step, fetchStepDetails }: IRestForm) => {
           }
         </FormGroup>
       }
-      <FormGroup label="Endpoints">
+      <FormGroup label="New Endpoints"
+        labelIcon={
+          <Popover
+            headerContent={
+              <div>
+                Endpoints to Add to your flow
+              </div>
+            }
+            bodyContent={
+              <div>
+                <p>The following endpoints will be added after you click on the
+                  <strong> Generate Endpoints </strong> button at the bottom of this form.</p>
+                <p>You can remove endpoints from this list by clicking on the
+                  <TrashIcon noVerticalAlign /> icon.</p>
+              </div>
+            }
+          >
+            <button
+              type="button"
+              aria-label="More info for name field"
+              onClick={e => e.preventDefault()}
+              aria-describedby="form-group-label-info"
+              className="pf-c-form__group-label-help"
+            >
+              <HelpIcon noVerticalAlign />
+            </button>
+          </Popover>
+        }
+      >
+
         {
           customEndpoints.map((element, elid) => {
             return Array.from(element.produces).map(([verb, operations]) => (
@@ -469,92 +664,6 @@ export const RestStep = ({ updateStep, step, fetchStepDetails }: IRestForm) => {
           )
         }
       </FormGroup>
-      <FormGroup>
-        <Card>
-          <label><strong>Add a new Endpoint</strong></label>
-          <CardBody>
-            <Stack>
-              <StackItem>
-                <Flex>
-                  <FlexItem align={{ default: 'alignLeft' }}>
-                    <label>Name</label>
-                  </FlexItem>
-                  <FlexItem align={{ default: 'alignLeft' }}>
-                    <TextInput
-                      type="text"
-                      onChange={(value) => setNewEndpointName(value) }
-                      value={newEndpointName}
-                      aria-label="Name of the new endpoint" />
-                  </FlexItem>
-                </Flex>
-              </StackItem>
-              <StackItem>
-                <Flex>
-                  <FlexItem align={{ default: 'alignLeft' }}>
-                    <label>Path</label>
-                  </FlexItem>
-                  <FlexItem align={{ default: 'alignLeft' }}>
-                    <TextInput
-                      type="text"
-                      onChange={(value) => setNewEndpointPath(value) }
-                      value={newEndpointPath}
-                      aria-label="Uri Path of the new endpoint" />
-                  </FlexItem>
-                </Flex>
-              </StackItem>
-              <StackItem>
-                <Flex>
-                  <FlexItem align={{ default: 'alignLeft' }}>
-                    <label>HTTP Verb</label>
-                  </FlexItem>
-                  <FlexItem align={{ default: 'alignLeft' }}>
-                    <FormSelect
-                      label="HTTP Verb"
-                      onChange={(value) => setNewEndpointVerb(value) }
-                      value={newEndpointVerb}
-                      aria-label='Http Verb select'>
-                      <FormSelectOption value="get" label="GET" />
-                      <FormSelectOption value="post" label="POST" />
-                      <FormSelectOption value="head" label="HEAD" />
-                      <FormSelectOption value="put" label="PUT" />
-                      <FormSelectOption value="delete" label="DELETE" />
-                      <FormSelectOption value="connect" label="CONNECT" />
-                      <FormSelectOption value="options" label="OPTIONS" />
-                      <FormSelectOption value="trace" label="TRACE" />
-                      <FormSelectOption value="patch" label="PATCH" />
-                    </FormSelect>
-                  </FlexItem>
-                </Flex>
-              </StackItem>
-              <StackItem>
-                <Flex>
-                  <FlexItem align={{ default: 'alignLeft' }}>
-                    <label>Produces</label>
-                  </FlexItem>
-                  <FlexItem align={{ default: 'alignLeft' }}>
-                    <MimeTypes label="Produces" onChange={(value : string) => setNewEndpointProduces(value) } value={newEndpointProduces} />
-                  </FlexItem>
-                </Flex>
-              </StackItem>
-              <StackItem>
-                <Flex>
-                  <FlexItem align={{ default: 'alignLeft' }}>
-                    <label>Consumes</label>
-                  </FlexItem>
-                  <FlexItem align={{ default: 'alignLeft' }}>
-                    <MimeTypes label="Consumes" onChange={(value : string) => setNewEndpointConsumes(value) } value={newEndpointConsumes} />
-                  </FlexItem>
-                </Flex>
-              </StackItem>
-              <StackItem>
-                <Button variant="primary" onClick={createEndpoint} >
-                  Add Endpoint to the list
-                </Button>
-              </StackItem>
-            </Stack>
-          </CardBody>
-        </Card>
-      </FormGroup>
 
       <ActionGroup>
         <Button variant="primary" onClick={saveHandler}
@@ -562,7 +671,7 @@ export const RestStep = ({ updateStep, step, fetchStepDetails }: IRestForm) => {
           Generate {endpoints.length + currentEndpoints.length + customEndpoints.length} Endpoints
         </Button>
       </ActionGroup>
-    </Form>
+    </Form >
   );
 };
 
