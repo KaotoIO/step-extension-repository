@@ -64,6 +64,12 @@ async function parseApiSpec(
         if (op['produces']) {
           op['produces'].forEach((prod: string) => produces.get(verb).push(prod));
           produce.set(verb, op['produces'][0]);
+        } else if (op.responses) {
+          Object.entries(op.responses).forEach(([index, response]) => {
+            if (response.content) {
+              produces.get(verb)?.push.apply(produces.get(verb), (Object.keys(response.content)));
+            }
+          });
         }
         if (op['consumes']) {
           consumes.set(verb, []);
@@ -394,10 +400,12 @@ export const RestStep = ({ updateStep, step, fetchStepDetails }: IRestForm) => {
       <strong>Add new Endpoint definitions</strong>
       <p>Use the following section to define the services to implement.</p>
       <FormGroup
+        id='Create Endpoints'
         isHelperTextBeforeField
         hasNoPaddingTop
         isStack>
         <FormGroup
+          id='Create via OpenAPI'
           label="Using an OpenApi Specification"
           isHelperTextBeforeField
           hasNoPaddingTop
@@ -486,7 +494,7 @@ export const RestStep = ({ updateStep, step, fetchStepDetails }: IRestForm) => {
         >
           <Grid>
             <GridItem span={4}>
-              <label style={{textAlign:"right", display:"block", paddingRight:"2%"}}>Name: </label>
+              <label style={{ textAlign: "right", display: "block", paddingRight: "2%" }}>Name: </label>
             </GridItem>
             <GridItem span={8}>
               <TextInput
@@ -496,7 +504,7 @@ export const RestStep = ({ updateStep, step, fetchStepDetails }: IRestForm) => {
                 aria-label="Name of the new endpoint" />
             </GridItem>
             <GridItem span={4}>
-              <label style={{textAlign:"right", display:"block", paddingRight:"2%"}}>Path: </label>
+              <label style={{ textAlign: "right", display: "block", paddingRight: "2%" }}>Path: </label>
             </GridItem>
             <GridItem span={8}>
               <TextInput
@@ -506,7 +514,7 @@ export const RestStep = ({ updateStep, step, fetchStepDetails }: IRestForm) => {
                 aria-label="Uri Path of the new endpoint" />
             </GridItem>
             <GridItem span={4}>
-              <label style={{textAlign:"right", display:"block", paddingRight:"2%"}}>HTTP Verb: </label>
+              <label style={{ textAlign: "right", display: "block", paddingRight: "2%" }}>HTTP Verb: </label>
             </GridItem>
             <GridItem span={8}>
               <FormSelect
@@ -526,14 +534,14 @@ export const RestStep = ({ updateStep, step, fetchStepDetails }: IRestForm) => {
               </FormSelect>
             </GridItem>
             <GridItem span={4}>
-              <label style={{textAlign:"right", display:"block", paddingRight:"2%"}}>Produces: </label>
+              <label style={{ textAlign: "right", display: "block", paddingRight: "2%" }}>Produces: </label>
             </GridItem>
             <GridItem span={8}>
               <MimeTypes label="Produces" onChange={(value: string) => setNewEndpointProduces(value)} value={newEndpointProduces} values={[]} />
 
             </GridItem>
             <GridItem span={4}>
-              <label style={{textAlign:"right", display:"block", paddingRight:"2%"}}>Consumes: </label>
+              <label style={{ textAlign: "right", display: "block", paddingRight: "2%" }}>Consumes: </label>
             </GridItem>
             <GridItem span={8}>
               <MimeTypes label="Consumes" onChange={(value: string) => setNewEndpointConsumes(value)} value={newEndpointConsumes} values={[]} />
@@ -588,6 +596,7 @@ export const RestStep = ({ updateStep, step, fetchStepDetails }: IRestForm) => {
               return Array.from(element.produces).map(([verb, operations]) => (
                 <Endpoint
                   elid={elid}
+                  key='elid'
                   element={element}
                   verb={verb}
                   operations={operations}
@@ -634,6 +643,7 @@ export const RestStep = ({ updateStep, step, fetchStepDetails }: IRestForm) => {
             return Array.from(element.produces).map(([verb, operations]) => (
               <Endpoint
                 elid={elid}
+                key={elid}
                 element={element}
                 verb={verb}
                 operations={operations}
@@ -649,6 +659,7 @@ export const RestStep = ({ updateStep, step, fetchStepDetails }: IRestForm) => {
             return Array.from(element.produces).map(([verb, operations]) => (
               <Endpoint
                 elid={elid}
+                key={elid}
                 element={element}
                 verb={verb}
                 operations={operations}
