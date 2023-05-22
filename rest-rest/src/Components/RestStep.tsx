@@ -14,25 +14,20 @@ import {
   GridItem,
 } from '@patternfly/react-core';
 import { Endpoint } from './Endpoint';
-import { OpenAPI, OpenAPIV3, OpenAPIV2, OpenAPIV3_1 } from 'openapi-types';
+import { OpenAPI } from 'openapi-types';
 import { useEffect, useState } from 'react';
 import SwaggerParser from '@apidevtools/swagger-parser';
+import { parse } from 'yaml/dist/public-api';
 import { IStepProps } from '../../../try-catch-eip/kaoto/types/dts/src/types.js';
 import MimeTypes from './MimeTypes';
 import { HelpIcon, TrashIcon, PlusCircleIcon } from '@patternfly/react-icons';
-import YAML from 'yaml';
 
 export interface IEndpoint {
   name: string;
-  pathItem:
-  | OpenAPIV2.PathItemObject
-  | OpenAPIV3.PathItemObject
-  | OpenAPIV3_1.PathItemObject
-  | string
-  | undefined;
+  path: string;
   operations:
   | Map<string, OpenAPI.Operation>
-  | Map<string, {}>;
+  | Map<string, { operationId: string; }>;
   produces: Map<string, string[]>;
   consumes: Map<string, string[]>;
   produce: Map<string, string>;
@@ -45,54 +40,63 @@ async function parseApiSpec(
   let swaggerParser: SwaggerParser = new SwaggerParser();
 
   const e: Array<IEndpoint> = [];
-  let api: OpenAPIV2.Document | OpenAPIV3.Document | OpenAPIV3_1.Document;
-
   try {
-    api = await swaggerParser.validate(input, { dereference: { circular: 'ignore' } });
-    // @ts-ignore
-    Object.entries(swaggerParser.api.paths).forEach((p) => {
-      const operations: Map<string, OpenAPI.Operation> = new Map<string, OpenAPI.Operation>();
-      Object.entries(p[1]).forEach((method: [string, OpenAPI.Operation]) => {
-        operations.set(method[0], method[1]);
-      });
-      let produces: Map<string, string[]> = new Map<string, string[]>();
-      let consumes: Map<string, string[]> = new Map<string, string[]>();
-      let produce: Map<string, string> = new Map<string, string>();
-      let consume: Map<string, string> = new Map<string, string>();
-      operations.forEach((op: OpenAPI.Operation, verb: string) => {
-        produces.set(verb, []);
-        if (op['produces']) {
-          op['produces'].forEach((prod: string) => produces.get(verb).push(prod));
-          produce.set(verb, op['produces'][0]);
-        } else if (op.responses) {
-          Object.entries(op.responses).forEach(([index, response]) => {
-            if (response.content) {
-              produces.get(verb)?.push.apply(produces.get(verb), (Object.keys(response.content)));
+    await swaggerParser.validate(input, { dereference: { circular: 'ignore' } });
+    const paths = swaggerParser.api.paths;
+    if (paths) {
+      Object.keys(paths).forEach((key: string) => {
+        const path = paths[key];
+        if (path) {
+          const operations: Map<string, OpenAPI.Operation> = new Map<string, OpenAPI.Operation>();
+          Object.entries(path).forEach((method: [string, OpenAPI.Operation]) => {
+            operations.set(method[0], method[1]);
+          });
+          let produces: Map<string, string[]> = new Map<string, string[]>();
+          let consumes: Map<string, string[]> = new Map<string, string[]>();
+          let produce: Map<string, string> = new Map<string, string>();
+          let consume: Map<string, string> = new Map<string, string>();
+          operations.forEach((op: OpenAPI.Operation, verb: string) => {
+            const producesMediaType: string[] = [];
+            if ('produces' in op) {
+              op.produces?.forEach((prod: string) => producesMediaType.push(prod));
+              if (producesMediaType.length > 0) {
+                produce.set(verb, producesMediaType[0]);
+              }
+            } else if (op.responses) {
+              Object.values(op.responses).forEach((response) => {
+                if (response.content) {
+                  producesMediaType.push.apply(producesMediaType, (Object.keys(response.content)));
+                }
+              });
             }
+            produces.set(verb, producesMediaType);
+            if ('consumes' in op) {
+              const consumesMediaTypes: string[] = [];
+              consumes.set(verb, consumesMediaTypes);
+              op.consumes?.forEach((con: string) => consumesMediaTypes.push(con));
+              if (consumesMediaTypes.length > 0) {
+                consume.set(verb, consumesMediaTypes[0]);
+              }
+            }
+            //@ts-ignore
+            e.push({ name: key, path: path[verb].operationId, operations: operations, produces: produces, consumes: consumes, produce: produce, consume: consume });
           });
         }
-        if (op['consumes']) {
-          consumes.set(verb, []);
-          op['consumes'].forEach((con: string) => consumes.get(verb).push(con));
-          consume.set(verb, op['consumes'][0]);
-        }
       });
-      e.push({ name: p[0], pathItem: p[1], operations: operations, produces: produces, consumes: consumes, produce: produce, consume: consume, useOnGeneration: true });
-    });
+    }
   } catch (error) {
     console.error('error ' + error);
-    props.notifyKaoto('Error trying to parse OpenAPI spec. Please, check the sources.');
   }
   return e;
 }
 
 export interface IRestForm {
-  updateStep?: (newConfig: IStepProps[]) => void;
+  updateStep?: (newConfig: IStepProps) => void;
   step?: IStepProps;
   fetchStepDetails: (stepId: string) => Promise<IStepProps>;
 }
 
-export function recoverEndpoints(step: IStepProps): IEndpoint[] {
+export function recoverEndpoints(step: IStepProps | undefined): IEndpoint[] {
 
   let endpoints: IEndpoint[] = [];
 
@@ -147,7 +151,7 @@ export function recoverEndpoints(step: IStepProps): IEndpoint[] {
                   endpoints.push(
                     {
                       name: path,
-                      pathItem: path,
+                      path: path,
                       operations: operations,
                       produces: produces,
                       consumes: consumes,
@@ -188,7 +192,7 @@ export const RestStep = ({ updateStep, step, fetchStepDetails }: IRestForm) => {
   useEffect(() => {
     let apiDoc = '';
     if (upload && openApiSpecText !== '') {
-      apiDoc = YAML.parse(openApiSpecText);
+      apiDoc = parse(openApiSpecText);
       parseSpec(apiDoc).catch(console.error);
     }
   }, [openApiSpecText, upload]);
@@ -226,7 +230,7 @@ export const RestStep = ({ updateStep, step, fetchStepDetails }: IRestForm) => {
     let endpoint: IEndpoint = {
       name: newEndpointName,
       operations: operations,
-      pathItem: newEndpointPath,
+      path: newEndpointPath,
       consume: consume,
       produce: produce,
       consumes: consumes,
@@ -278,7 +282,7 @@ export const RestStep = ({ updateStep, step, fetchStepDetails }: IRestForm) => {
     allEndpoints = allEndpoints.concat(currentEndpoints).concat(endpoints).concat(customEndpoints);
 
     for (const endpoint of allEndpoints) {
-      for (const operation of endpoint['operations']) {
+      for (const operation of endpoint.operations) {
 
         let verb = operation[0];
 
@@ -458,7 +462,7 @@ export const RestStep = ({ updateStep, step, fetchStepDetails }: IRestForm) => {
                 value={apiSpecUrl}
                 onChange={setApiUrl}
               />
-              <Button onClick={handleLoadClick}>Load</Button>
+              <Button data-testid='rest-load-remote-url' onClick={handleLoadClick}>Load</Button>
             </InputGroup>
           )}
         </FormGroup>
@@ -565,6 +569,7 @@ export const RestStep = ({ updateStep, step, fetchStepDetails }: IRestForm) => {
       {
         currentEndpoints.length > 0 &&
         <FormGroup label="Existing Endpoints"
+          data-testid='rest-existing-endpoints'
           labelIcon={
             <Popover
               headerContent={
@@ -609,6 +614,7 @@ export const RestStep = ({ updateStep, step, fetchStepDetails }: IRestForm) => {
         </FormGroup>
       }
       <FormGroup label="New Endpoints"
+        data-testid='rest-new-endpoints'
         labelIcon={
           <Popover
             headerContent={
@@ -674,6 +680,7 @@ export const RestStep = ({ updateStep, step, fetchStepDetails }: IRestForm) => {
 
       <ActionGroup>
         <Button variant="primary" onClick={saveHandler}
+          data-testid='rest-add-endpoints'
           isDisabled={endpoints.length + currentEndpoints.length + customEndpoints.length == 0} >
           Generate {endpoints.length + currentEndpoints.length + customEndpoints.length} Endpoints
         </Button>

@@ -2,7 +2,6 @@ import {
   Button,
   Card,
   CardBody,
-  Form,
   FormGroup,
   Grid,
   GridItem,
@@ -62,12 +61,7 @@ export const Endpoint = ({ elid, element, verb, operations, setEndpoints, endpoi
                   <label>{element.name}</label>
                 </GridItem>
                 <GridItem span={9}>
-                  {element.pathItem && element.pathItem[verb] &&
-                    <label>{ element.pathItem[verb].operationId }</label>
-                  }
-                  {element.pathItem && !element.pathItem[verb] &&
-                    <label>{ element.pathItem }</label>
-                  }
+                  <label>{ element.path }</label>
                 </GridItem>
                 <GridItem span={4}>
                   <label>Produces: </label>
