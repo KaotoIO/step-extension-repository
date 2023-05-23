@@ -5,6 +5,7 @@
   "port": "9001",
   "devDependencies": {
     "@babel/core": "7.21.8",
+    "@babel/preset-env": "^7.21.5",
     "@babel/preset-react": "7.18.6",
     "@babel/preset-typescript": "7.21.4",
     "@testing-library/jest-dom": "^5.16.5",
@@ -94,16 +95,17 @@
     "setupFilesAfterEnv": [
       "<rootDir>/src/setupTests.ts"
     ],
-    "testEnvironment": "jest-environment-jsdom",
+    "testEnvironment": "jsdom",
     "transform": {
-      "^.+\\.(ts|tsx)$": "ts-jest"
+      "^.+\\.(ts|tsx)$": "ts-jest",
+      "^.+\\.jsx?$": "babel-jest"
     },
     "moduleNameMapper": {
       "\\.(css|less|sass|scss)$": "<rootDir>/__mocks__/styleMock.js",
       "\\.(gif|ttf|eot|svg)$": "<rootDir>/__mocks__/fileMock.js"
     },
     "transformIgnorePatterns": [
-      "/node_modules/(?!(@patternfly/react-styles)/)"
+      "node_modules/(?!(@patternfly/react-styles|yaml)/)"
     ]
   }
 }
