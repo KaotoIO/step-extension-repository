@@ -17,7 +17,7 @@ import { Endpoint } from './Endpoint';
 import { OpenAPI } from 'openapi-types';
 import { useEffect, useState } from 'react';
 import SwaggerParser from '@apidevtools/swagger-parser';
-import { parse } from 'yaml/dist/public-api';
+import { parse } from 'yaml';
 import { IStepProps } from '../../../try-catch-eip/kaoto/types/dts/src/types.js';
 import MimeTypes from './MimeTypes';
 import { HelpIcon, TrashIcon, PlusCircleIcon } from '@patternfly/react-icons';
@@ -505,6 +505,7 @@ export const RestStep = ({ updateStep, step, fetchStepDetails }: IRestForm) => {
                 type="text"
                 onChange={(value) => setNewEndpointName(value)}
                 value={newEndpointName}
+                data-testid='new-endpoint-name'
                 aria-label="Name of the new endpoint" />
             </GridItem>
             <GridItem span={4}>
@@ -514,6 +515,7 @@ export const RestStep = ({ updateStep, step, fetchStepDetails }: IRestForm) => {
               <TextInput
                 type="text"
                 onChange={(value) => setNewEndpointPath(value)}
+                data-testid='new-endpoint-path'
                 value={newEndpointPath}
                 aria-label="Uri Path of the new endpoint" />
             </GridItem>
@@ -524,6 +526,7 @@ export const RestStep = ({ updateStep, step, fetchStepDetails }: IRestForm) => {
               <FormSelect
                 label="HTTP Verb"
                 onChange={(value) => setNewEndpointVerb(value)}
+                data-testid='new-endpoint-verb'
                 value={newEndpointVerb}
                 aria-label='Http Verb select'>
                 <FormSelectOption value="get" label="GET" />
@@ -553,7 +556,7 @@ export const RestStep = ({ updateStep, step, fetchStepDetails }: IRestForm) => {
             <GridItem span={4}>
             </GridItem>
             <GridItem span={8}>
-              <Button variant="link" icon={<PlusCircleIcon />} onClick={createEndpoint} >
+              <Button  data-testid='new-endpoint-button' variant="link" icon={<PlusCircleIcon />} onClick={createEndpoint} >
                 Create new Endpoint
               </Button>
             </GridItem>

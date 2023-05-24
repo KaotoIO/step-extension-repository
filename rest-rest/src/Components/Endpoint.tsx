@@ -38,7 +38,7 @@ export const Endpoint = ({ elid, element, verb, operations, setEndpoints, endpoi
 
 
   return (
-    <FormGroup key={'endpoint-block-' + elid + element['name']}>
+    <FormGroup key={'endpoint-block-' + elid + element['name']} data-testid={'endpoint-block-' + elid + element['name']}>
       <Card>
         <CardBody>
           <Grid>
@@ -61,13 +61,14 @@ export const Endpoint = ({ elid, element, verb, operations, setEndpoints, endpoi
                   <label>{element.name}</label>
                 </GridItem>
                 <GridItem span={9}>
-                  <label>{ element.path }</label>
+                  <label>{element.path}</label>
                 </GridItem>
-                <GridItem span={4}>
+                <GridItem span={3}>
                   <label>Produces: </label>
                 </GridItem>
-                <GridItem span={8}>
-                  <MimeTypes label="Produces"
+                <GridItem span={9}>
+                  <MimeTypes
+                    label="Produces"
                     onChange={(value: string) => updateMetaType(elid, verb, false, value)}
                     value={element.produce.get(verb) || ""}
                     values={operations} />
@@ -76,11 +77,12 @@ export const Endpoint = ({ elid, element, verb, operations, setEndpoints, endpoi
               {
                 element.consumes.size > 0 &&
                 <Grid>
-                  <GridItem span={4}>
+                  <GridItem span={3}>
                     <label>Consumes</label>
                   </GridItem>
-                  <GridItem span={8}>
-                    <MimeTypes label="Consumes: "
+                  <GridItem span={9}>
+                    <MimeTypes
+                      label="Consumes: "
                       onChange={(value: string) => updateMetaType(elid, verb, true, value)}
                       value={element.consume.get(verb) || ""}
                       values={element.consumes.get(verb) || []} />
