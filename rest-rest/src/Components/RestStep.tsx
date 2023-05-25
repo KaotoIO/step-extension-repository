@@ -250,7 +250,7 @@ export const RestStep = ({ updateStep, step, fetchStepDetails }: IRestForm) => {
         if (verbBranch.steps && verbBranch.steps.length > 0) {
           const verb = verbBranch.identifier;
 
-          if (verbBranch.steps[0].branches != null) {
+          if (verbBranch.steps[0].branches !== null && verbBranch.steps[0].branches !== undefined) {
             for (const consumeBranch of verbBranch.steps[0].branches) {
               if (consumeBranch.steps && consumeBranch.steps.length > 1) {
                 const consumeStep: IStepProps = consumeBranch.steps[0];
