@@ -1,4 +1,4 @@
-import { Select, SelectOption, SelectVariant } from '@patternfly/react-core';
+import { Select, SelectOption, SelectOptionObject, SelectVariant } from '@patternfly/react-core';
 import * as defaultMimeTypes from './DefaultMimeTypes';
 import { useState, MouseEvent, ChangeEvent } from 'react';
 
