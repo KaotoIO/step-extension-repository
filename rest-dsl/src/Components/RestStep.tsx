@@ -505,6 +505,7 @@ export const RestStep = ({ updateStep, step, fetchStepDetails }: IRestForm) => {
                 type="text"
                 onChange={(value) => setNewEndpointName(value)}
                 value={newEndpointName}
+                required={true}
                 data-testid='new-endpoint-name'
                 aria-label="Name of the new endpoint" />
             </GridItem>
@@ -604,7 +605,7 @@ export const RestStep = ({ updateStep, step, fetchStepDetails }: IRestForm) => {
               return Array.from(element.produces).map(([verb, operations]) => (
                 <Endpoint
                   elid={elid}
-                  key='elid'
+                  key={ 'current-' + verb + elid }
                   element={element}
                   verb={verb}
                   operations={operations}
@@ -652,7 +653,7 @@ export const RestStep = ({ updateStep, step, fetchStepDetails }: IRestForm) => {
             return Array.from(element.produces).map(([verb, operations]) => (
               <Endpoint
                 elid={elid}
-                key={elid}
+                key={ 'custom-' + verb + elid }
                 element={element}
                 verb={verb}
                 operations={operations}
@@ -668,7 +669,7 @@ export const RestStep = ({ updateStep, step, fetchStepDetails }: IRestForm) => {
             return Array.from(element.produces).map(([verb, operations]) => (
               <Endpoint
                 elid={elid}
-                key={elid}
+                key={ 'new-' + verb + elid }
                 element={element}
                 verb={verb}
                 operations={operations}
