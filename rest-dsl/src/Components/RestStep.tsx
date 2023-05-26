@@ -78,8 +78,8 @@ async function parseApiSpec(
                 consume.set(verb, consumesMediaTypes[0]);
               }
             }
-            //@ts-ignore
-            e.push({ name: key, path: path[verb].operationId, operations: operations, produces: produces, consumes: consumes, produce: produce, consume: consume });
+            // @ts-expect-error | The problem comes from `verb` not being recognized as a HttpMethods from OpenAPIV2, OpenAPIV3, OpenAPIV3_1
+            e.push({ name: key, path: path[verb].operationId, operations, produces, consumes, produce, consume });
           });
         }
       });

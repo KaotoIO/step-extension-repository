@@ -1,6 +1,6 @@
 import { Select, SelectOption, SelectVariant } from '@patternfly/react-core';
 import * as defaultMimeTypes from './DefaultMimeTypes';
-import { useState } from 'react';
+import { useState, MouseEvent, ChangeEvent } from 'react';
 
 //Code strongly "inspired" from https://www.patternfly.org/v4/components/select/#typeahead
 export interface IMimeTypeSelectInputForm {
@@ -26,13 +26,16 @@ export const MimeTypeSelectInput = ({ label, onChange, value, values }: IMimeTyp
     setIsOpen(isNowOpen);
   };
 
-  // @ts-ignore
-  const onSelect = (event, selection, isPlaceholder) => {
+  const onSelect = (
+    _: MouseEvent | ChangeEvent,
+    selection: string | SelectOptionObject,
+    isPlaceholder?: boolean,
+  ) => {
     if (isPlaceholder) {
       clearSelection();
     }
     else {
-      setSelected(selection);
+      setSelected(selection as string);
       setIsOpen(false);
     }
     onChange(selection);
