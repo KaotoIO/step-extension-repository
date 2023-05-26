@@ -18,7 +18,7 @@ import { OpenAPI } from 'openapi-types';
 import { useEffect, useState } from 'react';
 import SwaggerParser from '@apidevtools/swagger-parser';
 import { parse } from 'yaml';
-import { IStepProps } from '../../../try-catch-eip/kaoto/types/dts/src/types.js';
+import { IStepProps } from 'kaoto/types/dts/src/types.js';
 import MimeTypes from './MimeTypes';
 import { HelpIcon, TrashIcon, PlusCircleIcon } from '@patternfly/react-icons';
 
