@@ -1297,7 +1297,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-transform-modules-commonjs@npm:^7.21.2, @babel/plugin-transform-modules-commonjs@npm:^7.21.5":
+"@babel/plugin-transform-modules-commonjs@npm:^7.21.5":
   version: 7.21.5
   resolution: "@babel/plugin-transform-modules-commonjs@npm:7.21.5"
   dependencies:
@@ -1702,22 +1702,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/preset-typescript@npm:7.21.4":
-  version: 7.21.4
-  resolution: "@babel/preset-typescript@npm:7.21.4"
-  dependencies:
-    "@babel/helper-plugin-utils": ^7.20.2
-    "@babel/helper-validator-option": ^7.21.0
-    "@babel/plugin-syntax-jsx": ^7.21.4
-    "@babel/plugin-transform-modules-commonjs": ^7.21.2
-    "@babel/plugin-transform-typescript": ^7.21.3
-  peerDependencies:
-    "@babel/core": ^7.0.0-0
-  checksum: 83b2f2bf7be3a970acd212177525f58bbb1f2e042b675a47d021a675ae27cf00b6b6babfaf3ae5c980592c9ed1b0712e5197796b691905d25c99f9006478ea06
-  languageName: node
-  linkType: hard
-
-"@babel/preset-typescript@npm:^7.16.0":
+"@babel/preset-typescript@npm:7.21.5, @babel/preset-typescript@npm:^7.16.0":
   version: 7.21.5
   resolution: "@babel/preset-typescript@npm:7.21.5"
   dependencies:
@@ -5640,7 +5625,7 @@ __metadata:
     "@apidevtools/swagger-parser": ^10.1.0
     "@babel/core": 7.21.8
     "@babel/preset-react": 7.18.6
-    "@babel/preset-typescript": 7.21.4
+    "@babel/preset-typescript": 7.21.5
     "@patternfly/patternfly": 4.224.2
     "@patternfly/react-core": 4.276.8
     "@patternfly/react-styles": 4.92.6
@@ -8945,7 +8930,7 @@ __metadata:
     "@apidevtools/swagger-parser": ^10.1.0
     "@babel/core": 7.21.8
     "@babel/preset-react": 7.18.6
-    "@babel/preset-typescript": 7.21.4
+    "@babel/preset-typescript": 7.21.5
     "@patternfly/patternfly": 4.224.2
     "@patternfly/react-core": 4.276.8
     "@patternfly/react-styles": 4.92.6
@@ -14150,7 +14135,7 @@ __metadata:
     "@babel/core": 7.21.8
     "@babel/preset-env": ^7.21.5
     "@babel/preset-react": 7.18.6
-    "@babel/preset-typescript": 7.21.4
+    "@babel/preset-typescript": 7.21.5
     "@patternfly/patternfly": 4.224.2
     "@patternfly/react-core": 4.276.8
     "@patternfly/react-styles": 4.92.6
@@ -14651,7 +14636,7 @@ __metadata:
     "@apidevtools/swagger-parser": ^10.1.0
     "@babel/core": 7.21.8
     "@babel/preset-react": 7.18.6
-    "@babel/preset-typescript": 7.21.4
+    "@babel/preset-typescript": 7.21.5
     "@patternfly/patternfly": 4.224.2
     "@patternfly/react-core": 4.276.8
     "@patternfly/react-styles": 4.92.6
@@ -14696,7 +14681,7 @@ __metadata:
     "@apidevtools/swagger-parser": ^10.1.0
     "@babel/core": 7.21.8
     "@babel/preset-react": 7.18.6
-    "@babel/preset-typescript": 7.21.4
+    "@babel/preset-typescript": 7.21.5
     "@patternfly/patternfly": 4.224.2
     "@patternfly/react-core": 4.276.8
     "@patternfly/react-styles": 4.92.6
@@ -14741,7 +14726,7 @@ __metadata:
     "@apidevtools/swagger-parser": ^10.1.0
     "@babel/core": 7.21.8
     "@babel/preset-react": 7.18.6
-    "@babel/preset-typescript": 7.21.4
+    "@babel/preset-typescript": 7.21.5
     "@patternfly/patternfly": 4.224.2
     "@patternfly/react-core": 4.276.8
     "@patternfly/react-styles": 4.92.6
@@ -15093,7 +15078,7 @@ __metadata:
     "@apidevtools/swagger-parser": ^10.1.0
     "@babel/core": 7.21.8
     "@babel/preset-react": 7.18.6
-    "@babel/preset-typescript": 7.21.4
+    "@babel/preset-typescript": 7.21.5
     "@patternfly/patternfly": 4.224.2
     "@patternfly/react-core": 4.276.8
     "@patternfly/react-styles": 4.92.6
@@ -15137,7 +15122,7 @@ __metadata:
   dependencies:
     "@babel/core": 7.21.8
     "@babel/preset-react": 7.18.6
-    "@babel/preset-typescript": 7.21.4
+    "@babel/preset-typescript": 7.21.5
     "@popperjs/core": ^2.11.7
     "@testing-library/dom": ^9.2.0
     "@testing-library/jest-dom": ^5.11.4
@@ -15904,7 +15889,7 @@ __metadata:
     "@apidevtools/swagger-parser": ^10.1.0
     "@babel/core": 7.21.8
     "@babel/preset-react": ^7.18.6
-    "@babel/preset-typescript": 7.21.4
+    "@babel/preset-typescript": 7.21.5
     "@patternfly/patternfly": 4.224.2
     "@patternfly/react-core": 4.276.8
     "@patternfly/react-styles": 4.92.6
