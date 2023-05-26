@@ -177,7 +177,7 @@ export const RestStep = ({ updateStep, step, fetchStepDetails }: IRestForm) => {
   const [currentEndpoints, setCurrentEndpoints] = useState<IEndpoint[]>(recoverEndpoints(step));
   const [customEndpoints, setCustomEndpoints] = useState<IEndpoint[]>([]);
   const [upload, setUpload] = useState<boolean>(false);
-  const [apiSpecUrl, setApiUrl] = useState<string>('https://api.chucknorris.io/documentation');
+  const [apiSpecUrl, setApiUrl] = useState<string>('');
   const [newEndpointName, setNewEndpointName] = useState('');
   const [newEndpointPath, setNewEndpointPath] = useState('/');
   const [newEndpointConsumes, setNewEndpointConsumes] = useState('');
@@ -458,8 +458,10 @@ export const RestStep = ({ updateStep, step, fetchStepDetails }: IRestForm) => {
             <InputGroup>
               <TextInput
                 id="specUrlInput"
+                data-testid='spec-url-input'
                 aria-label="Api spec url"
                 value={apiSpecUrl}
+                placeholder='url pointing to a swagger or openapi specification'
                 onChange={setApiUrl}
               />
               <Button data-testid='rest-load-remote-url' onClick={handleLoadClick}>Load</Button>

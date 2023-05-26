@@ -18,6 +18,9 @@ test('Loads new endpoints', async () => {
     }}
   />);
 
+  const specUrlInput = screen.getByTestId('spec-url-input');
+  expect(specUrlInput).toBeInTheDocument();
+  fireEvent.change(specUrlInput, { target: { value: 'https://api.chucknorris.io/documentation' } });
 
   const newEndpointsList = screen.getByTestId('rest-new-endpoints');
   expect(newEndpointsList).toBeInTheDocument();
