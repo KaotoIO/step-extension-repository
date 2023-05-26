@@ -14142,9 +14142,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rest-rest-step-extension@workspace:rest-rest":
+"rest-dsl-step-extension@workspace:rest-dsl":
   version: 0.0.0-use.local
-  resolution: "rest-rest-step-extension@workspace:rest-rest"
+  resolution: "rest-dsl-step-extension@workspace:rest-dsl"
   dependencies:
     "@apidevtools/swagger-parser": ^10.1.0
     "@babel/core": 7.21.8

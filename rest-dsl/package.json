@@ -1,5 +1,5 @@
 {
-  "name": "rest-rest-step-extension",
+  "name": "rest-dsl-step-extension",
   "version": "0.1.0",
   "private": true,
   "port": "9001",
