@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "This is the official step extensions repository for Kaoto.",
   "workspaces": [
+    "./common",
     "./choice",
     "./http",
     "./load-balance",

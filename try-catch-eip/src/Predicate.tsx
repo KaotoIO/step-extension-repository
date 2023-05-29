@@ -1,6 +1,6 @@
 import {FormGroup, FormSelect, FormSelectOption, TextInput} from '@patternfly/react-core';
 import {useState} from 'react';
-import {ExpressionObjectLabel} from "./ExpressionObjectLabel";
+import {ExpressionObjectLabel} from "common";
 
 export type PredicateProps = {
     initSyntax: string,

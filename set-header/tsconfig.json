@@ -6,6 +6,7 @@
     "declaration": true,
     "esModuleInterop": true,
     "typeRoots": ["./node_modules/@types"],
+    "types": ["@types/jest"],
     "jsx": "react-jsx",
     "importHelpers": true,
     "lib": ["dom", "esnext"],
