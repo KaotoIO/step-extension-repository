@@ -24,7 +24,7 @@
     "node-polyfill-webpack-plugin": "^2.0.1",
     "null-loader": "^4.0.1",
     "serve": "14.2.0",
-    "style-loader": "^3.3.2",
+    "style-loader": "^3.3.3",
     "ts-jest": "^29.1.0",
     "typescript": "5.0.4",
     "util": "^0.12.5",
