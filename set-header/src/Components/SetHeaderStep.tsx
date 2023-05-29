@@ -1,6 +1,6 @@
-import {Expression} from './Expression';
-import {ActionGroup, Button, Form, FormGroup, TextInput} from '@patternfly/react-core';
-import {useState} from 'react';
+import { ActionGroup, Button, Form, FormGroup, TextInput } from '@patternfly/react-core';
+import { Expression } from 'common/src/expression';
+import { useState } from 'react';
 
 type SetHeaderStepParams = {
   name: string;
@@ -56,7 +56,7 @@ export const SetHeaderStep = (props: any) => {
   return (
     <Form>
       <FormGroup label="Name">
-        <TextInput data-testid='set-header-name-input' value={headerName}  aria-label="name" onChange={updateHeaderName} />
+        <TextInput data-testid='set-header-name-input' value={headerName} aria-label="name" onChange={updateHeaderName} />
       </FormGroup>
       <Expression
         initSyntax={initSyntax}

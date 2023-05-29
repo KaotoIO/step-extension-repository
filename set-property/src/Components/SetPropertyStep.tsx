@@ -1,4 +1,4 @@
-import {Expression} from './Expression';
+import {Expression} from 'common';
 import {ActionGroup, Button, Form, FormGroup, TextInput} from '@patternfly/react-core';
 import {useState} from 'react';
 
