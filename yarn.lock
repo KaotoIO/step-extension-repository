@@ -130,6 +130,29 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/core@npm:7.21.8, @babel/core@npm:^7.1.0, @babel/core@npm:^7.11.1, @babel/core@npm:^7.16.0, @babel/core@npm:^7.7.2, @babel/core@npm:^7.8.0":
+  version: 7.21.8
+  resolution: "@babel/core@npm:7.21.8"
+  dependencies:
+    "@ampproject/remapping": ^2.2.0
+    "@babel/code-frame": ^7.21.4
+    "@babel/generator": ^7.21.5
+    "@babel/helper-compilation-targets": ^7.21.5
+    "@babel/helper-module-transforms": ^7.21.5
+    "@babel/helpers": ^7.21.5
+    "@babel/parser": ^7.21.8
+    "@babel/template": ^7.20.7
+    "@babel/traverse": ^7.21.5
+    "@babel/types": ^7.21.5
+    convert-source-map: ^1.7.0
+    debug: ^4.1.0
+    gensync: ^1.0.0-beta.2
+    json5: ^2.2.2
+    semver: ^6.3.0
+  checksum: f28118447355af2a90bd340e2e60699f94c8020517eba9b71bf8ebff62fa9e00d63f076e033f9dfb97548053ad62ada45fafb0d96584b1a90e8aef5a3b8241b1
+  languageName: node
+  linkType: hard
+
 "@babel/core@npm:7.22.1":
   version: 7.22.1
   resolution: "@babel/core@npm:7.22.1"
@@ -150,29 +173,6 @@ __metadata:
     json5: ^2.2.2
     semver: ^6.3.0
   checksum: bbe45e791f223a7e692d2ea6597a73f48050abd24b119c85c48ac6504c30ce63343a2ea3f79b5847bf4b409ddd8a68b6cdc4f0272ded1d2ef6f6b1e9663432f0
-  languageName: node
-  linkType: hard
-
-"@babel/core@npm:^7.1.0, @babel/core@npm:^7.11.1, @babel/core@npm:^7.16.0, @babel/core@npm:^7.7.2, @babel/core@npm:^7.8.0":
-  version: 7.21.8
-  resolution: "@babel/core@npm:7.21.8"
-  dependencies:
-    "@ampproject/remapping": ^2.2.0
-    "@babel/code-frame": ^7.21.4
-    "@babel/generator": ^7.21.5
-    "@babel/helper-compilation-targets": ^7.21.5
-    "@babel/helper-module-transforms": ^7.21.5
-    "@babel/helpers": ^7.21.5
-    "@babel/parser": ^7.21.8
-    "@babel/template": ^7.20.7
-    "@babel/traverse": ^7.21.5
-    "@babel/types": ^7.21.5
-    convert-source-map: ^1.7.0
-    debug: ^4.1.0
-    gensync: ^1.0.0-beta.2
-    json5: ^2.2.2
-    semver: ^6.3.0
-  checksum: f28118447355af2a90bd340e2e60699f94c8020517eba9b71bf8ebff62fa9e00d63f076e033f9dfb97548053ad62ada45fafb0d96584b1a90e8aef5a3b8241b1
   languageName: node
   linkType: hard
 
@@ -1397,7 +1397,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-transform-modules-commonjs@npm:^7.21.5":
+"@babel/plugin-transform-modules-commonjs@npm:^7.21.2, @babel/plugin-transform-modules-commonjs@npm:^7.21.5":
   version: 7.21.5
   resolution: "@babel/plugin-transform-modules-commonjs@npm:7.21.5"
   dependencies:
@@ -1799,6 +1799,21 @@ __metadata:
   peerDependencies:
     "@babel/core": ^7.0.0-0
   checksum: 540d9cf0a0cc0bb07e6879994e6fb7152f87dafbac880b56b65e2f528134c7ba33e0cd140b58700c77b2ebf4c81fa6468fed0ba391462d75efc7f8c1699bb4c3
+  languageName: node
+  linkType: hard
+
+"@babel/preset-typescript@npm:7.21.4":
+  version: 7.21.4
+  resolution: "@babel/preset-typescript@npm:7.21.4"
+  dependencies:
+    "@babel/helper-plugin-utils": ^7.20.2
+    "@babel/helper-validator-option": ^7.21.0
+    "@babel/plugin-syntax-jsx": ^7.21.4
+    "@babel/plugin-transform-modules-commonjs": ^7.21.2
+    "@babel/plugin-transform-typescript": ^7.21.3
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: 83b2f2bf7be3a970acd212177525f58bbb1f2e042b675a47d021a675ae27cf00b6b6babfaf3ae5c980592c9ed1b0712e5197796b691905d25c99f9006478ea06
   languageName: node
   linkType: hard
 
@@ -3277,7 +3292,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/dom@npm:^9.3.0":
+"@testing-library/dom@npm:^9.2.0, @testing-library/dom@npm:^9.3.0":
   version: 9.3.0
   resolution: "@testing-library/dom@npm:9.3.0"
   dependencies:
@@ -3730,14 +3745,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:^18.2.5, @types/react@npm:^18.2.6":
-  version: 18.2.6
-  resolution: "@types/react@npm:18.2.6"
+"@types/react@npm:^18.2.7":
+  version: 18.2.7
+  resolution: "@types/react@npm:18.2.7"
   dependencies:
     "@types/prop-types": "*"
     "@types/scheduler": "*"
     csstype: ^3.0.2
-  checksum: dea9d232d8df7ac357367a69dcb557711ab3d5501807ffa77cebeee73d49ee94d095f298e36853c63ed47cce097eee4c7eae2aaa8c02fac3f0171ec1b523a819
+  checksum: caa5da4cf929766738ec789301dc6fb6624bd48dd317d851c4c9b84b1f47cd8ebe17fe01398cadaa0bc938cd4d502d67f4b9de9ff771dc132096bdc86228efba
   languageName: node
   linkType: hard
 
@@ -5696,7 +5711,7 @@ __metadata:
     "@testing-library/user-event": ^14.4.3
     "@types/jest": ^29.5.1
     "@types/node": ^18.15.11
-    "@types/react": ^18.2.6
+    "@types/react": ^18.2.7
     "@types/react-dom": ^18.2.4
     babel-loader: 9.1.2
     buffer: ^6.0.3
@@ -6279,6 +6294,24 @@ __metadata:
   bin:
     css-has-pseudo: dist/cli.cjs
   checksum: 8f165d68f6621891d9fa1d874794916a52ed8847dfbec591523ad68774650cc1eae062ba08f59514666e04aeba27be72c9b211892f3a187c5ba6e287bd4260e7
+  languageName: node
+  linkType: hard
+
+"css-loader@npm:^6.2.0":
+  version: 6.8.1
+  resolution: "css-loader@npm:6.8.1"
+  dependencies:
+    icss-utils: ^5.1.0
+    postcss: ^8.4.21
+    postcss-modules-extract-imports: ^3.0.0
+    postcss-modules-local-by-default: ^4.0.3
+    postcss-modules-scope: ^3.0.0
+    postcss-modules-values: ^4.0.0
+    postcss-value-parser: ^4.2.0
+    semver: ^7.3.8
+  peerDependencies:
+    webpack: ^5.0.0
+  checksum: 7c1784247bdbe76dc5c55fb1ac84f1d4177a74c47259942c9cfdb7a8e6baef11967a0bc85ac285f26bd26d5059decb848af8154a03fdb4f4894f41212f45eef3
   languageName: node
   linkType: hard
 
@@ -8884,7 +8917,7 @@ __metadata:
     "@trivago/prettier-plugin-sort-imports": ^4.1.1
     "@types/jest": ^29.5.1
     "@types/node": ^18.15.11
-    "@types/react": ^18.2.6
+    "@types/react": ^18.2.7
     "@types/react-dom": 18.2.4
     "@typescript-eslint/eslint-plugin": ^5.59.5
     "@typescript-eslint/parser": 5.59.7
@@ -12712,7 +12745,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss-modules-local-by-default@npm:^4.0.1":
+"postcss-modules-local-by-default@npm:^4.0.1, postcss-modules-local-by-default@npm:^4.0.3":
   version: 4.0.3
   resolution: "postcss-modules-local-by-default@npm:4.0.3"
   dependencies:
@@ -14057,7 +14090,7 @@ __metadata:
     "@trivago/prettier-plugin-sort-imports": ^4.1.1
     "@types/jest": ^29.5.1
     "@types/node": ^18.15.11
-    "@types/react": ^18.2.5
+    "@types/react": ^18.2.7
     "@types/react-dom": 18.0.11
     "@typescript-eslint/eslint-plugin": ^5.59.0
     "@typescript-eslint/parser": 5.59.7
@@ -14558,7 +14591,7 @@ __metadata:
     "@testing-library/user-event": ^14.4.3
     "@types/jest": ^29.5.1
     "@types/node": ^18.15.11
-    "@types/react": ^18.2.6
+    "@types/react": ^18.2.7
     "@types/react-dom": ^18.2.4
     babel-loader: 9.1.2
     buffer: ^6.0.3
@@ -14603,7 +14636,7 @@ __metadata:
     "@testing-library/user-event": ^14.4.3
     "@types/jest": ^29.5.1
     "@types/node": ^18.15.13
-    "@types/react": ^18.2.6
+    "@types/react": ^18.2.7
     "@types/react-dom": ^18.2.4
     babel-loader: 9.1.2
     buffer: ^6.0.3
@@ -14648,7 +14681,7 @@ __metadata:
     "@testing-library/user-event": ^14.4.3
     "@types/jest": ^29.5.1
     "@types/node": ^18.15.11
-    "@types/react": ^18.2.6
+    "@types/react": ^18.2.7
     "@types/react-dom": ^18.2.4
     babel-loader: 9.1.2
     buffer: ^6.0.3
@@ -14836,7 +14869,7 @@ __metadata:
     "@testing-library/user-event": ^14.4.3
     "@types/jest": ^29.5.1
     "@types/node": ^18.15.11
-    "@types/react": ^18.2.6
+    "@types/react": ^18.2.7
     "@types/react-dom": ^18.2.4
     babel-loader: 9.1.2
     buffer: ^6.0.3
@@ -15045,7 +15078,7 @@ __metadata:
     "@testing-library/user-event": ^14.4.3
     "@types/jest": ^29.5.1
     "@types/node": ^18.15.11
-    "@types/react": ^18.2.6
+    "@types/react": ^18.2.7
     "@types/react-dom": ^18.2.4
     babel-loader: 9.1.2
     buffer: ^6.0.3
@@ -15087,7 +15120,7 @@ __metadata:
     "@testing-library/user-event": ^14.4.3
     "@types/jest": ^29.5.1
     "@types/node": ^18.15.11
-    "@types/react": ^18.2.6
+    "@types/react": ^18.2.7
     "@types/react-dom": 18.2.4
     "@typescript-eslint/eslint-plugin": ^5.59.5
     "@typescript-eslint/parser": ^5.59.7
@@ -15126,7 +15159,7 @@ __metadata:
     "@trivago/prettier-plugin-sort-imports": ^4.1.1
     "@types/jest": ^29.5.1
     "@types/node": ^18.15.13
-    "@types/react": ^18.2.6
+    "@types/react": ^18.2.7
     "@types/react-dom": ^18.2.4
     css-loader: ^6.7.4
     html-webpack-plugin: 5.5.1
@@ -15386,7 +15419,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"style-loader@npm:^3.3.1, style-loader@npm:^3.3.3":
+"style-loader@npm:^3.3.1, style-loader@npm:^3.3.2, style-loader@npm:^3.3.3":
   version: 3.3.3
   resolution: "style-loader@npm:3.3.3"
   peerDependencies:
@@ -15847,7 +15880,7 @@ __metadata:
     "@testing-library/user-event": ^14.4.3
     "@types/jest": ^29.5.1
     "@types/node": ^18.15.13
-    "@types/react": ^18.2.6
+    "@types/react": ^18.2.7
     "@types/react-dom": ^18.2.4
     babel-loader: 9.1.2
     buffer: ^6.0.3
@@ -16586,7 +16619,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"webpack-merge@npm:^5.9.0":
+"webpack-merge@npm:^5.8.0, webpack-merge@npm:^5.9.0":
   version: 5.9.0
   resolution: "webpack-merge@npm:5.9.0"
   dependencies:
@@ -16670,7 +16703,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"webpack@npm:^5.84.1":
+"webpack@npm:^5.79.0, webpack@npm:^5.84.1":
   version: 5.84.1
   resolution: "webpack@npm:5.84.1"
   dependencies:
