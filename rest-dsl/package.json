@@ -60,7 +60,7 @@
     "react-scripts": "^5.0.1",
     "stream-http": "^3.2.0",
     "web-vitals": "^3.3.1",
-    "yaml": "^2.2.2"
+    "yaml": "^2.3.1"
   },
   "scripts": {
     "build": "webpack --mode production --config webpack.common.js",
