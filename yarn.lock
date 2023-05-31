@@ -1119,7 +1119,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-transform-modules-commonjs@npm:^7.21.2, @babel/plugin-transform-modules-commonjs@npm:^7.21.5":
+"@babel/plugin-transform-modules-commonjs@npm:^7.21.5":
   version: 7.21.5
   resolution: "@babel/plugin-transform-modules-commonjs@npm:7.21.5"
   dependencies:
@@ -1639,21 +1639,6 @@ __metadata:
   peerDependencies:
     "@babel/core": ^7.0.0-0
   checksum: 0b6210e8ea7485d71dfa7745e6b03e6252e3fd363cc84765c81709b51ad89bcf0a5887a82651dedfc007b7e47ae918496ee963f42c52d9ce3ddbcc5815b96bb7
-  languageName: node
-  linkType: hard
-
-"@babel/preset-typescript@npm:7.21.4":
-  version: 7.21.4
-  resolution: "@babel/preset-typescript@npm:7.21.4"
-  dependencies:
-    "@babel/helper-plugin-utils": ^7.20.2
-    "@babel/helper-validator-option": ^7.21.0
-    "@babel/plugin-syntax-jsx": ^7.21.4
-    "@babel/plugin-transform-modules-commonjs": ^7.21.2
-    "@babel/plugin-transform-typescript": ^7.21.3
-  peerDependencies:
-    "@babel/core": ^7.0.0-0
-  checksum: 83b2f2bf7be3a970acd212177525f58bbb1f2e042b675a47d021a675ae27cf00b6b6babfaf3ae5c980592c9ed1b0712e5197796b691905d25c99f9006478ea06
   languageName: node
   linkType: hard
 
@@ -14424,7 +14409,7 @@ __metadata:
     "@apidevtools/swagger-parser": ^10.1.0
     "@babel/core": 7.21.8
     "@babel/preset-react": 7.22.3
-    "@babel/preset-typescript": 7.21.4
+    "@babel/preset-typescript": 7.21.5
     "@patternfly/patternfly": 4.224.2
     "@patternfly/react-core": 4.276.8
     "@patternfly/react-styles": 4.92.6
