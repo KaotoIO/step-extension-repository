@@ -6,7 +6,7 @@
   "port": 3002,
   "devDependencies": {
     "@babel/core": "7.21.8",
-    "@babel/preset-react": "7.18.6",
+    "@babel/preset-react": "7.22.3",
     "@babel/preset-typescript": "7.21.4",
     "@testing-library/dom": "^9.2.0",
     "@testing-library/jest-dom": "^5.16.5",
