@@ -51,11 +51,11 @@ async function parseApiSpec(
           Object.entries(path).forEach((method: [string, OpenAPI.Operation]) => {
             operations.set(method[0], method[1]);
           });
-          let produces: Map<string, string[]> = new Map<string, string[]>();
-          let consumes: Map<string, string[]> = new Map<string, string[]>();
-          let produce: Map<string, string> = new Map<string, string>();
-          let consume: Map<string, string> = new Map<string, string>();
           operations.forEach((op: OpenAPI.Operation, verb: string) => {
+            let produces: Map<string, string[]> = new Map<string, string[]>();
+            let consumes: Map<string, string[]> = new Map<string, string[]>();
+            let produce: Map<string, string> = new Map<string, string>();
+            let consume: Map<string, string> = new Map<string, string>();
             const producesMediaType: string[] = [];
             if ('produces' in op) {
               op.produces?.forEach((prod: string) => producesMediaType.push(prod));
