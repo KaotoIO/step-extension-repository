@@ -5433,7 +5433,7 @@ __metadata:
     typescript: 5.1.3
     util: ^0.12.5
     web-vitals: ^3.3.1
-    webpack: ^5.85.1
+    webpack: ^5.86.0
     webpack-cli: ^5.1.3
     webpack-dev-server: ^4.15.0
     webpack-merge: ^5.9.0
@@ -8685,7 +8685,7 @@ __metadata:
     typescript: 5.1.3
     util: ^0.12.4
     web-vitals: ^3.3.1
-    webpack: ^5.85.1
+    webpack: ^5.86.0
     webpack-cli: ^5.1.3
     webpack-dev-server: ^4.15.0
     webpack-merge: ^5.9.0
@@ -13772,7 +13772,7 @@ __metadata:
     typescript: 5.1.3
     util: ^0.12.4
     web-vitals: ^3.3.1
-    webpack: ^5.85.1
+    webpack: ^5.86.0
     webpack-cli: ^5.1.3
     webpack-dev-server: ^4.13.3
     webpack-merge: ^5.9.0
@@ -14237,7 +14237,7 @@ __metadata:
     typescript: 5.1.3
     util: ^0.12.5
     web-vitals: ^3.3.1
-    webpack: ^5.85.1
+    webpack: ^5.86.0
     webpack-cli: ^5.1.3
     webpack-dev-server: ^4.15.0
     webpack-merge: ^5.9.0
@@ -14283,7 +14283,7 @@ __metadata:
     typescript: 5.1.3
     util: ^0.12.5
     web-vitals: ^3.3.1
-    webpack: ^5.85.1
+    webpack: ^5.86.0
     webpack-cli: ^5.1.3
     webpack-dev-server: ^4.15.0
     webpack-merge: ^5.9.0
@@ -14329,7 +14329,7 @@ __metadata:
     typescript: 5.1.3
     util: ^0.12.5
     web-vitals: ^3.3.1
-    webpack: ^5.85.1
+    webpack: ^5.86.0
     webpack-cli: ^5.1.3
     webpack-dev-server: ^4.15.0
     webpack-merge: ^5.9.0
@@ -14518,7 +14518,7 @@ __metadata:
     typescript: 5.1.3
     util: ^0.12.5
     web-vitals: ^3.3.1
-    webpack: ^5.85.1
+    webpack: ^5.86.0
     webpack-cli: ^5.1.3
     webpack-dev-server: ^4.15.0
     webpack-merge: ^5.8.0
@@ -14727,7 +14727,7 @@ __metadata:
     typescript: 5.1.3
     util: ^0.12.5
     web-vitals: ^3.3.1
-    webpack: ^5.85.1
+    webpack: ^5.86.0
     webpack-cli: ^5.1.3
     webpack-dev-server: ^4.15.0
     webpack-merge: ^5.9.0
@@ -14766,7 +14766,7 @@ __metadata:
     style-loader: ^3.3.3
     typescript: 5.1.3
     web-vitals: ^3.3.1
-    webpack: ^5.85.1
+    webpack: ^5.86.0
     webpack-cli: ^5.1.3
     webpack-dev-server: ^4.15.0
     webpack-remote-types-plugin: ^0.2.7
@@ -14806,7 +14806,7 @@ __metadata:
     tsconfig-paths-webpack-plugin: 4.0.1
     typescript: ^5.1.3
     web-vitals: ^3.3.1
-    webpack: ^5.85.1
+    webpack: ^5.86.0
     webpack-cli: ^5.1.3
     webpack-dev-server: ^4.15.0
   languageName: unknown
@@ -15495,7 +15495,7 @@ __metadata:
     typescript: 5.1.3
     util: ^0.12.5
     web-vitals: ^3.3.1
-    webpack: ^5.85.1
+    webpack: ^5.86.0
     webpack-cli: ^5.1.3
     webpack-dev-server: ^4.15.0
     webpack-merge: ^5.9.0
@@ -16287,9 +16287,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"webpack@npm:^5.85.1":
-  version: 5.85.1
-  resolution: "webpack@npm:5.85.1"
+"webpack@npm:^5.86.0":
+  version: 5.86.0
+  resolution: "webpack@npm:5.86.0"
   dependencies:
     "@types/eslint-scope": ^3.7.3
     "@types/estree": ^1.0.0
@@ -16320,7 +16320,7 @@ __metadata:
       optional: true
   bin:
     webpack: bin/webpack.js
-  checksum: 6fa659ef5e53211e6eeaed1987ac415ddd219584414b2d5ca0d528f0c7dd49be5363a9840e1def33efe1b3305ef3ad3c91f803bd87e41d2771b125340caa4df7
+  checksum: 682b1aa8328bb9d52ae66a1d0a1078af88f9e3b3b3a9c9e1ce203e669581a8e61d522420ef253130eacd510d24d7275b840c1311d50bd048d6fd7c1af186ce55
   languageName: node
   linkType: hard
 
