@@ -56,6 +56,8 @@ async function parseApiSpec(
             let consumes: Map<string, string[]> = new Map<string, string[]>();
             let produce: Map<string, string> = new Map<string, string>();
             let consume: Map<string, string> = new Map<string, string>();
+            let operation: Map<string, OpenAPI.Operation> = new Map<string, OpenAPI.Operation>();
+            operation.set(verb, op);
             const producesMediaType: string[] = [];
             if ('produces' in op) {
               op.produces?.forEach((prod: string) => producesMediaType.push(prod));
@@ -79,7 +81,7 @@ async function parseApiSpec(
               }
             }
             // @ts-expect-error | The problem comes from `verb` not being recognized as a HttpMethods from OpenAPIV2, OpenAPIV3, OpenAPIV3_1
-            e.push({ name: key, path: path[verb].operationId, operations, produces, consumes, produce, consume });
+            e.push({ name: key, path: path[verb].operationId, operations: operation, produces, consumes, produce, consume });
           });
         }
       });
