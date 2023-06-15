@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "packageManager": "yarn@3.5.0",
   "main": "src/index.ts",
-  "scripts": {   
+  "scripts": {
     "build": "echo 'Nothing to build.'",
     "clean": "echo 'No dist folder to clean.'",
     "test": "jest --coverage"
