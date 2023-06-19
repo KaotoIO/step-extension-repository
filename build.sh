@@ -6,4 +6,4 @@ yarn workspaces foreach --exclude "@kaoto/step-extension-repository" --topologic
 rm -rf ./dist
 mkdir -p ./dist
 
-yarn workspaces foreach --exclude "@kaoto/step-extension-repository" --exclude common --parallel --verbose exec bash -c 'working_folder=${PWD##*/}; cp -r "${PWD}/dist/" "../dist/${working_folder}"'
+yarn workspaces foreach --exclude "@kaoto/step-extension-repository" --exclude step-extension-template --exclude common --parallel --verbose exec bash -c 'working_folder=${PWD##*/}; cp -r "${PWD}/dist/" "../dist/${working_folder}"'
