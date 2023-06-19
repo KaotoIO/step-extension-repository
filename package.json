@@ -12,6 +12,7 @@
     "./set-header",
     "./set-property",
     "./step-extension-ogcapi-features-action",
+    "./step-extension-template",
     "./sort",
     "./transform",
     "./try-catch-eip"
