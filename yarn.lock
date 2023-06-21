@@ -4622,7 +4622,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:^18.2.6":
+"@types/react-dom@npm:^18.2.5, @types/react-dom@npm:^18.2.6":
   version: 18.2.6
   resolution: "@types/react-dom@npm:18.2.6"
   dependencies:
@@ -4642,7 +4642,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:^18.2.13":
+"@types/react@npm:^18.2.12, @types/react@npm:^18.2.13":
   version: 18.2.13
   resolution: "@types/react@npm:18.2.13"
   dependencies:
@@ -9919,7 +9919,7 @@ __metadata:
     react: 18.2.0
     react-dom: ^18.2.0
     react-router-dom: 6.13.0
-    sass: ^1.63.4
+    sass: ^1.63.5
     sass-loader: ^13.3.2
     serve: 14.2.0
     stream-http: ^3.2.0
@@ -15005,7 +15005,7 @@ __metadata:
     react-dom: ^18.2.0
     react-router-dom: 6.13.0
     react-scripts: ^5.0.1
-    sass: ^1.63.4
+    sass: ^1.63.5
     sass-loader: ^13.3.2
     serve: 14.2.0
     stream-http: ^3.2.0
@@ -15201,16 +15201,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass@npm:^1.63.4":
-  version: 1.63.4
-  resolution: "sass@npm:1.63.4"
+"sass@npm:^1.63.5":
+  version: 1.63.5
+  resolution: "sass@npm:1.63.5"
   dependencies:
     chokidar: ">=3.0.0 <4.0.0"
     immutable: ^4.0.0
     source-map-js: ">=0.6.2 <2.0.0"
   bin:
     sass: sass.js
-  checksum: 12bde5beff85a7018157d90c8b9d5aec8b56832f89fcfeca146f10936eecf97e669d22fd41f812b3407ed259bbb114d69c9ecbfc7ee9b15308211fb910cdf5eb
+  checksum: eee6a1b5f2bd85c464daa51aca11bd5d8086592099ff3a3a8286f92fafc0ab02edf5aaf781d8e53e446353beff15eff8cdf52052c232ece18efd7945d59172af
   languageName: node
   linkType: hard
 
