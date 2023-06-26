@@ -4642,14 +4642,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:^18.2.12, @types/react@npm:^18.2.13":
-  version: 18.2.13
-  resolution: "@types/react@npm:18.2.13"
+"@types/react@npm:^18.2.14":
+  version: 18.2.14
+  resolution: "@types/react@npm:18.2.14"
   dependencies:
     "@types/prop-types": "*"
     "@types/scheduler": "*"
     csstype: ^3.0.2
-  checksum: f7c15f19c164a29262993ea2aae2085fa38cddd9b8359fd8fefabfced91010b515a3abe2042b2b7f2f86e6b38a25b191415aa9313a9027175e3a000883c858cc
+  checksum: a6a5e8cc78f486b9020d1ad009aa6c56943c68c7c6376e0f8399e9cbcd950b7b8f5d73f00200f5379f5e58d31d57d8aed24357f301d8e86108cd438ce6c8b3dd
   languageName: node
   linkType: hard
 
@@ -6628,7 +6628,7 @@ __metadata:
     "@testing-library/user-event": ^14.4.3
     "@types/jest": ^29.5.2
     "@types/node": ^20.3.1
-    "@types/react": ^18.2.13
+    "@types/react": ^18.2.14
     "@types/react-dom": ^18.2.6
     babel-loader: 9.1.2
     buffer: ^6.0.3
@@ -6934,7 +6934,7 @@ __metadata:
     "@testing-library/user-event": ^14.4.3
     "@types/jest": ^29.5.2
     "@types/node": ^20.3.1
-    "@types/react": ^18.2.13
+    "@types/react": ^18.2.14
     "@types/react-dom": ^18.2.6
     babel-loader: 9.1.2
     jest: ^29.5.0
@@ -9894,7 +9894,7 @@ __metadata:
     "@trivago/prettier-plugin-sort-imports": ^4.1.1
     "@types/jest": ^29.5.2
     "@types/node": ^20.3.1
-    "@types/react": ^18.2.13
+    "@types/react": ^18.2.14
     "@types/react-dom": ^18.2.6
     "@typescript-eslint/eslint-plugin": ^5.60.0
     "@typescript-eslint/parser": 5.60.0
@@ -14978,7 +14978,7 @@ __metadata:
     "@trivago/prettier-plugin-sort-imports": ^4.1.1
     "@types/jest": ^29.5.2
     "@types/node": ^20.3.1
-    "@types/react": ^18.2.13
+    "@types/react": ^18.2.14
     "@types/react-dom": ^18.2.6
     "@typescript-eslint/eslint-plugin": ^5.60.0
     "@typescript-eslint/parser": 5.60.0
@@ -15467,7 +15467,7 @@ __metadata:
     "@testing-library/user-event": ^14.4.3
     "@types/jest": ^29.5.2
     "@types/node": ^20.3.1
-    "@types/react": ^18.2.13
+    "@types/react": ^18.2.14
     "@types/react-dom": ^18.2.6
     babel-loader: 9.1.2
     buffer: ^6.0.3
@@ -15513,7 +15513,7 @@ __metadata:
     "@testing-library/user-event": ^14.4.3
     "@types/jest": ^29.5.2
     "@types/node": ^20.3.1
-    "@types/react": ^18.2.13
+    "@types/react": ^18.2.14
     "@types/react-dom": ^18.2.6
     babel-loader: 9.1.2
     buffer: ^6.0.3
@@ -15559,7 +15559,7 @@ __metadata:
     "@testing-library/user-event": ^14.4.3
     "@types/jest": ^29.5.2
     "@types/node": ^20.3.1
-    "@types/react": ^18.2.13
+    "@types/react": ^18.2.14
     "@types/react-dom": ^18.2.6
     babel-loader: 9.1.2
     buffer: ^6.0.3
@@ -15748,7 +15748,7 @@ __metadata:
     "@testing-library/user-event": ^14.4.3
     "@types/jest": ^29.5.2
     "@types/node": ^20.3.1
-    "@types/react": ^18.2.13
+    "@types/react": ^18.2.14
     "@types/react-dom": ^18.2.6
     babel-loader: 9.1.2
     buffer: ^6.0.3
@@ -15958,7 +15958,7 @@ __metadata:
     "@testing-library/user-event": ^14.4.3
     "@types/jest": ^29.5.2
     "@types/node": ^20.3.1
-    "@types/react": ^18.2.13
+    "@types/react": ^18.2.14
     "@types/react-dom": ^18.2.6
     babel-loader: 9.1.2
     buffer: ^6.0.3
@@ -16000,7 +16000,7 @@ __metadata:
     "@testing-library/user-event": ^14.4.3
     "@types/jest": ^29.5.2
     "@types/node": ^20.3.1
-    "@types/react": ^18.2.13
+    "@types/react": ^18.2.14
     "@types/react-dom": ^18.2.6
     "@typescript-eslint/eslint-plugin": ^5.60.0
     "@typescript-eslint/parser": ^5.60.0
@@ -16038,7 +16038,7 @@ __metadata:
     "@testing-library/user-event": ^14.4.3
     "@types/jest": ^29.5.2
     "@types/node": ^20.3.1
-    "@types/react": ^18.2.12
+    "@types/react": ^18.2.14
     "@types/react-dom": ^18.2.5
     babel-loader: 9.1.2
     css-loader: ^6.7.4
@@ -16077,7 +16077,7 @@ __metadata:
     "@trivago/prettier-plugin-sort-imports": ^4.1.1
     "@types/jest": ^29.5.2
     "@types/node": ^20.3.1
-    "@types/react": ^18.2.13
+    "@types/react": ^18.2.14
     "@types/react-dom": ^18.2.6
     common: 0.1.0
     css-loader: ^6.7.4
@@ -16763,7 +16763,7 @@ __metadata:
     "@testing-library/user-event": ^14.4.3
     "@types/jest": ^29.5.2
     "@types/node": ^20.3.1
-    "@types/react": ^18.2.13
+    "@types/react": ^18.2.14
     "@types/react-dom": ^18.2.6
     babel-loader: 9.1.2
     buffer: ^6.0.3
