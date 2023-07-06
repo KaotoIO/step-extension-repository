@@ -32,7 +32,7 @@
     "html-webpack-plugin": "5.5.3",
     "mini-css-extract-plugin": "^2.7.5",
     "null-loader": "^4.0.1",
-    "prettier": "2.8.8",
+    "prettier": "3.0.0",
     "sass": "^1.63.6",
     "sass-loader": "^13.3.2",
     "serve": "14.2.0",
