@@ -37,7 +37,7 @@
     "@apidevtools/swagger-parser": "^10.1.0",
     "@patternfly/patternfly": "4.224.2",
     "@patternfly/react-core": "4.276.8",
-    "@patternfly/react-styles": "4.92.6",
+    "@patternfly/react-styles": "4.92.8",
     "buffer": "^6.0.3",
     "openapi-types": "^12.1.0",
     "react": "^18.2.0",

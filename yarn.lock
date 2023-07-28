@@ -3344,10 +3344,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@patternfly/react-styles@npm:4.92.6":
-  version: 4.92.6
-  resolution: "@patternfly/react-styles@npm:4.92.6"
-  checksum: fef3317cf2c6f79afea3c1903372ac62a0e753b239f360c4c9896dbdbe98a2d72abd62e047cd29b6569a1c7d3654110cd3f3934a2268d01d1891855eeff2b72a
+"@patternfly/react-styles@npm:4.92.8":
+  version: 4.92.8
+  resolution: "@patternfly/react-styles@npm:4.92.8"
+  checksum: ab4cd3d57c96bb1988a3d635388108aeac1fb310be2678f06ea9c3ce47517c005ae47cbc93b7f90fa6208356282104dfbaa4a04980b7024b4c8129cd8c838687
   languageName: node
   linkType: hard
 
@@ -6256,7 +6256,7 @@ __metadata:
     "@babel/preset-typescript": 7.22.5
     "@patternfly/patternfly": 4.224.2
     "@patternfly/react-core": 4.276.8
-    "@patternfly/react-styles": 4.92.6
+    "@patternfly/react-styles": 4.92.8
     "@testing-library/dom": ^9.3.1
     "@testing-library/jest-dom": ^5.16.5
     "@testing-library/react": ^14.0.0
@@ -9576,7 +9576,7 @@ __metadata:
     "@babel/preset-typescript": 7.22.5
     "@patternfly/patternfly": 4.224.2
     "@patternfly/react-core": 4.276.8
-    "@patternfly/react-styles": 4.92.6
+    "@patternfly/react-styles": 4.92.8
     "@testing-library/dom": ^9.3.1
     "@testing-library/jest-dom": ^5.16.5
     "@testing-library/react": ^14.0.0
@@ -14846,7 +14846,7 @@ __metadata:
     "@babel/preset-typescript": 7.22.5
     "@patternfly/patternfly": 4.224.2
     "@patternfly/react-core": 4.276.8
-    "@patternfly/react-styles": 4.92.6
+    "@patternfly/react-styles": 4.92.8
     "@testing-library/jest-dom": ^5.16.5
     "@testing-library/react": ^14.0.0
     "@testing-library/user-event": ^14.4.3
@@ -15355,7 +15355,7 @@ __metadata:
     "@babel/preset-typescript": 7.22.5
     "@patternfly/patternfly": 4.224.2
     "@patternfly/react-core": 4.276.8
-    "@patternfly/react-styles": 4.92.6
+    "@patternfly/react-styles": 4.92.8
     "@testing-library/dom": ^9.3.1
     "@testing-library/jest-dom": ^5.16.5
     "@testing-library/react": ^14.0.0
@@ -15401,7 +15401,7 @@ __metadata:
     "@babel/preset-typescript": 7.22.5
     "@patternfly/patternfly": 4.224.2
     "@patternfly/react-core": 4.276.8
-    "@patternfly/react-styles": 4.92.6
+    "@patternfly/react-styles": 4.92.8
     "@testing-library/dom": ^9.3.1
     "@testing-library/jest-dom": ^5.16.5
     "@testing-library/react": ^14.0.0
@@ -15447,7 +15447,7 @@ __metadata:
     "@babel/preset-typescript": 7.22.5
     "@patternfly/patternfly": 4.224.2
     "@patternfly/react-core": 4.276.8
-    "@patternfly/react-styles": 4.92.6
+    "@patternfly/react-styles": 4.92.8
     "@testing-library/dom": ^9.3.1
     "@testing-library/jest-dom": ^5.16.5
     "@testing-library/react": ^14.0.0
@@ -15636,7 +15636,7 @@ __metadata:
     "@babel/preset-typescript": 7.22.5
     "@patternfly/patternfly": 4.224.2
     "@patternfly/react-core": 4.276.8
-    "@patternfly/react-styles": 4.92.6
+    "@patternfly/react-styles": 4.92.8
     "@testing-library/dom": ^9.3.1
     "@testing-library/jest-dom": ^5.16.5
     "@testing-library/react": ^14.0.0
@@ -15846,7 +15846,7 @@ __metadata:
     "@babel/preset-typescript": 7.22.5
     "@patternfly/patternfly": 4.224.2
     "@patternfly/react-core": 4.276.8
-    "@patternfly/react-styles": 4.92.6
+    "@patternfly/react-styles": 4.92.8
     "@testing-library/dom": ^9.3.1
     "@testing-library/jest-dom": ^5.16.5
     "@testing-library/react": ^14.0.0
@@ -15964,7 +15964,7 @@ __metadata:
   dependencies:
     "@patternfly/patternfly": 4.224.2
     "@patternfly/react-core": 4.276.8
-    "@patternfly/react-styles": 4.92.6
+    "@patternfly/react-styles": 4.92.8
     "@testing-library/dom": ^9.3.1
     "@testing-library/jest-dom": ^5.16.5
     "@testing-library/react": ^14.0.0
@@ -16675,7 +16675,7 @@ __metadata:
     "@babel/preset-typescript": 7.22.5
     "@patternfly/patternfly": 4.224.2
     "@patternfly/react-core": 4.276.8
-    "@patternfly/react-styles": 4.92.6
+    "@patternfly/react-styles": 4.92.8
     "@testing-library/dom": ^9.3.1
     "@testing-library/jest-dom": ^5.16.5
     "@testing-library/react": ^14.0.0

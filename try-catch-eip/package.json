@@ -32,7 +32,7 @@
   "dependencies": {
     "@patternfly/patternfly": "4.224.2",
     "@patternfly/react-core": "4.276.8",
-    "@patternfly/react-styles": "4.92.6",
+    "@patternfly/react-styles": "4.92.8",
     "common": "0.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
