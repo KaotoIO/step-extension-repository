@@ -1,12 +1,20 @@
 import { fireEvent, render, screen } from '@testing-library/react';
+// @ts-ignore
+import { IStepProps } from 'kaoto/types';
 import TransformStep from "./TransformStep";
 
 test('renders TransformStep', () => {
   let notifyKaotoCount = 0;
-  let stepParams: any = {};
+  let step: IStepProps = {
+    parameters: [
+      { id: "jq", value: null },
+      { id: "simple", value: null }
+    ],
+  };
   render(<TransformStep
     notifyKaoto={() => notifyKaotoCount++}
-    updateStepParams={(p: any) => {stepParams = p}}
+    updateStep={(p: IStepProps) => step = p}
+    step={step}
   />);
   const expressionSyntaxSelect = screen.getByTestId('expression-syntax-select');
   expect(expressionSyntaxSelect).toBeInTheDocument();
@@ -21,8 +29,8 @@ test('renders TransformStep', () => {
   expect(applyBtn).toBeInTheDocument();
   fireEvent.click(applyBtn);
   expect(notifyKaotoCount).toBe(1);
-  expect(stepParams.jq).toBe('.field3');
-  expect(stepParams.simple).toBeFalsy();
+  expect(findStepValue(step ,"jq")).toBe('.field3');
+  expect(findStepValue(step ,"simple")).toBeFalsy();
 });
 
 test('renders TransformStep with initial jq expression', () => {
@@ -39,3 +47,8 @@ test('renders TransformStep with initial jq expression', () => {
   const expressionStringInput = screen.getByTestId('expression-string-input');
   expect(expressionStringInput).toHaveValue('.field3');
 });
+
+function findStepValue(step: IStepProps, key: string) {
+  const paramIndex = step.parameters.findIndex((p: any) => p.id === key);
+  return step.parameters[paramIndex].value
+}

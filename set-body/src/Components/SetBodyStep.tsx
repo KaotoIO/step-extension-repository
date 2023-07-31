@@ -1,6 +1,8 @@
-import {Expression} from 'common';
-import {ActionGroup, Button, Form } from '@patternfly/react-core';
-import {useState} from 'react';
+import { Expression } from 'common';
+// @ts-ignore
+import { IStepProps } from '../types';
+import { ActionGroup, Button, Form } from '@patternfly/react-core';
+import { useState } from 'react';
 
 type SetBodyStepParams = {
   constant?: string;
@@ -23,14 +25,20 @@ export const SetBodyStep = (props: any) => {
   }
 
   const [stepParams, setStepParams] = useState<SetBodyStepParams>({
-        constant: props.stepParams?.constant,
-        simple: props.stepParams?.simple,
-        jq: props.stepParams?.jq,
-    });
+    constant: props.stepParams?.constant,
+    simple: props.stepParams?.simple,
+    jq: props.stepParams?.jq,
+  });
 
   function updateKaoto() {
     props.notifyKaoto('Set Body step updated');
-    props.updateStepParams(stepParams);
+    let newStep: IStepProps = props.step;
+    const newStepParameters = newStep.parameters?.slice();
+    Object.entries(stepParams).forEach(([key, value]) => {
+      const paramIndex = newStepParameters.findIndex((p: any) => p.id === key);
+      newStepParameters[paramIndex].value = value;
+    });
+    props.updateStep(newStep);
   }
 
   function updateStepParams(constant?: string, simple?: string, jq?: string) {
@@ -40,17 +48,17 @@ export const SetBodyStep = (props: any) => {
 
   return (
     <Form>
-        <Expression
-          initSyntax={initSyntax}
-          initExpression={initExpression}
-          setExpression={(syntax: string, expression: string) => {
-            const constant = syntax === 'constant' ? expression : undefined;
-            const simple = syntax === 'simple' ? expression : undefined;
-            const jq = syntax === 'jq' ? expression : undefined;
-            updateStepParams(constant, simple, jq);
-          }}
-          hasExpressionObject={props?.stepParams?.expression != null}
-        />
+      <Expression
+        initSyntax={initSyntax}
+        initExpression={initExpression}
+        setExpression={(syntax: string, expression: string) => {
+          const constant = syntax === 'constant' ? expression : undefined;
+          const simple = syntax === 'simple' ? expression : undefined;
+          const jq = syntax === 'jq' ? expression : undefined;
+          updateStepParams(constant, simple, jq);
+        }}
+        hasExpressionObject={props?.stepParams?.expression != null}
+      />
 
       <ActionGroup>
         <Button data-testid='set-body-apply-button' variant="primary" onClick={updateKaoto}>

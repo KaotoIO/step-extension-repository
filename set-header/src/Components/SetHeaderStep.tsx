@@ -1,6 +1,8 @@
 import { ActionGroup, Button, Form, FormGroup, TextInput } from '@patternfly/react-core';
 import { Expression } from 'common/src/expression';
 import { useState } from 'react';
+// @ts-ignore
+import { IStepProps } from '../types';
 
 type SetHeaderStepParams = {
   name: string;
@@ -33,7 +35,13 @@ export const SetHeaderStep = (props: any) => {
 
   function updateKaoto() {
     props.notifyKaoto('Set Header step updated');
-    props.updateStepParams(stepParams);
+    let newStep: IStepProps = props.step;
+    const newStepParameters = newStep.parameters?.slice();
+    Object.entries(stepParams).forEach(([key, value]) => {
+      const paramIndex = newStepParameters.findIndex((p: any) => p.id === key);
+      newStepParameters[paramIndex].value = value;
+    });
+    props.updateStep(newStep);
   }
 
   function updateStepParams(constant?: string, simple?: string, jq?: string) {

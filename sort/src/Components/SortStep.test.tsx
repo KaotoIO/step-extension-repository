@@ -1,13 +1,24 @@
 import { fireEvent, render, screen } from '@testing-library/react';
+// @ts-ignore
+import { IStepProps } from 'kaoto/types';
 import SortStep from "./SortStep";
 
 test('renders SortStep', () => {
   let notifyKaotoCount = 0;
-  let stepParams: any = {};
+  let step: IStepProps = {
+    parameters: [
+      { id: "jq", value: null },
+      { id: "constant", value: null },
+      { id: "simple", value: null },
+      { id: "tokenize", value: null },
+      { id: "comparator", value: null },
+    ],
+  };
 
   render(<SortStep
     notifyKaoto={() => notifyKaotoCount++}
-    updateStepParams={(p: any) => stepParams = p}
+    updateStep={(p: IStepProps) => step = p}
+    step={step}
   />);
   const comparatorInput = screen.getByTestId('set-comparator-input');
   expect(comparatorInput).toBeInTheDocument();
@@ -30,9 +41,14 @@ test('renders SortStep', () => {
   expect(applyBtn).toBeInTheDocument();
   fireEvent.click(applyBtn);
   expect(notifyKaotoCount).toBe(1);
-  expect(stepParams.comparator).toBe('testComparator');
-  expect(stepParams.tokenize).toBe('testTokenize');
-  expect(stepParams.jq).toBe('.field3');
-  expect(stepParams.constant).toBeFalsy();
-  expect(stepParams.simple).toBeFalsy();
+  expect(findStepValue(step, "comparator")).toBe('testComparator');
+  expect(findStepValue(step, "tokenize")).toBe('testTokenize');
+  expect(findStepValue(step, "jq")).toBe('.field3');
+  expect(findStepValue(step, "constant")).toBeFalsy();
+  expect(findStepValue(step, "simple")).toBeFalsy();
 });
+
+function findStepValue(step: IStepProps, key: string) {
+  const paramIndex = step.parameters.findIndex((p: any) => p.id === key);
+  return step.parameters[paramIndex].value;
+}

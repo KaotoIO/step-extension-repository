@@ -1,6 +1,8 @@
 import { Expression } from 'common';
 import { ActionGroup, Button, FormGroup, Form, TextInput } from '@patternfly/react-core';
 import { useState } from 'react';
+// @ts-ignore
+import { IStepProps } from '../types';
 
 type SetSortStepParams = {
   tokenize?: string;
@@ -60,8 +62,14 @@ export const SortStep = (props: any) => {
   }
 
   function updateKaoto() {
-    props.notifyKaoto('Set Body step updated');
-    props.updateStepParams(stepParams);
+    props.notifyKaoto('Sort step updated');
+    let newStep: IStepProps = props.step;
+    const newStepParameters = newStep.parameters?.slice();
+    Object.entries(stepParams).forEach(([key, value]) => {
+      const paramIndex = newStepParameters.findIndex((p: any) => p.id === key);
+      newStepParameters[paramIndex].value = value;
+    });
+    props.updateStep(newStep);
   }
 
   function updateStepParams(constant?: string, simple?: string, jq?: string) {
