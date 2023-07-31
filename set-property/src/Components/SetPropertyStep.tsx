@@ -1,6 +1,8 @@
 import {Expression} from 'common';
 import {ActionGroup, Button, Form, FormGroup, TextInput} from '@patternfly/react-core';
 import {useState} from 'react';
+// @ts-ignore
+import { IStepProps } from '../types';
 
 type SetPropertyStepParams = {
   name: string;
@@ -33,7 +35,13 @@ export const SetPropertyStep = (props: any) => {
 
   function updateKaoto() {
     props.notifyKaoto('Set Property step updated');
-    props.updateStepParams(stepParams);
+    let newStep: IStepProps = props.step;
+    const newStepParameters = newStep.parameters?.slice();
+    Object.entries(stepParams).forEach(([key, value]) => {
+      const paramIndex = newStepParameters.findIndex((p: any) => p.id === key);
+      newStepParameters[paramIndex].value = value;
+    });
+    props.updateStep(newStep);
   }
 
   function updateStepParams(constant?: string, simple?: string, jq?: string) {

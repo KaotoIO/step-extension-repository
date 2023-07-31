@@ -1,12 +1,23 @@
 import { fireEvent, render, screen } from '@testing-library/react';
+// @ts-ignore
+import { IStepProps } from 'kaoto/types';
 import SetPropertyStep from "./SetPropertyStep";
 
 test('renders SetPropertyStep', () => {
   let notifyKaotoCount = 0;
-  let stepParams: any = {};
+  let step: IStepProps = {
+    parameters: [
+      {id: "jq", value: null},
+      {id: "name", value: null},
+      {id: "constant", value: null},
+      {id: "simple", value: null}
+    ],
+  };
+
   render(<SetPropertyStep
     notifyKaoto={() => notifyKaotoCount++}
-    updateStepParams={(p: any) => stepParams = p}
+    updateStep={(p: IStepProps) => step = p}
+    step={step}
   />);
   const propertyNameInput = screen.getByTestId('set-property-name-input');
   expect(propertyNameInput).toBeInTheDocument();
@@ -25,10 +36,10 @@ test('renders SetPropertyStep', () => {
   expect(applyBtn).toBeInTheDocument();
   fireEvent.click(applyBtn);
   expect(notifyKaotoCount).toBe(1);
-  expect(stepParams.name).toBe('testprop');
-  expect(stepParams.jq).toBe('.field3');
-  expect(stepParams.constant).toBeFalsy();
-  expect(stepParams.simple).toBeFalsy();
+  expect(findStepValue(step, "name")).toBe('testprop');
+  expect(findStepValue(step, "jq")).toBe('.field3');
+  expect(findStepValue(step, "constant")).toBeFalsy();
+  expect(findStepValue(step, "simple")).toBeFalsy();
 });
 
 test('renders SetPropertyStep with initial jq expression', () => {
@@ -63,3 +74,8 @@ test('renders SetPropertyStep with initial constant expression', () => {
   const expressionStringInput = screen.getByTestId('expression-string-input');
   expect(expressionStringInput).toHaveValue('propval');
 });
+
+function findStepValue(step: IStepProps, key: string) {
+  const paramIndex = step.parameters.findIndex((p: any) => p.id === key);
+  return step.parameters[paramIndex].value
+}

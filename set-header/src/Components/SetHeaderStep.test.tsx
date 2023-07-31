@@ -1,12 +1,22 @@
 import { fireEvent, render, screen } from '@testing-library/react';
+// @ts-ignore
+import { IStepProps } from 'kaoto/types';
 import SetHeaderStep from "./SetHeaderStep";
 
 test('renders SetHeaderStep', () => {
   let notifyKaotoCount = 0;
-  let stepParams: any = {};
+  let step: IStepProps = {
+    parameters: [
+      { id: "jq", value: null },
+      { id: "name", value: null },
+      { id: "constant", value: null },
+      { id: "simple", value: null }
+    ],
+  };
   render(<SetHeaderStep
     notifyKaoto={() => notifyKaotoCount++}
-    updateStepParams={(p: any) => stepParams = p}
+    updateStep={(p: IStepProps) => step = p}
+    step={step}
   />);
   const headerNameInput = screen.getByTestId('set-header-name-input');
   expect(headerNameInput).toBeInTheDocument();
@@ -25,10 +35,10 @@ test('renders SetHeaderStep', () => {
   expect(applyBtn).toBeInTheDocument();
   fireEvent.click(applyBtn);
   expect(notifyKaotoCount).toBe(1);
-  expect(stepParams.name).toBe('testheader');
-  expect(stepParams.jq).toBe('.field3');
-  expect(stepParams.constant).toBeFalsy();
-  expect(stepParams.simple).toBeFalsy();
+  expect(findStepValue(step, "name")).toBe('testheader');
+  expect(findStepValue(step, "jq")).toBe('.field3');
+  expect(findStepValue(step, "constant")).toBeFalsy();
+  expect(findStepValue(step, "simple")).toBeFalsy();
 });
 
 test('renders SetHeaderStep with initial jq expression', () => {
@@ -63,3 +73,8 @@ test('renders SetHeaderStep with initial constant expression', () => {
   const expressionStringInput = screen.getByTestId('expression-string-input');
   expect(expressionStringInput).toHaveValue('propval');
 });
+
+function findStepValue(step: IStepProps, key: string) {
+  const paramIndex = step.parameters.findIndex((p: any) => p.id === key);
+  return step.parameters[paramIndex].value
+}
