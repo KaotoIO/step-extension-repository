@@ -6296,7 +6296,7 @@ __metadata:
     openapi-types: ^12.1.0
     react: ^18.2.0
     react-dom: ^18.2.0
-    serve: 14.2.0
+    serve: 14.2.1
     stream-http: ^3.2.0
     style-loader: ^3.3.3
     ts-jest: ^29.1.1
@@ -9738,7 +9738,7 @@ __metadata:
     react-router-dom: 6.14.1
     sass: ^1.63.6
     sass-loader: ^13.3.2
-    serve: 14.2.0
+    serve: 14.2.1
     stream-http: ^3.2.0
     style-loader: ^3.3.3
     typescript: 5.1.6
@@ -15071,7 +15071,7 @@ __metadata:
     react-scripts: ^5.0.1
     sass: ^1.63.6
     sass-loader: ^13.3.2
-    serve: 14.2.0
+    serve: 14.2.1
     stream-http: ^3.2.0
     style-loader: ^3.3.3
     ts-jest: ^29.1.1
@@ -15506,9 +15506,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"serve@npm:14.2.0":
-  version: 14.2.0
-  resolution: "serve@npm:14.2.0"
+"serve@npm:14.2.1":
+  version: 14.2.1
+  resolution: "serve@npm:14.2.1"
   dependencies:
     "@zeit/schemas": 2.29.0
     ajv: 8.11.0
@@ -15523,7 +15523,7 @@ __metadata:
     update-check: 1.5.4
   bin:
     serve: build/main.js
-  checksum: a1c26e6c3dd0c482589b39a105e2f09bebf20ee8a0358accd5d64b313952ad3e1a56b8af2bdfef269f9fd37140b4f6c940d12395c851e4a46dfdace8f97616e4
+  checksum: c39a517b5d795a0a5c2f9fb9ff088b7e4962c579e34ace5b85dd62f93e0eacbc8a90359792c153c444a83258ffda392113dff7bfd10d41ced574a2d1886c2994
   languageName: node
   linkType: hard
 
@@ -15566,7 +15566,7 @@ __metadata:
     openapi-types: ^12.1.0
     react: ^18.2.0
     react-dom: ^18.2.0
-    serve: 14.2.0
+    serve: 14.2.1
     stream-http: ^3.2.0
     style-loader: ^3.3.3
     ts-jest: ^29.1.1
@@ -15612,7 +15612,7 @@ __metadata:
     openapi-types: ^12.1.0
     react: ^18.2.0
     react-dom: ^18.2.0
-    serve: 14.2.0
+    serve: 14.2.1
     stream-http: ^3.2.0
     style-loader: ^3.3.3
     ts-jest: ^29.1.1
@@ -15658,7 +15658,7 @@ __metadata:
     openapi-types: ^12.1.0
     react: ^18.2.0
     react-dom: ^18.2.0
-    serve: 14.2.0
+    serve: 14.2.1
     stream-http: ^3.2.0
     style-loader: ^3.3.3
     ts-jest: ^29.1.1
@@ -15847,7 +15847,7 @@ __metadata:
     openapi-types: ^12.1.0
     react: ^18.2.0
     react-dom: ^18.2.0
-    serve: 14.2.0
+    serve: 14.2.1
     stream-http: ^3.2.0
     style-loader: ^3.3.2
     ts-jest: ^29.1.1
@@ -16056,7 +16056,7 @@ __metadata:
     openapi-types: ^12.1.0
     react: ^18.2.0
     react-dom: ^18.2.0
-    serve: 14.2.0
+    serve: 14.2.1
     stream-http: ^3.2.0
     style-loader: ^3.3.3
     ts-jest: ^29.1.1
@@ -16098,7 +16098,7 @@ __metadata:
     prettier: ^3.0.0
     react: 18.2.0
     react-dom: ^18.2.0
-    serve: 14.2.0
+    serve: 14.2.1
     style-loader: ^3.3.3
     typescript: 5.1.6
     web-vitals: ^3.3.1
@@ -16133,7 +16133,7 @@ __metadata:
     node-polyfill-webpack-plugin: ^2.0.1
     react: ^18.2.0
     react-dom: ^18.2.0
-    serve: 14.2.0
+    serve: 14.2.1
     stream-http: ^3.2.0
     style-loader: ^3.3.2
     ts-jest: ^29.1.1
@@ -16173,7 +16173,7 @@ __metadata:
     prettier: 3.0.1
     react: ^18.2.0
     react-dom: ^18.2.0
-    serve: 14.2.0
+    serve: 14.2.1
     style-loader: ^3.3.3
     ts-jest: ^29.1.1
     ts-loader: ^9.4.3
@@ -16886,7 +16886,7 @@ __metadata:
     openapi-types: ^12.1.0
     react: ^18.2.0
     react-dom: ^18.2.0
-    serve: 14.2.0
+    serve: 14.2.1
     stream-http: ^3.2.0
     style-loader: ^3.3.3
     ts-jest: ^29.1.1
