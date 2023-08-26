@@ -3312,9 +3312,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@patternfly/react-core@npm:4.276.11":
-  version: 4.276.11
-  resolution: "@patternfly/react-core@npm:4.276.11"
+"@patternfly/react-core@npm:4.276.12":
+  version: 4.276.12
+  resolution: "@patternfly/react-core@npm:4.276.12"
   dependencies:
     "@patternfly/react-icons": ^4.93.7
     "@patternfly/react-styles": ^4.92.8
@@ -3326,7 +3326,7 @@ __metadata:
   peerDependencies:
     react: ^16.8 || ^17 || ^18
     react-dom: ^16.8 || ^17 || ^18
-  checksum: 1bacb8ba497ec3f3e8fe181192ee6af6ecad82e31b3462b13ba7a952583a1cd3caae51634a766dfa5f52cda162e61e9bb9520ae35f0721c0ab963a1e0164ca0f
+  checksum: e58f3538e53622bfab496af9d269446f1b09b1cdf86dfcfd1e62960090f1cc222a486972d53a60021e1faa7454807e57f021c0c0cc5c302b0b4ea3c00523cced
   languageName: node
   linkType: hard
 
@@ -6273,7 +6273,7 @@ __metadata:
     "@babel/preset-react": 7.22.5
     "@babel/preset-typescript": 7.22.5
     "@patternfly/patternfly": 4.224.5
-    "@patternfly/react-core": 4.276.11
+    "@patternfly/react-core": 4.276.12
     "@patternfly/react-styles": 4.92.8
     "@testing-library/dom": ^9.3.1
     "@testing-library/jest-dom": ^6.0.0
@@ -6587,7 +6587,7 @@ __metadata:
     "@babel/preset-react": 7.22.5
     "@babel/preset-typescript": 7.22.5
     "@patternfly/patternfly": 4.224.5
-    "@patternfly/react-core": 4.276.11
+    "@patternfly/react-core": 4.276.12
     "@testing-library/dom": ^9.3.1
     "@testing-library/jest-dom": ^6.0.0
     "@testing-library/react": ^14.0.0
@@ -9702,7 +9702,7 @@ __metadata:
     "@babel/preset-react": 7.22.5
     "@babel/preset-typescript": 7.22.5
     "@patternfly/patternfly": 4.224.5
-    "@patternfly/react-core": 4.276.11
+    "@patternfly/react-core": 4.276.12
     "@patternfly/react-styles": 4.92.8
     "@testing-library/dom": ^9.3.1
     "@testing-library/jest-dom": ^6.0.0
@@ -15034,7 +15034,7 @@ __metadata:
     "@babel/preset-react": 7.22.5
     "@babel/preset-typescript": 7.22.5
     "@patternfly/patternfly": 4.224.5
-    "@patternfly/react-core": 4.276.11
+    "@patternfly/react-core": 4.276.12
     "@patternfly/react-styles": 4.92.8
     "@testing-library/jest-dom": ^6.0.0
     "@testing-library/react": ^14.0.0
@@ -15543,7 +15543,7 @@ __metadata:
     "@babel/preset-react": 7.22.5
     "@babel/preset-typescript": 7.22.5
     "@patternfly/patternfly": 4.224.5
-    "@patternfly/react-core": 4.276.11
+    "@patternfly/react-core": 4.276.12
     "@patternfly/react-styles": 4.92.8
     "@testing-library/dom": ^9.3.1
     "@testing-library/jest-dom": ^6.0.0
@@ -15589,7 +15589,7 @@ __metadata:
     "@babel/preset-react": 7.22.5
     "@babel/preset-typescript": 7.22.5
     "@patternfly/patternfly": 4.224.5
-    "@patternfly/react-core": 4.276.11
+    "@patternfly/react-core": 4.276.12
     "@patternfly/react-styles": 4.92.8
     "@testing-library/dom": ^9.3.1
     "@testing-library/jest-dom": ^6.0.0
@@ -15635,7 +15635,7 @@ __metadata:
     "@babel/preset-react": 7.22.5
     "@babel/preset-typescript": 7.22.5
     "@patternfly/patternfly": 4.224.5
-    "@patternfly/react-core": 4.276.11
+    "@patternfly/react-core": 4.276.12
     "@patternfly/react-styles": 4.92.8
     "@testing-library/dom": ^9.3.1
     "@testing-library/jest-dom": ^6.0.0
@@ -15824,7 +15824,7 @@ __metadata:
     "@babel/preset-react": 7.22.5
     "@babel/preset-typescript": 7.22.5
     "@patternfly/patternfly": 4.224.5
-    "@patternfly/react-core": 4.276.11
+    "@patternfly/react-core": 4.276.12
     "@patternfly/react-styles": 4.92.8
     "@testing-library/dom": ^9.3.1
     "@testing-library/jest-dom": ^6.0.0
@@ -16034,7 +16034,7 @@ __metadata:
     "@babel/preset-react": 7.22.5
     "@babel/preset-typescript": 7.22.5
     "@patternfly/patternfly": 4.224.5
-    "@patternfly/react-core": 4.276.11
+    "@patternfly/react-core": 4.276.12
     "@patternfly/react-styles": 4.92.8
     "@testing-library/dom": ^9.3.1
     "@testing-library/jest-dom": ^6.0.0
@@ -16152,7 +16152,7 @@ __metadata:
   resolution: "step-extension-try-catch@workspace:try-catch-eip"
   dependencies:
     "@patternfly/patternfly": 4.224.5
-    "@patternfly/react-core": 4.276.11
+    "@patternfly/react-core": 4.276.12
     "@patternfly/react-styles": 4.92.8
     "@testing-library/dom": ^9.3.1
     "@testing-library/jest-dom": ^6.0.0
@@ -16863,7 +16863,7 @@ __metadata:
     "@babel/preset-react": ^7.22.5
     "@babel/preset-typescript": 7.22.5
     "@patternfly/patternfly": 4.224.5
-    "@patternfly/react-core": 4.276.11
+    "@patternfly/react-core": 4.276.12
     "@patternfly/react-styles": 4.92.8
     "@testing-library/dom": ^9.3.1
     "@testing-library/jest-dom": ^6.0.0
