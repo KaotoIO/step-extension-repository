@@ -33,7 +33,7 @@
     "jest-environment-jsdom": "^29.6.2",
     "mini-css-extract-plugin": "^2.7.5",
     "null-loader": "^4.0.1",
-    "prettier": "3.0.1",
+    "prettier": "3.0.3",
     "sass": "^1.63.6",
     "sass-loader": "^13.3.2",
     "serve": "14.2.1",
