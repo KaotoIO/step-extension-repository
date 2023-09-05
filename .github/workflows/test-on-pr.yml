@@ -11,7 +11,7 @@ jobs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
     - name: 📥 Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
     - name: 🎡  Set Matrix
       id: set-matrix
       run: |
@@ -26,7 +26,7 @@ jobs:
       fail-fast: false
     steps:
     - name: 📥 Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
     - name: 🧮 Run install
       run: yarn workspaces focus ${{ matrix.extension }}
     - name: 🧮 Run tests
