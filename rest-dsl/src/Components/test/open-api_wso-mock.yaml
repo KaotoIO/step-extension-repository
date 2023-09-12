@@ -1,0 +1,54 @@
+---
+openapi: 3.0.2
+info:
+  title: wso-mock
+  version: 1.0.0
+  description: Mocking the WSO2 response
+  contact:
+    name: developer
+    url: http://www.redhat.com
+    email: sgutierr@redhat.com
+  license:
+    name: GNU GPLv3
+    url: https://www.gnu.org/licenses/gpl.txt
+paths:
+  /token:
+    summary: getToken
+    post:
+      requestBody:
+        description: Mock request body
+        content:
+          application/json:
+            schema:
+              type: string
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                token example:
+                  value:
+                    access_token: 4e188f51-6ff4-3eb0-bb8b-235b652b123a
+                    token_type: Bearer
+                    expires_in: 3600
+          description: returns specific token
+      operationId: mock1
+      summary: mock of the token endpoint
+  /status:
+    get:
+      responses:
+        "200":
+          description: Get status
+      operationId: getstatus
+components:
+  schemas:
+    reponseToken:
+      description: responseToken
+      type: object
+      properties:
+        body:
+          description: body
+tags:
+- name: mock
+  description: mocking endpoint

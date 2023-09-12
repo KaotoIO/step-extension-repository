@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`parseApiSpec should parse an OpenAPI spec 1`] = `
+[
+  {
+    "consume": Map {},
+    "consumes": Map {},
+    "name": "/token",
+    "operations": Map {
+      "post" => {
+        "operationId": "mock1",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string",
+              },
+            },
+          },
+          "description": "Mock request body",
+          "required": true,
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "examples": {
+                  "token example": {
+                    "value": {
+                      "access_token": "4e188f51-6ff4-3eb0-bb8b-235b652b123a",
+                      "expires_in": 3600,
+                      "token_type": "Bearer",
+                    },
+                  },
+                },
+              },
+            },
+            "description": "returns specific token",
+          },
+        },
+        "summary": "mock of the token endpoint",
+      },
+    },
+    "path": "mock1",
+    "produce": Map {},
+    "produces": Map {
+      "post" => [
+        "application/json",
+      ],
+    },
+  },
+  {
+    "consume": Map {},
+    "consumes": Map {},
+    "name": "/status",
+    "operations": Map {
+      "get" => {
+        "operationId": "getstatus",
+        "responses": {
+          "200": {
+            "description": "Get status",
+          },
+        },
+      },
+    },
+    "path": "getstatus",
+    "produce": Map {},
+    "produces": Map {
+      "get" => [],
+    },
+  },
+]
+`;
