@@ -1,26 +1,26 @@
 import {
-  Form,
-  FormGroup,
-  TextInput,
   ActionGroup,
   Button,
-  FileUpload,
-  InputGroup,
   Checkbox,
+  FileUpload,
+  Form,
+  FormGroup,
   FormSelect,
   FormSelectOption,
-  Popover,
   Grid,
   GridItem,
+  InputGroup,
+  Popover,
+  TextInput,
 } from '@patternfly/react-core';
-import { Endpoint } from './Endpoint';
+import { HelpIcon, PlusCircleIcon, TrashIcon } from '@patternfly/react-icons';
+import { IStepProps } from 'kaoto/types/dts/src/types.js';
 import { OpenAPI } from 'openapi-types';
 import { useEffect, useState } from 'react';
-import SwaggerParser from '@apidevtools/swagger-parser';
 import { parse } from 'yaml';
-import { IStepProps } from 'kaoto/types/dts/src/types.js';
+import { Endpoint } from './Endpoint';
 import MimeTypes from './MimeTypes';
-import { HelpIcon, TrashIcon, PlusCircleIcon } from '@patternfly/react-icons';
+import { parseApiSpec } from './parse-api';
 
 export interface IEndpoint {
   name: string;
@@ -32,64 +32,6 @@ export interface IEndpoint {
   consumes: Map<string, string[]>;
   produce: Map<string, string>;
   consume: Map<string, string>;
-}
-
-async function parseApiSpec(
-  input: string | OpenAPI.Document
-): Promise<IEndpoint[]> {
-  let swaggerParser: SwaggerParser = new SwaggerParser();
-
-  const e: Array<IEndpoint> = [];
-  try {
-    await swaggerParser.validate(input, { dereference: { circular: 'ignore' } });
-    const paths = swaggerParser.api.paths;
-    if (paths) {
-      Object.keys(paths).forEach((key: string) => {
-        const path = paths[key];
-        if (path) {
-          const operations: Map<string, OpenAPI.Operation> = new Map<string, OpenAPI.Operation>();
-          Object.entries(path).forEach((method: [string, OpenAPI.Operation]) => {
-            operations.set(method[0], method[1]);
-          });
-          operations.forEach((op: OpenAPI.Operation, verb: string) => {
-            let produces: Map<string, string[]> = new Map<string, string[]>();
-            let consumes: Map<string, string[]> = new Map<string, string[]>();
-            let produce: Map<string, string> = new Map<string, string>();
-            let consume: Map<string, string> = new Map<string, string>();
-            let operation: Map<string, OpenAPI.Operation> = new Map<string, OpenAPI.Operation>();
-            operation.set(verb, op);
-            const producesMediaType: string[] = [];
-            if ('produces' in op) {
-              op.produces?.forEach((prod: string) => producesMediaType.push(prod));
-              if (producesMediaType.length > 0) {
-                produce.set(verb, producesMediaType[0]);
-              }
-            } else if (op.responses) {
-              Object.values(op.responses).forEach((response) => {
-                if (response.content) {
-                  producesMediaType.push.apply(producesMediaType, (Object.keys(response.content)));
-                }
-              });
-            }
-            produces.set(verb, producesMediaType);
-            if ('consumes' in op) {
-              const consumesMediaTypes: string[] = [];
-              consumes.set(verb, consumesMediaTypes);
-              op.consumes?.forEach((con: string) => consumesMediaTypes.push(con));
-              if (consumesMediaTypes.length > 0) {
-                consume.set(verb, consumesMediaTypes[0]);
-              }
-            }
-            // @ts-expect-error | The problem comes from `verb` not being recognized as a HttpMethods from OpenAPIV2, OpenAPIV3, OpenAPIV3_1
-            e.push({ name: key, path: path[verb].operationId, operations: operation, produces, consumes, produce, consume });
-          });
-        }
-      });
-    }
-  } catch (error) {
-    console.error('error ' + error);
-  }
-  return e;
 }
 
 export interface IRestForm {
@@ -171,7 +113,6 @@ export function recoverEndpoints(step: IStepProps | undefined): IEndpoint[] {
 
   return endpoints;
 };
-
 
 export const RestStep = ({ updateStep, step, fetchStepDetails }: IRestForm) => {
   const [openApiSpecText, setOpenApiSpecText] = useState('');
@@ -698,4 +639,3 @@ export const RestStep = ({ updateStep, step, fetchStepDetails }: IRestForm) => {
 };
 
 export default RestStep;
-
