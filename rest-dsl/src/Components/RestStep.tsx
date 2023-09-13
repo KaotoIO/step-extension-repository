@@ -273,7 +273,16 @@ export const RestStep = ({ updateStep, step, fetchStepDetails }: IRestForm) => {
                   parameter['value'] = consumes;
                 } else if (parameter['id'] == "produces") {
                   parameter['value'] = produces;
-                } else if (parameter['id'] == "uri") {
+
+                /**
+                 * Mod to support Camel Rest DSL syntax
+                 *
+                 * Starting from Camel 3.18.0, the Rest DSL syntax has changed.
+                 * it went from uri -> path
+                 *
+                 * This is a temporary fix to support both syntaxes.
+                 */
+                } else if (parameter['id'] === "uri" || parameter['id'] === "path") {
                   parameter['value'] = endpoint['name'];
                 }
               }
