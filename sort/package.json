@@ -5,7 +5,7 @@
   "homepage": "https://kaotoio.github.io/step-extension-repository",
   "port": 3002,
   "devDependencies": {
-    "@babel/core": "7.22.19",
+    "@babel/core": "7.22.20",
     "@babel/preset-react": "7.22.15",
     "@babel/preset-typescript": "7.22.15",
     "@testing-library/dom": "^9.3.1",
