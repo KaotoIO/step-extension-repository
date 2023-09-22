@@ -37,7 +37,7 @@
   "dependencies": {
     "@apidevtools/swagger-parser": "^10.1.0",
     "@patternfly/patternfly": "4.224.5",
-    "@patternfly/react-core": "4.276.12",
+    "@patternfly/react-core": "4.277.0",
     "@patternfly/react-styles": "4.92.8",
     "buffer": "^6.0.3",
     "common": "0.1.0",
