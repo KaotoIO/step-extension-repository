@@ -5,9 +5,9 @@
   "homepage": "https://kaotoio.github.io/http-step-extension",
   "port": "9001",
   "devDependencies": {
-    "@babel/core": "7.22.20",
+    "@babel/core": "7.23.0",
     "@babel/preset-react": "7.22.15",
-    "@babel/preset-typescript": "7.22.15",
+    "@babel/preset-typescript": "7.23.0",
     "@testing-library/dom": "^9.3.1",
     "@testing-library/jest-dom": "^6.0.0",
     "@testing-library/react": "^14.0.0",
